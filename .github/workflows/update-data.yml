@@ -1,0 +1,46 @@
+name: update-data
+
+# 日経の日足を取得して data/data.json を更新・コミットする。
+# 平日の場中〜引け後に複数回まわす（cron は UTC。JST = UTC+9）。
+on:
+  schedule:
+    # 1日で解約する運用なので、引け(15:30 JST)後に更新して「翌営業日の注文」に使う。
+    # cron は UTC。JST = UTC+9。EOD(日足)がstooqに反映される夜に回す。
+    - cron: "0 9 * * 1-5"    # 18:00 JST（本命）
+    - cron: "0 11 * * 1-5"   # 20:00 JST（データ反映が遅れた場合の予備）
+  workflow_dispatch: {}   # 手動実行も可
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install -r scripts/requirements.txt
+
+      - name: Update data.json
+        run: python scripts/update_data.py --out data/data.json
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain data/data.json)" ]; then
+            git add data/data.json
+            git commit -m "chore: update data.json ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git push
+          else
+            echo "変更なし"
+          fi
