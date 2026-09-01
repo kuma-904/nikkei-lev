@@ -1,0 +1,16 @@
+{
+  "name": "赤青ナビ｜日経レバレッジ判断",
+  "short_name": "赤青ナビ",
+  "description": "日経平均 ブル4.3倍 / ベア3.8倍 の判断ダッシュボード",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0c1017",
+  "theme_color": "#0c1017",
+  "lang": "ja",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
