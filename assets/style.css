@@ -279,6 +279,140 @@ section { margin-top: 22px; }
 .termchip:active { transform: scale(.97); }
 .termchip:hover { border-color: var(--gold); color: var(--text); }
 
+/* 買い期限バッジ */
+.cutoff {
+  display: flex; align-items: center; gap: 7px; width: 100%; margin-top: 14px;
+  border: 1px solid var(--gold-soft); background: rgba(0,0,0,.2);
+  border-radius: var(--r-sm); padding: 10px 12px;
+  color: var(--gold); font: inherit; font-size: 12px; font-weight: 700;
+  cursor: pointer; text-align: left;
+}
+.cutoff span { color: var(--muted); font-weight: 600; }
+.cutoff:active { transform: scale(.99); }
+
+/* 仕組み解説（アコーディオン） */
+.method {
+  border: 1px solid var(--line); border-radius: var(--r-md);
+  background: var(--surface); margin-bottom: 10px; overflow: hidden;
+}
+.method > summary {
+  list-style: none; cursor: pointer; padding: 15px 16px;
+  font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 10px;
+}
+.method > summary::-webkit-details-marker { display: none; }
+.method > summary::before {
+  content: "＋"; color: var(--gold); font-weight: 800; font-size: 15px;
+  width: 16px; flex: 0 0 auto;
+}
+.method[open] > summary::before { content: "−"; }
+.method-body { padding: 0 16px 16px; }
+.method-body p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+.method-body p b { color: var(--text); }
+.formula {
+  font-family: "Bricolage Grotesque", sans-serif; font-size: 13px; color: var(--text);
+  background: rgba(0,0,0,.28); border: 1px solid var(--line); border-radius: var(--r-sm);
+  padding: 11px 13px; margin: 4px 0 12px; text-align: center; letter-spacing: .01em;
+}
+.rules { list-style: none; display: grid; gap: 7px; margin: 0 0 12px; }
+.rules li {
+  font-size: 12.5px; color: var(--muted); padding-left: 14px; position: relative;
+}
+.rules li::before { content: "・"; position: absolute; left: 0; color: var(--faint); }
+.rules li b { color: var(--gold); }
+.wtable { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.wt {
+  font-size: 11px; color: var(--muted); border: 1px solid var(--line);
+  border-radius: 8px; padding: 4px 8px;
+}
+.wt b { color: var(--gold); margin-left: 5px; font-family: "Bricolage Grotesque", sans-serif; }
+.mnote { font-size: 11.5px !important; color: var(--faint) !important; margin-bottom: 0 !important; }
+
+/* 調整パネル */
+.adjuster { display: grid; gap: 16px; }
+.adj-note {
+  font-size: 12px; color: var(--muted); line-height: 1.6;
+  background: rgba(0,0,0,.2); border: 1px solid var(--line);
+  border-radius: var(--r-sm); padding: 11px 12px;
+}
+.adj-note b { color: var(--gold); }
+.adj-group { display: grid; gap: 12px; }
+.adj-title {
+  font-size: 12px; font-weight: 800; color: var(--text);
+  padding-bottom: 8px; border-bottom: 1px solid var(--line);
+}
+.ctl { display: grid; gap: 8px; }
+.ctl > span { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+.ctl > span b {
+  color: var(--gold); font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 15px; margin: 0 2px;
+}
+.ctl input[type="range"] {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
+  border-radius: 999px; background: var(--raised); outline: none; accent-color: var(--gold);
+}
+.ctl input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--gold); border: 3px solid var(--ink); cursor: pointer;
+  box-shadow: 0 0 0 1px var(--line-2);
+}
+.ctl input[type="range"]::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%; background: var(--gold);
+  border: 3px solid var(--ink); cursor: pointer;
+}
+.wdetails > summary {
+  list-style: none; cursor: pointer; font-size: 12.5px; font-weight: 700;
+  color: var(--muted); padding: 4px 0; display: flex; align-items: center; gap: 8px;
+}
+.wdetails > summary::-webkit-details-marker { display: none; }
+.wdetails > summary::before { content: "▸"; color: var(--gold); }
+.wdetails[open] > summary::before { content: "▾"; }
+.wdetails > div { display: grid; gap: 12px; margin-top: 12px; }
+.reset {
+  width: 100%; padding: 12px; border-radius: var(--r-sm);
+  background: var(--raised); color: var(--text); border: 1px solid var(--line-2);
+  font: inherit; font-weight: 700; font-size: 13px; cursor: pointer;
+}
+.reset:active { transform: scale(.99); }
+
+/* データ取得状況 */
+.src-rows { display: grid; gap: 2px; }
+.src-row {
+  display: grid; grid-template-columns: 14px 1fr auto auto; align-items: center;
+  gap: 10px; padding: 9px 2px; border-bottom: 1px solid var(--line);
+}
+.src-row:last-child { border-bottom: 0; }
+.src-dot { width: 8px; height: 8px; border-radius: 50%; }
+.src-dot.ok { background: #46c98b; box-shadow: 0 0 0 3px rgba(70,201,139,.14); }
+.src-dot.ng { background: var(--gold); box-shadow: 0 0 0 3px var(--gold-soft); }
+.src-name { font-size: 13px; font-weight: 600; }
+.src-asof { font-size: 12.5px; color: var(--text); font-weight: 700; }
+.src-prov { font-size: 10.5px; color: var(--faint); }
+.src-foot {
+  display: grid; gap: 6px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-2);
+}
+.src-line { display: flex; align-items: baseline; justify-content: space-between; }
+.src-line span { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+.src-line b { font-size: 13.5px; color: var(--text); }
+.src-note { font-size: 11px; color: var(--faint); line-height: 1.55; margin-top: 12px; }
+
+/* オーバーナイト予測カード */
+.ov-pred { margin-bottom: 10px; }
+.ovp-lead { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; }
+.ovp-lead b { color: var(--text); font-weight: 800; }
+.ovp-top { display: flex; align-items: center; gap: 16px; }
+.ovp-prob {
+  flex: 0 0 auto; font-size: 34px; font-weight: 800; line-height: 1;
+  width: 78px; text-align: center;
+}
+.ovp-body { flex: 1; }
+.ovp-label { font-size: 15px; font-weight: 800; }
+.ovp-note { font-size: 12.5px; color: var(--muted); line-height: 1.55; margin-top: 6px; }
+.ov-hint {
+  font-size: 11.5px; color: var(--faint); line-height: 1.55; margin-top: 10px;
+  padding: 10px 12px; border: 1px dashed var(--line-2); border-radius: var(--r-sm);
+}
+.ov-hint b { color: var(--muted); }
+
 /* 免責 */
 .disclaimer {
   margin-top: 22px; border: 1px solid var(--line); border-radius: var(--r-md);

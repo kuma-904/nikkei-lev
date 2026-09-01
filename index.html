@@ -72,6 +72,8 @@
         <div class="mv num" id="bearMove">—</div>
       </button>
     </div>
+
+    <button class="cutoff" data-term="cutoff">⏰ <span id="cutoffNote">—</span></button>
   </div>
 
   <!-- ===== 予測（過去データ）＝1日運用の主役 ===== -->
@@ -105,7 +107,38 @@
   <!-- ===== テクニカル指標（タップで解説） ===== -->
   <section>
     <div class="sec-head"><h2>テクニカル指標</h2><span class="hint">カードをタップで解説</span></div>
-    <div class="grid" id="grid"></div>
+    <div class="grid" id="gridTech"></div>
+  </section>
+
+  <!-- ===== データの取得状況 ===== -->
+  <section>
+    <div class="sec-head"><h2>データの取得状況</h2><span class="hint">時点と次回更新</span></div>
+    <div class="card">
+      <div class="src-rows" id="srcRows"></div>
+      <div class="src-foot">
+        <div class="src-line"><span>最終取得</span><b class="num" id="srcGen">—</b></div>
+        <div class="src-line"><span>次回取得予定</span><b class="num" id="srcNext">—</b></div>
+      </div>
+      <div class="src-note">※ 自動更新は GitHub Actions のスケジュール（平日 8:00 / 18:00 / 20:00 JST）に従います。混雑時は数分〜遅れることがあります。</div>
+    </div>
+  </section>
+
+  <!-- ===== オーバーナイト要因（前日の海外） ===== -->
+  <section id="ovSection">
+    <div class="sec-head"><h2>オーバーナイト要因</h2><span class="hint" data-term="overnight">前日の海外 ⓘ</span></div>
+    <div class="card ov-pred" id="ovPredCard">
+      <div class="ovp-lead">前夜の海外が同じだった<b>翌営業日</b>の日経</div>
+      <div class="ovp-top">
+        <div class="ovp-prob num" id="ovProb">—</div>
+        <div class="ovp-body">
+          <div class="ovp-label" id="ovLabel">—</div>
+          <div class="ovp-note" id="ovNote">—</div>
+        </div>
+      </div>
+      <div class="pred-meta" id="ovMeta"></div>
+    </div>
+    <div class="grid" id="gridOv"></div>
+    <div class="ov-hint">※ オーバーナイト要因は前夜に確定するため、<b>朝に確認して当日のセッションに賭ける</b>のが効果的です。</div>
   </section>
 
   <!-- ===== 1日運用の損益イメージ ===== -->
@@ -129,6 +162,67 @@
       </div>
       <div class="lev-note"><span class="term" data-term="cost">往復コスト</span>：<span id="costNote">—</span></div>
       <div class="lev-ref">参考・本日実績×倍率：ブル <b class="num" id="refBull">—</b>／ベア <b class="num" id="refBear">—</b></div>
+    </div>
+  </section>
+
+  <!-- ===== 判定と予測の仕組み ===== -->
+  <section>
+    <div class="sec-head"><h2>判定と予測の仕組み</h2><span class="hint">タップで開く</span></div>
+    <details class="method">
+      <summary>ルールベース判定はどう出している？</summary>
+      <div class="method-body">
+        <p>テクニカル7指標に加え、オーバーナイト要因（米国株・ドル円・先物）も同じ仕組みで「強気(+1)／弱気(−1)／中立(0)」を投票し、指標ごとの重みを掛けて合計します。合計を −100〜+100 のスコアに正規化して判定します。</p>
+        <div class="formula">スコア ＝ Σ(各指標の投票 × 重み) ÷ Σ(重み) × 100</div>
+        <ul class="rules">
+          <li>スコア ≧ ＋<b id="mThOver">20</b> → <span class="read-bull">ブル寄り</span></li>
+          <li>スコア ≦ −<b id="mThUnder">20</b> → <span class="read-bear">ベア寄り</span></li>
+          <li>その間 → <span class="read-neutral">様子見</span></li>
+        </ul>
+        <div class="wtable" id="mWeights"></div>
+        <p class="mnote">この重み・しきい値は下の「数字を調整」で変えられます。</p>
+      </div>
+    </details>
+    <details class="method">
+      <summary>過去データからの予測はどう出している？</summary>
+      <div class="method-body">
+        <p>今日の相場を〈トレンド区分 × RSIゾーン × MACD符号〉で分類し、<b id="mLb">直近5年</b>で同じ状態だった日の「翌日の値動き」を集計。上昇した割合を上昇確率として表示します。</p>
+        <ul class="rules">
+          <li>トレンド区分：移動平均の並び（上昇／下降／もみ合い）</li>
+          <li>RSIゾーン：過熱(≧70)／やや強(≧50)／やや弱(>30)／底値圏(≦30)</li>
+          <li>MACD符号：ヒストグラムの ＋／−</li>
+        </ul>
+        <p>同じ状態が <b id="mMin">8</b> 回に満たないときは、条件をトレンド区分だけに広げて集計します。サンプルが多いほど信頼度は上がります（40回以上で「高」）。</p>
+        <p>これとは別に「オーバーナイト予測」も出しています。前夜の米国株×ドル円の方向が今と同じだった翌営業日、日経が上昇した割合を集計したもので、1日運用の方向感を補います。</p>
+        <p class="mnote">遡り年数・最小サンプル数も下で調整できます。</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===== 数字を調整（プレビュー） ===== -->
+  <section>
+    <div class="sec-head"><h2>数字を調整</h2><span class="hint">この端末だけのプレビュー</span></div>
+    <div class="card adjuster">
+      <div class="adj-note">スライダーを動かすと、上の判定・予測がその場で計算し直されます。日々のデータは次回更新まで固定で、この調整は<b>あなたの端末にだけ</b>保存されます。</div>
+
+      <div class="adj-group">
+        <div class="adj-title">予測</div>
+        <label class="ctl"><span>遡り年数　<b id="vLb">5</b> 年</span>
+          <input type="range" id="cLb" min="1" max="8" step="1"></label>
+        <label class="ctl"><span>最小サンプル数　<b id="vMin">8</b></span>
+          <input type="range" id="cMin" min="3" max="30" step="1"></label>
+      </div>
+
+      <div class="adj-group">
+        <div class="adj-title">ルールベース判定</div>
+        <label class="ctl"><span>判定しきい値　±<b id="vTh">20</b></span>
+          <input type="range" id="cTh" min="5" max="40" step="1"></label>
+        <details class="wdetails">
+          <summary>指標の重み（7項目）</summary>
+          <div id="wSliders"></div>
+        </details>
+      </div>
+
+      <button class="reset" id="resetBtn">既定値に戻す</button>
     </div>
   </section>
 
