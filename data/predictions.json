@@ -1,1 +1,14 @@
-[]
+[
+ {
+  "date": "2026-09-01",
+  "close": 66215.34,
+  "verdict_side": "neutral",
+  "verdict_score": 3,
+  "pred_side": "bear",
+  "pred_prob": 0.446,
+  "ov_side": "bull",
+  "next_ret": null,
+  "verdict_correct": null,
+  "pred_correct": null
+ }
+]
