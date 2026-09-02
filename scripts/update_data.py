@@ -562,15 +562,28 @@ def historical_prediction(d: pd.DataFrame,
                 key=key, lookback_years=lookback_years)
 
 
+BT_ORDER = ["trend", "cross", "rsi14", "macd", "bb", "stoch", "dev25"]  # バックテスト対象のテクニカル7指標
+
+
+def _sig_string(row: pd.Series) -> str:
+    """その日の7指標シグナルを b(強気)/s(弱気)/n(中立) の文字列に符号化。"""
+    sig = {s["id"]: s["signal"] for s in indicator_signals(row)}
+    m = {"bull": "b", "bear": "s", "neutral": "n"}
+    return "".join(m[sig[i]] for i in BT_ORDER)
+
+
 def build_pred_samples(d: pd.DataFrame, ship_years: int = SHIP_YEARS) -> list:
-    """サイトが遡り年数を変えて再計算できるよう、直近 ship_years 年の
-    [日付, key, 翌日リターン%] を出荷する。"""
+    """サイトが遡り年数・重み・しきい値を変えて再計算できるよう、直近 ship_years 年の
+    [日付, key, 翌日リターン%, 7指標シグナル文字列] を出荷する。"""
     last_date = d.iloc[-1]["date"]
     cutoff = last_date - pd.DateOffset(years=ship_years)
     s = d.iloc[:-1]
     s = s[s["date"] >= cutoff]
-    return [[dt.strftime("%Y-%m-%d"), k, round(float(r) * 100, 3)]
-            for dt, k, r in zip(s["date"], s["key"], s["fwd_ret1"])]
+    out = []
+    for _, row in s.iterrows():
+        out.append([row["date"].strftime("%Y-%m-%d"), row["key"],
+                    round(float(row["fwd_ret1"]) * 100, 3), _sig_string(row)])
+    return out
 
 
 # ----------------------------------------------------------------------------
@@ -600,7 +613,106 @@ def leverage_block(df: pd.DataFrame, change_pct: float) -> dict:
 # ----------------------------------------------------------------------------
 # メイン
 # ----------------------------------------------------------------------------
-def build_payload(force_sample: bool) -> dict:
+def _correct(side: str, ret: float):
+    if side == "bull":
+        return bool(ret > 0)
+    if side == "bear":
+        return bool(ret < 0)
+    return None  # 様子見/五分五分は採点しない
+
+
+def summarize_track(log: list) -> dict:
+    resolved = [r for r in log if r.get("next_ret") is not None]
+    vd = [r for r in resolved if r.get("verdict_correct") is not None]
+    pr = [r for r in resolved if r.get("pred_correct") is not None]
+    pct = lambda xs: round(sum(1 for r in xs if r) / len(xs) * 100, 1) if xs else None
+    keys = ("date", "close", "verdict_side", "pred_side", "ov_side",
+            "next_ret", "verdict_correct", "pred_correct")
+    recent = [{k: r.get(k) for k in keys} for r in log[-12:][::-1]]
+    return {
+        "resolved": len(resolved),
+        "verdict_hit_rate": pct([r["verdict_correct"] for r in vd]), "verdict_n": len(vd),
+        "pred_hit_rate": pct([r["pred_correct"] for r in pr]), "pred_n": len(pr),
+        "since": log[0]["date"] if log else None,
+        "total_logged": len(log),
+        "recent": recent,
+    }
+
+
+def synth_track_record() -> dict:
+    """サンプル表示用の合成フォワード実績。"""
+    rng = np.random.default_rng(3)
+    log = []
+    base = 34000.0
+    d0 = datetime.now(JST).date()
+    for i in range(16):
+        base *= (1 + rng.normal(0.0005, 0.011))
+        ret = round(float(rng.normal(0.05, 1.1)), 3)
+        vs = rng.choice(["bull", "bear", "neutral"], p=[0.4, 0.4, 0.2])
+        ps = rng.choice(["bull", "bear", "neutral"], p=[0.35, 0.35, 0.3])
+        log.append({
+            "date": (d0 - timedelta(days=(16 - i) * 1)).strftime("%Y-%m-%d"),
+            "close": round(base, 2), "verdict_side": vs, "pred_side": ps,
+            "ov_side": rng.choice(["bull", "bear", "neutral"]),
+            "next_ret": ret, "verdict_correct": _correct(vs, ret), "pred_correct": _correct(ps, ret),
+        })
+    return summarize_track(log)
+
+
+def resolve_and_log(df: pd.DataFrame, verdict: dict, prediction: dict, overnight: dict,
+                    is_sample: bool, path: str) -> dict:
+    """実運用の予測ログを更新（追記＋結果判明分の採点）して、フォワード実績サマリを返す。
+    バックテスト（過去当てはめ）と違い、実際に出した予測の的中を日々ためる“独自DB”。"""
+    if is_sample:
+        return synth_track_record()
+
+    import os
+    log = []
+    if os.path.exists(path):
+        try:
+            log = json.load(open(path, encoding="utf-8"))
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] predictions.json 読込失敗: {e}", file=sys.stderr)
+            log = []
+    by_date = {r["date"]: r for r in log if "date" in r}
+
+    last = df.iloc[-1]
+    tdate = last["date"].strftime("%Y-%m-%d")
+    rec = by_date.get(tdate, {"date": tdate})
+    ov_side = (overnight.get("prediction") or {}).get("side") if overnight.get("available") else None
+    rec.update({
+        "close": round(float(last["close"]), 2),
+        "verdict_side": verdict["side"], "verdict_score": verdict["score"],
+        "pred_side": prediction["side"], "pred_prob": prediction["up_probability"],
+        "ov_side": ov_side,
+    })
+    rec.setdefault("next_ret", None)
+    rec.setdefault("verdict_correct", None)
+    rec.setdefault("pred_correct", None)
+    by_date[tdate] = rec
+
+    # 結果の採点：記録日の翌営業日の終値が判明していれば埋める
+    dates = list(df["date"])
+    close_by = {d.strftime("%Y-%m-%d"): float(c) for d, c in zip(df["date"], df["close"])}
+    pos = {d.strftime("%Y-%m-%d"): i for i, d in enumerate(dates)}
+    for d, r in by_date.items():
+        if r.get("next_ret") is None and d in pos and pos[d] + 1 < len(dates):
+            nd = dates[pos[d] + 1].strftime("%Y-%m-%d")
+            ret = (close_by[nd] / close_by[d] - 1) * 100
+            r["next_ret"] = round(ret, 3)
+            r["verdict_correct"] = _correct(r.get("verdict_side"), ret)
+            r["pred_correct"] = _correct(r.get("pred_side"), ret)
+
+    log = [by_date[d] for d in sorted(by_date.keys())]
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(log, f, ensure_ascii=False, indent=1)
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] predictions.json 書込失敗: {e}", file=sys.stderr)
+    return summarize_track(log)
+
+
+def build_payload(force_sample: bool, pred_log_path: str = "data/predictions.json") -> dict:
     raw, is_sample, source = load_data(force_sample)
     df = build_features(raw)
     last = df.iloc[-1]
@@ -642,7 +754,8 @@ def build_payload(force_sample: bool) -> dict:
         "ship_years": SHIP_YEARS,
         "score_threshold": SCORE_THRESHOLD,
         "order_cutoff": ORDER_CUTOFF,
-        "run_times_jst": ["08:00", "18:00", "20:00"],  # 自動更新の予定時刻（平日）
+        "run_times_jst": [f"{h:02d}:00" for h in range(8, 21)],  # 平日 8:00〜20:00 毎時
+        "bt_order": BT_ORDER,  # バックテストの指標順（サイト側の再計算用）
         "weights": {s["id"]: s["weight"] for s in signals_all},
     }
 
@@ -667,6 +780,8 @@ def build_payload(force_sample: bool) -> dict:
         "prediction": ov_pred,
     }
 
+    track_record = resolve_and_log(df, verdict, prediction, overnight, is_sample, pred_log_path)
+
     return {
         "generated_at": datetime.now(JST).isoformat(timespec="minutes"),
         "is_sample": is_sample,
@@ -686,6 +801,7 @@ def build_payload(force_sample: bool) -> dict:
         "leverage": leverage,
         "config": config,
         "sources": sources,
+        "track_record": track_record,
         "pred_samples": pred_samples,
         "indicators": [dict(s) for s in signals_all],
     }
@@ -695,9 +811,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sample", action="store_true", help="合成データを強制使用（ローカル検証用）")
     ap.add_argument("--out", default="data/data.json")
+    ap.add_argument("--pred-out", default="data/predictions.json")
     args = ap.parse_args()
 
-    payload = build_payload(args.sample)
+    payload = build_payload(args.sample, args.pred_out)
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
     tag = "SAMPLE" if payload["is_sample"] else "LIVE"
