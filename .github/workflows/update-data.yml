@@ -4,11 +4,11 @@ name: update-data
 # 平日の場中〜引け後に複数回まわす（cron は UTC。JST = UTC+9）。
 on:
   schedule:
-    # 引け(15:30 JST)後に更新して翌営業日の注文に使う。cron は UTC（JST = UTC+9）。
-    - cron: "0 9 * * 1-5"    # 18:00 JST（本命・当日の確定テクニカル）
-    - cron: "0 11 * * 1-5"   # 20:00 JST（データ反映が遅れた場合の予備）
-    # 朝の更新：前夜の米国株・ドル円が反映された状態でオーバーナイト要因を見るため
-    - cron: "0 23 * * 0-4"   # 08:00 JST（月〜金の朝＝UTC 前日 23:00）
+    # 平日 8:00〜20:00 JST を毎時更新（頻度アップ）。cron は UTC（JST = UTC+9）。
+    # ※ 日足データのため日中は基本変わらない。引け後の当日データを早めに拾い、
+    #    「時点/次回更新」表示を新鮮に保つのが狙い。変化がなければコミットしない。
+    - cron: "0 23 * * 0-4"    # 08:00 JST（前夜の米国株・ドル円が反映＝オーバーナイト用）
+    - cron: "0 0-11 * * 1-5"  # 09:00〜20:00 JST の毎時
   workflow_dispatch: {}   # 手動実行も可
 
 permissions:
@@ -31,16 +31,16 @@ jobs:
       - name: Install deps
         run: pip install -r scripts/requirements.txt
 
-      - name: Update data.json
-        run: python scripts/update_data.py --out data/data.json
+      - name: Update data
+        run: python scripts/update_data.py --out data/data.json --pred-out data/predictions.json
 
       - name: Commit if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if [ -n "$(git status --porcelain data/data.json)" ]; then
-            git add data/data.json
-            git commit -m "chore: update data.json ($(date -u +%Y-%m-%dT%H:%MZ))"
+          if [ -n "$(git status --porcelain data/)" ]; then
+            git add data/data.json data/predictions.json
+            git commit -m "chore: update data ($(date -u +%Y-%m-%dT%H:%MZ))"
             git push
           else
             echo "変更なし"
