@@ -1,0 +1,33 @@
+name: research-export
+
+# 分析用の生データCSV（data/research.csv）を作ってコミットする。手動実行のみ。
+# Actionsタブ →「research-export」→ Run workflow で起動 → data/research.csv をダウンロード。
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: pip install -r scripts/requirements.txt
+      - name: Export research CSV
+        run: python scripts/update_data.py --research-csv data/research.csv
+      - name: Commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain data/research.csv)" ]; then
+            git add data/research.csv
+            git commit -m "chore: research.csv ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git push
+          else
+            echo "変更なし"
+          fi
