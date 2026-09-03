@@ -7,6 +7,18 @@
   "pred_side": "bear",
   "pred_prob": 0.446,
   "ov_side": "bull",
+  "next_ret": -3.055,
+  "verdict_correct": null,
+  "pred_correct": true
+ },
+ {
+  "date": "2026-09-03",
+  "close": 64192.44,
+  "verdict_side": "neutral",
+  "verdict_score": -16,
+  "pred_side": "bull",
+  "pred_prob": 0.582,
+  "ov_side": "bull",
   "next_ret": null,
   "verdict_correct": null,
   "pred_correct": null
