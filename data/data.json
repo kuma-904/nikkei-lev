@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T18:34+09:00",
+  "generated_at": "2026-09-03T23:57+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -10,10 +10,6 @@
     "change_pct": -0.17,
     "date": "2026-09-03",
     "history": [
-      {
-        "d": "2026-03-10",
-        "c": 54248.39
-      },
       {
         "d": "2026-03-11",
         "c": 55025.37
@@ -475,6 +471,10 @@
         "c": 66131.98
       },
       {
+        "d": "2026-08-28",
+        "c": 66405.56
+      },
+      {
         "d": "2026-08-31",
         "c": 66311.93
       },
@@ -498,15 +498,15 @@
     "score": -55,
     "conviction": 3,
     "n_bull": 2,
-    "n_bear": 7,
-    "summary": "10指標中 強気2 / 弱気7。総合スコア -55。"
+    "n_bear": 8,
+    "summary": "10指標中 強気2 / 弱気8。総合スコア -55。"
   },
   "prediction": {
     "side": "bull",
     "label": "ブル寄り",
     "up_probability": 0.579,
     "sample_size": 197,
-    "avg_next_return_pct": 0.079,
+    "avg_next_return_pct": 0.08,
     "confidence": "高",
     "basis": "類似局面",
     "note": "直近5年で、同じ状態（もみ合い・RSIやや弱・MACD−）だった日は197回。そのうち翌日上昇は58%（類似局面ベース、サンプル信頼度：高）。",
@@ -515,9 +515,9 @@
   },
   "overnight": {
     "available": true,
-    "us_ret_pct": 0.46,
-    "jpy_ret_pct": -2.28,
-    "fut_premium_pct": -0.04,
+    "us_ret_pct": 0.43,
+    "jpy_ret_pct": -2.99,
+    "fut_premium_pct": -0.43,
     "prediction": {
       "available": true,
       "side": "bull",
@@ -529,16 +529,21 @@
       "note": "前日に米国株上昇・ドル円円高となった翌営業日、日経が上昇したのは直近5年で221回中68%（米国株×ドル円、信頼度高）。"
     }
   },
+  "regime": {
+    "adx": 16.0,
+    "state": "range",
+    "cutoff": 23
+  },
   "leverage": {
     "bull_mult": 4.3,
     "bear_mult": 3.8,
     "hold_days": 1,
-    "daily_move_pct": 1.57,
-    "swing_bull_pct": 6.8,
-    "swing_bear_pct": 6.0,
+    "daily_move_pct": 1.34,
+    "swing_bull_pct": 5.7,
+    "swing_bear_pct": 5.1,
     "today_bull_pct": -0.74,
     "today_bear_pct": 0.66,
-    "realized_vol_annual_pct": 25.0,
+    "realized_vol_annual_pct": 21.2,
     "decay_note": "1日で解約する運用なら、減価（複数日の再計算で効く目減り）はほぼ発生しません。効くのは往復コストと、方向が当たるかどうかです。",
     "cost_note": "勝っても往復コスト（信託報酬の日割り・信託財産留保額・購入時手数料など）が差し引かれます。料率は目論見書で要確認。"
   },
@@ -546,22 +551,24 @@
     "lookback_years": 5,
     "min_samples": 8,
     "ship_years": 8,
-    "score_threshold": 20,
+    "score_threshold": 16,
     "order_cutoff": "15:20",
+    "adx_cutoff": 23,
     "run_times_jst": [
-      "08:00",
-      "09:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-      "20:00"
+      "08:10",
+      "09:10",
+      "10:10",
+      "11:10",
+      "12:10",
+      "13:10",
+      "14:10",
+      "15:03",
+      "15:10",
+      "16:10",
+      "17:10",
+      "18:10",
+      "19:10",
+      "20:10"
     ],
     "bt_order": [
       "trend",
@@ -573,13 +580,13 @@
       "dev25"
     ],
     "weights": {
-      "trend": 2.0,
-      "cross": 1.5,
-      "rsi14": 1.5,
-      "macd": 1.3,
-      "bb": 1.0,
-      "stoch": 0.8,
-      "dev25": 1.0,
+      "trend": 0.8,
+      "cross": 1.0,
+      "rsi14": 1.2,
+      "macd": 0.3,
+      "bb": 1.3,
+      "stoch": 1.0,
+      "dev25": 2.2,
       "us": 1.6,
       "jpy": 1.2,
       "fut": 1.0
@@ -594,7 +601,7 @@
     },
     {
       "name": "米国株(S&P500)",
-      "as_of": "2026-09-02",
+      "as_of": "2026-09-03",
       "provider": "Yahoo ^GSPC",
       "ok": true
     },
@@ -617,6 +624,8 @@
     "verdict_n": 0,
     "pred_hit_rate": 100.0,
     "pred_n": 1,
+    "ov_hit_rate": null,
+    "ov_n": 0,
     "since": "2026-09-01",
     "total_logged": 2,
     "recent": [
@@ -628,7 +637,8 @@
         "ov_side": "bull",
         "next_ret": null,
         "verdict_correct": null,
-        "pred_correct": null
+        "pred_correct": null,
+        "ov_correct": null
       },
       {
         "date": "2026-09-01",
@@ -638,7 +648,8 @@
         "ov_side": "bull",
         "next_ret": -3.055,
         "verdict_correct": null,
-        "pred_correct": true
+        "pred_correct": true,
+        "ov_correct": null
       }
     ]
   },
@@ -647,6877 +658,8030 @@
       "2021-12-22",
       "down|low|pos",
       0.827,
-      "ssnbbbs"
+      "ssnbbbs",
+      "R"
     ],
     [
       "2021-12-23",
       "down|high|pos",
       -0.055,
-      "ssnbbbb"
+      "ssnbbbb",
+      "R"
     ],
     [
       "2021-12-24",
       "down|high|pos",
       -0.369,
-      "ssnbbbb"
+      "ssnbbbb",
+      "R"
     ],
     [
       "2021-12-27",
       "mid|high|pos",
       1.369,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2021-12-28",
       "mid|high|pos",
       -0.558,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2021-12-29",
       "mid|high|pos",
       -0.398,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2021-12-30",
       "mid|high|pos",
       1.772,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-01-04",
       "mid|high|pos",
       0.104,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-01-05",
       "mid|high|pos",
       -2.878,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-01-06",
       "mid|low|pos",
       -0.033,
-      "nbnbsbs"
+      "nbnbsbs",
+      "R"
     ],
     [
       "2022-01-07",
       "mid|low|pos",
       -0.899,
-      "nbnbsbs"
+      "nbnbsbs",
+      "R"
     ],
     [
       "2022-01-11",
       "mid|low|neg",
       1.925,
-      "nbsssbs"
+      "nbsssbs",
+      "R"
     ],
     [
       "2022-01-12",
       "mid|high|neg",
       -0.961,
-      "nbnsbbb"
+      "nbnsbbb",
+      "R"
     ],
     [
       "2022-01-13",
       "down|low|neg",
       -1.281,
-      "ssnssss"
+      "ssnssss",
+      "R"
     ],
     [
       "2022-01-14",
       "down|low|neg",
       0.744,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2022-01-17",
       "down|low|neg",
       -0.269,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2022-01-18",
       "down|low|neg",
       -2.796,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2022-01-19",
       "down|low|neg",
       1.113,
-      "ssssbbs"
+      "ssssbbs",
+      "R"
     ],
     [
       "2022-01-20",
       "down|low|neg",
       -0.903,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2022-01-21",
       "down|low|neg",
       0.24,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2022-01-24",
       "down|low|neg",
       -1.657,
-      "sssssss"
+      "sssssss",
+      "R"
     ],
     [
       "2022-01-25",
       "down|low|neg",
       -0.442,
-      "ssssbbs"
+      "ssssbbs",
+      "R"
     ],
     [
       "2022-01-26",
       "down|low|neg",
       -3.114,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2022-01-27",
       "down|cold|neg",
       2.09,
-      "ssbsbbb"
+      "ssbsbbb",
+      "T"
     ],
     [
       "2022-01-28",
       "down|low|neg",
       1.065,
-      "sssssbb"
+      "sssssbb",
+      "T"
     ],
     [
       "2022-01-31",
       "down|low|neg",
       0.283,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2022-02-01",
       "down|low|neg",
       1.681,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2022-02-02",
       "down|low|neg",
       -1.062,
-      "ssnssss"
+      "ssnssss",
+      "T"
     ],
     [
       "2022-02-03",
       "down|low|neg",
       0.729,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2022-02-04",
       "down|low|pos",
       -0.697,
-      "ssnbsss"
+      "ssnbsss",
+      "T"
     ],
     [
       "2022-02-07",
       "down|low|pos",
       0.131,
-      "sssbsss"
+      "sssbsss",
+      "T"
     ],
     [
       "2022-02-08",
       "down|low|pos",
       1.082,
-      "sssbsss"
+      "sssbsss",
+      "T"
     ],
     [
       "2022-02-09",
       "down|low|pos",
       0.421,
-      "ssnbbss"
+      "ssnbbss",
+      "T"
     ],
     [
       "2022-02-10",
       "down|high|pos",
       -2.226,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2022-02-14",
       "down|low|pos",
       -0.792,
-      "sssbsbs"
+      "sssbsbs",
+      "R"
     ],
     [
       "2022-02-15",
       "down|low|pos",
       2.216,
-      "sssbsbs"
+      "sssbsbs",
+      "R"
     ],
     [
       "2022-02-16",
       "down|low|pos",
       -0.829,
-      "ssnbbbs"
+      "ssnbbbs",
+      "R"
     ],
     [
       "2022-02-17",
       "down|low|pos",
       -0.407,
-      "ssnbbbs"
+      "ssnbbbs",
+      "R"
     ],
     [
       "2022-02-18",
       "down|low|pos",
       -0.779,
-      "ssnbsss"
+      "ssnbsss",
+      "R"
     ],
     [
       "2022-02-21",
       "down|low|pos",
       -1.714,
-      "sssbsss"
+      "sssbsss",
+      "R"
     ],
     [
       "2022-02-22",
       "down|low|neg",
       -1.81,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2022-02-24",
       "down|low|neg",
       1.947,
-      "ssssbbs"
+      "ssssbbs",
+      "T"
     ],
     [
       "2022-02-25",
       "down|low|neg",
       0.19,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2022-02-28",
       "down|low|neg",
       1.198,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2022-03-01",
       "down|low|neg",
       -1.683,
-      "ssnssbs"
+      "ssnssbs",
+      "T"
     ],
     [
       "2022-03-02",
       "down|low|neg",
       0.698,
-      "sssssss"
+      "sssssss",
+      "T"
     ],
     [
       "2022-03-03",
       "down|low|neg",
       -2.227,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2022-03-04",
       "down|low|neg",
       -2.94,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2022-03-07",
       "down|low|neg",
       -1.707,
-      "ssssbbb"
+      "ssssbbb",
+      "T"
     ],
     [
       "2022-03-08",
       "down|cold|neg",
       -0.296,
-      "ssbsbbb"
+      "ssbsbbb",
+      "T"
     ],
     [
       "2022-03-09",
       "down|cold|neg",
       3.936,
-      "ssbsbbb"
+      "ssbsbbb",
+      "T"
     ],
     [
       "2022-03-10",
       "down|low|neg",
       -2.054,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2022-03-11",
       "down|low|neg",
       0.577,
-      "ssssssb"
+      "ssssssb",
+      "T"
     ],
     [
       "2022-03-14",
       "down|low|neg",
       0.153,
-      "sssssss"
+      "sssssss",
+      "T"
     ],
     [
       "2022-03-15",
       "down|low|neg",
       1.639,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2022-03-16",
       "down|low|neg",
       3.458,
-      "ssnssbs"
+      "ssnssbs",
+      "T"
     ],
     [
       "2022-03-17",
       "down|high|pos",
       0.655,
-      "ssnbbsb"
+      "ssnbbsb",
+      "T"
     ],
     [
       "2022-03-18",
       "down|high|pos",
       1.479,
-      "ssbbbsb"
+      "ssbbbsb",
+      "T"
     ],
     [
       "2022-03-22",
       "mid|high|pos",
       2.998,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2022-03-23",
       "mid|high|pos",
       0.25,
-      "nbbbsss"
+      "nbbbsss",
+      "T"
     ],
     [
       "2022-03-24",
       "mid|high|pos",
       0.14,
-      "nbbbsss"
+      "nbbbsss",
+      "T"
     ],
     [
       "2022-03-25",
       "mid|high|pos",
       -0.732,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2022-03-28",
       "mid|high|pos",
       1.104,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2022-03-29",
       "mid|high|pos",
       -0.797,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2022-03-30",
       "mid|high|pos",
       -0.734,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2022-03-31",
       "mid|high|pos",
       -0.559,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2022-04-01",
       "mid|high|pos",
       0.255,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2022-04-04",
       "mid|high|pos",
       0.186,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2022-04-05",
       "mid|high|pos",
       -1.575,
-      "nbbbbbb"
+      "nbbbbbb",
+      "T"
     ],
     [
       "2022-04-06",
       "mid|high|pos",
       -1.688,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2022-04-07",
       "mid|low|neg",
       0.362,
-      "nbnssbb"
+      "nbnssbb",
+      "R"
     ],
     [
       "2022-04-08",
       "mid|low|neg",
       -0.609,
-      "nbnssbb"
+      "nbnssbb",
+      "R"
     ],
     [
       "2022-04-11",
       "mid|low|neg",
       -1.814,
-      "nbnssbb"
+      "nbnssbb",
+      "R"
     ],
     [
       "2022-04-12",
       "mid|low|neg",
       1.931,
-      "nbsssbs"
+      "nbsssbs",
+      "R"
     ],
     [
       "2022-04-13",
       "down|low|neg",
       1.224,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2022-04-14",
       "down|high|neg",
       -0.29,
-      "ssnssbb"
+      "ssnssbb",
+      "R"
     ],
     [
       "2022-04-15",
       "down|high|neg",
       -1.083,
-      "ssnssbb"
+      "ssnssbb",
+      "R"
     ],
     [
       "2022-04-18",
       "down|low|neg",
       0.692,
-      "ssnssss"
+      "ssnssss",
+      "R"
     ],
     [
       "2022-04-19",
       "mid|low|neg",
       0.863,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-04-20",
       "mid|high|neg",
       1.232,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2022-04-21",
       "mid|high|neg",
       -1.625,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2022-04-22",
       "mid|high|neg",
       -1.898,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2022-04-25",
       "mid|low|neg",
       0.411,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-04-26",
       "mid|low|neg",
       -1.174,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-04-27",
       "mid|low|neg",
       1.748,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-04-28",
       "mid|low|neg",
       -0.109,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-05-02",
       "mid|low|neg",
       0.69,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-05-06",
       "mid|high|neg",
       -2.534,
-      "nsnsbbs"
+      "nsnsbbs",
+      "R"
     ],
     [
       "2022-05-09",
       "mid|low|neg",
       -0.578,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-05-10",
       "mid|low|neg",
       0.178,
-      "nssssss"
+      "nssssss",
+      "R"
     ],
     [
       "2022-05-11",
       "mid|low|neg",
       -1.774,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-05-12",
       "down|low|neg",
       2.637,
-      "ssssbbs"
+      "ssssbbs",
+      "R"
     ],
     [
       "2022-05-13",
       "down|low|neg",
       0.452,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2022-05-16",
       "down|low|neg",
       0.425,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2022-05-17",
       "down|low|neg",
       0.943,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2022-05-18",
       "down|high|pos",
       -1.889,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2022-05-19",
       "down|low|pos",
       1.273,
-      "ssnbsss"
+      "ssnbsss",
+      "R"
     ],
     [
       "2022-05-20",
       "down|high|pos",
       0.982,
-      "ssnbbbb"
+      "ssnbbbb",
+      "R"
     ],
     [
       "2022-05-23",
       "mid|high|pos",
       -0.938,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-05-24",
       "mid|high|pos",
       -0.263,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-05-25",
       "mid|low|pos",
       -0.273,
-      "nbnbbss"
+      "nbnbbss",
+      "R"
     ],
     [
       "2022-05-26",
       "mid|low|pos",
       0.665,
-      "nbnbbss"
+      "nbnbbss",
+      "R"
     ],
     [
       "2022-05-27",
       "mid|high|pos",
       2.195,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2022-05-30",
       "mid|high|pos",
       -0.327,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2022-05-31",
       "mid|high|pos",
       0.653,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-06-01",
       "mid|high|pos",
       -0.16,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-06-02",
       "mid|high|pos",
       1.268,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-06-03",
       "mid|high|pos",
       0.556,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2022-06-06",
       "mid|high|pos",
       0.101,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-06-07",
       "up|high|pos",
       1.039,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-06-08",
       "up|high|pos",
       0.043,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-06-09",
       "up|high|pos",
       -1.495,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-06-10",
       "up|high|pos",
       -3.008,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-06-13",
       "up|low|pos",
       -1.325,
-      "bbnbsbs"
+      "bbnbsbs",
+      "R"
     ],
     [
       "2022-06-14",
       "up|low|neg",
       -1.14,
-      "bbsssbs"
+      "bbsssbs",
+      "R"
     ],
     [
       "2022-06-15",
       "up|low|neg",
       0.399,
-      "bbsssbs"
+      "bbsssbs",
+      "R"
     ],
     [
       "2022-06-16",
       "mid|low|neg",
       -1.771,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-06-17",
       "mid|low|neg",
       -0.739,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-06-20",
       "mid|low|neg",
       1.843,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-06-21",
       "mid|low|neg",
       -0.369,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-06-22",
       "mid|low|neg",
       0.083,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-06-23",
       "mid|low|neg",
       1.225,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-06-24",
       "mid|low|neg",
       1.432,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-06-27",
       "mid|high|neg",
       0.663,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2022-06-28",
       "mid|high|neg",
       -0.905,
-      "nsnsbsb"
+      "nsnsbsb",
+      "R"
     ],
     [
       "2022-06-29",
       "mid|high|pos",
       -1.535,
-      "nsnbsss"
+      "nsnbsss",
+      "R"
     ],
     [
       "2022-06-30",
       "mid|low|neg",
       -1.733,
-      "nssssss"
+      "nssssss",
+      "R"
     ],
     [
       "2022-07-01",
       "mid|low|neg",
       0.841,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-07-04",
       "down|low|neg",
       1.031,
-      "sssssss"
+      "sssssss",
+      "R"
     ],
     [
       "2022-07-05",
       "down|low|neg",
       -1.195,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2022-07-06",
       "down|low|neg",
       1.467,
-      "sssssss"
+      "sssssss",
+      "R"
     ],
     [
       "2022-07-07",
       "down|low|neg",
       0.101,
-      "ssnsbbs"
+      "ssnsbbs",
+      "R"
     ],
     [
       "2022-07-08",
       "down|low|pos",
       1.113,
-      "ssnbbbs"
+      "ssnbbbs",
+      "R"
     ],
     [
       "2022-07-11",
       "down|high|pos",
       -1.774,
-      "ssnbbbb"
+      "ssnbbbb",
+      "R"
     ],
     [
       "2022-07-12",
       "down|low|pos",
       0.54,
-      "ssnbsss"
+      "ssnbsss",
+      "R"
     ],
     [
       "2022-07-13",
       "down|low|pos",
       0.622,
-      "ssnbbss"
+      "ssnbbss",
+      "R"
     ],
     [
       "2022-07-14",
       "mid|high|pos",
       0.545,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2022-07-15",
       "mid|high|pos",
       0.647,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2022-07-19",
       "mid|high|pos",
       2.665,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-07-20",
       "mid|high|pos",
       0.443,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2022-07-21",
       "mid|high|pos",
       0.402,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2022-07-22",
       "mid|high|pos",
       -0.772,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2022-07-25",
       "mid|high|pos",
       -0.159,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-07-26",
       "mid|high|pos",
       0.219,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-07-27",
       "mid|high|pos",
       0.36,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-07-28",
       "up|high|pos",
       -0.05,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-07-29",
       "up|high|pos",
       0.69,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-08-01",
       "up|high|pos",
       -1.424,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-08-02",
       "up|high|pos",
       0.533,
-      "bbbbbbb"
+      "bbbbbbb",
+      "R"
     ],
     [
       "2022-08-03",
       "up|high|pos",
       0.686,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-08-04",
       "up|high|pos",
       0.872,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-08-05",
       "up|high|pos",
       0.26,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-08-08",
       "up|high|pos",
       -0.882,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-08-09",
       "up|high|pos",
       -0.645,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-08-10",
       "up|high|pos",
       2.616,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-08-12",
       "up|high|pos",
       1.138,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-08-15",
       "up|high|pos",
       -0.01,
-      "bbbbssb"
+      "bbbbssb",
+      "T"
     ],
     [
       "2022-08-16",
       "up|high|pos",
       1.226,
-      "bbbbssb"
+      "bbbbssb",
+      "T"
     ],
     [
       "2022-08-17",
       "up|hot|pos",
       -0.96,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2022-08-18",
       "up|high|pos",
       -0.041,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2022-08-19",
       "up|high|pos",
       -0.47,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2022-08-22",
       "up|high|pos",
       -1.187,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2022-08-23",
       "up|high|pos",
       -0.49,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2022-08-24",
       "up|high|neg",
       0.585,
-      "bbnsbbb"
+      "bbnsbbb",
+      "T"
     ],
     [
       "2022-08-25",
       "up|high|neg",
       0.57,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2022-08-26",
       "up|high|neg",
       -2.662,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2022-08-29",
       "up|low|neg",
       1.136,
-      "bbnssbs"
+      "bbnssbs",
+      "T"
     ],
     [
       "2022-08-30",
       "up|high|neg",
       -0.369,
-      "bbnssbs"
+      "bbnssbs",
+      "T"
     ],
     [
       "2022-08-31",
       "mid|low|neg",
       -1.531,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-09-01",
       "mid|low|neg",
       -0.038,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-09-02",
       "mid|low|neg",
       -0.113,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-09-05",
       "mid|low|neg",
       0.025,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-09-06",
       "mid|low|neg",
       -0.71,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-09-07",
       "mid|low|neg",
       2.315,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-09-08",
       "mid|high|neg",
       0.533,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2022-09-09",
       "mid|high|neg",
       1.16,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2022-09-12",
       "mid|high|neg",
       0.254,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2022-09-13",
       "mid|high|pos",
       -2.782,
-      "nsbbbsb"
+      "nsbbbsb",
+      "R"
     ],
     [
       "2022-09-14",
       "mid|low|neg",
       0.206,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2022-09-15",
       "mid|low|neg",
       -1.106,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2022-09-16",
       "mid|low|neg",
       0.438,
-      "nssssss"
+      "nssssss",
+      "R"
     ],
     [
       "2022-09-20",
       "mid|low|neg",
       -1.355,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2022-09-21",
       "mid|low|neg",
       -0.583,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-09-22",
       "mid|low|neg",
       -2.66,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-09-26",
       "mid|low|neg",
       0.531,
-      "nsssbbb"
+      "nsssbbb",
+      "R"
     ],
     [
       "2022-09-27",
       "mid|low|neg",
       -1.497,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2022-09-28",
       "mid|low|neg",
       0.948,
-      "nsssbbb"
+      "nsssbbb",
+      "R"
     ],
     [
       "2022-09-29",
       "mid|low|neg",
       -1.835,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-09-30",
       "mid|low|neg",
       1.074,
-      "nsssbbb"
+      "nsssbbb",
+      "T"
     ],
     [
       "2022-10-03",
       "mid|low|neg",
       2.962,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2022-10-04",
       "mid|low|neg",
       0.475,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2022-10-05",
       "down|low|neg",
       0.703,
-      "ssnssss"
+      "ssnssss",
+      "T"
     ],
     [
       "2022-10-06",
       "down|high|pos",
       -0.715,
-      "ssnbbss"
+      "ssnbbss",
+      "T"
     ],
     [
       "2022-10-07",
       "down|low|pos",
       -2.636,
-      "ssnbsss"
+      "ssnbsss",
+      "T"
     ],
     [
       "2022-10-11",
       "down|low|pos",
       -0.017,
-      "sssbsss"
+      "sssbsss",
+      "T"
     ],
     [
       "2022-10-12",
       "down|low|pos",
       -0.604,
-      "sssbsss"
+      "sssbsss",
+      "T"
     ],
     [
       "2022-10-13",
       "down|low|neg",
       3.252,
-      "sssssss"
+      "sssssss",
+      "T"
     ],
     [
       "2022-10-14",
       "down|high|pos",
       -1.163,
-      "ssnbbss"
+      "ssnbbss",
+      "T"
     ],
     [
       "2022-10-17",
       "down|low|pos",
       1.421,
-      "ssnbsss"
+      "ssnbsss",
+      "R"
     ],
     [
       "2022-10-18",
       "down|high|pos",
       0.373,
-      "ssnbbbb"
+      "ssnbbbb",
+      "R"
     ],
     [
       "2022-10-19",
       "down|high|pos",
       -0.919,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2022-10-20",
       "mid|low|pos",
       -0.431,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-10-21",
       "mid|low|pos",
       0.314,
-      "nbnbbss"
+      "nbnbbss",
+      "R"
     ],
     [
       "2022-10-24",
       "mid|low|pos",
       1.021,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2022-10-25",
       "mid|high|pos",
       0.666,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-10-26",
       "mid|high|pos",
       -0.316,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-10-27",
       "mid|high|pos",
       -0.878,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-10-28",
       "mid|low|pos",
       1.779,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-10-31",
       "mid|high|pos",
       0.332,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-11-01",
       "mid|high|pos",
       -0.056,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-11-02",
       "mid|high|pos",
       -1.676,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-11-04",
       "mid|low|pos",
       1.206,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-11-07",
       "mid|high|pos",
       1.251,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2022-11-08",
       "mid|high|pos",
       -0.559,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-11-09",
       "mid|high|pos",
       -0.975,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-11-10",
       "mid|high|pos",
       2.978,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2022-11-11",
       "mid|high|pos",
       -1.062,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2022-11-14",
       "mid|high|pos",
       0.095,
-      "nbbbbbb"
+      "nbbbbbb",
+      "R"
     ],
     [
       "2022-11-15",
       "mid|high|pos",
       0.136,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-11-16",
       "mid|high|pos",
       -0.349,
-      "nbbbbbb"
+      "nbbbbbb",
+      "R"
     ],
     [
       "2022-11-17",
       "mid|high|pos",
       -0.11,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-11-18",
       "mid|high|pos",
       0.161,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-11-21",
       "mid|high|pos",
       0.612,
-      "nbbbbbb"
+      "nbbbbbb",
+      "R"
     ],
     [
       "2022-11-22",
       "mid|high|pos",
       0.951,
-      "nbbbbbb"
+      "nbbbbbb",
+      "R"
     ],
     [
       "2022-11-24",
       "mid|high|pos",
       -0.353,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2022-11-25",
       "up|high|pos",
       -0.425,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-11-28",
       "up|high|pos",
       -0.479,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2022-11-29",
       "up|high|pos",
       -0.21,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2022-11-30",
       "up|high|neg",
       0.919,
-      "bbnsbsb"
+      "bbnsbsb",
+      "R"
     ],
     [
       "2022-12-01",
       "up|high|neg",
       -1.588,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2022-12-02",
       "up|low|neg",
       0.153,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2022-12-05",
       "up|high|neg",
       0.235,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2022-12-06",
       "up|high|neg",
       -0.715,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2022-12-07",
       "mid|low|neg",
       -0.404,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-12-08",
       "mid|low|neg",
       1.184,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-12-09",
       "mid|high|neg",
       -0.21,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-12-12",
       "mid|high|neg",
       0.404,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2022-12-13",
       "mid|high|neg",
       0.72,
-      "nsnssbb"
+      "nsnssbb",
+      "R"
     ],
     [
       "2022-12-14",
       "mid|high|neg",
       -0.371,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2022-12-15",
       "up|high|neg",
       -1.87,
-      "bbnsbsb"
+      "bbnsbsb",
+      "R"
     ],
     [
       "2022-12-16",
       "mid|low|neg",
       -1.052,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-12-19",
       "mid|low|neg",
       -2.458,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2022-12-20",
       "mid|low|neg",
       -0.679,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2022-12-21",
       "mid|low|neg",
       0.455,
-      "nsssbbb"
+      "nsssbbb",
+      "R"
     ],
     [
       "2022-12-22",
       "mid|low|neg",
       -1.028,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2022-12-23",
       "mid|low|neg",
       0.65,
-      "nsssbbb"
+      "nsssbbb",
+      "R"
     ],
     [
       "2022-12-26",
       "mid|low|neg",
       0.159,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-12-27",
       "mid|low|neg",
       -0.406,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-12-28",
       "mid|low|neg",
       -0.937,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-12-29",
       "mid|low|neg",
       0.003,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2022-12-30",
       "down|low|neg",
       -1.447,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2023-01-04",
       "down|cold|neg",
       0.404,
-      "ssbssbb"
+      "ssbssbb",
+      "T"
     ],
     [
       "2023-01-05",
       "down|cold|neg",
       0.593,
-      "ssbssbs"
+      "ssbssbs",
+      "T"
     ],
     [
       "2023-01-06",
       "down|low|neg",
       0.777,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2023-01-10",
       "down|low|neg",
       1.033,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2023-01-11",
       "down|low|neg",
       0.014,
-      "sssssss"
+      "sssssss",
+      "T"
     ],
     [
       "2023-01-12",
       "down|low|pos",
       -1.249,
-      "sssbsss"
+      "sssbsss",
+      "T"
     ],
     [
       "2023-01-13",
       "down|low|pos",
       -1.138,
-      "sssbsss"
+      "sssbsss",
+      "R"
     ],
     [
       "2023-01-16",
       "down|low|pos",
       1.225,
-      "sssbsbs"
+      "sssbsbs",
+      "T"
     ],
     [
       "2023-01-17",
       "down|low|pos",
       2.496,
-      "sssbsbs"
+      "sssbsbs",
+      "R"
     ],
     [
       "2023-01-18",
       "down|high|pos",
       -1.44,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2023-01-19",
       "down|low|pos",
       0.562,
-      "ssnbbss"
+      "ssnbbss",
+      "R"
     ],
     [
       "2023-01-20",
       "down|low|pos",
       1.328,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2023-01-23",
       "mid|high|pos",
       1.461,
-      "nbnbssb"
+      "nbnbssb",
+      "R"
     ],
     [
       "2023-01-24",
       "mid|high|pos",
       0.351,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2023-01-25",
       "mid|high|pos",
       -0.118,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2023-01-26",
       "mid|high|pos",
       0.072,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-01-27",
       "mid|high|pos",
       0.186,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-01-30",
       "mid|high|pos",
       -0.387,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-01-31",
       "mid|high|pos",
       0.072,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-02-01",
       "mid|high|pos",
       0.202,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-02-02",
       "mid|high|pos",
       0.392,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-02-03",
       "mid|high|pos",
       0.67,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2023-02-06",
       "mid|high|pos",
       -0.03,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2023-02-07",
       "mid|high|pos",
       -0.285,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2023-02-08",
       "mid|high|pos",
       -0.08,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2023-02-09",
       "mid|high|pos",
       0.314,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2023-02-10",
       "mid|high|pos",
       -0.881,
-      "nbbbbbb"
+      "nbbbbbb",
+      "T"
     ],
     [
       "2023-02-13",
       "mid|high|pos",
       0.64,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2023-02-14",
       "mid|high|pos",
       -0.366,
-      "nbbbbbb"
+      "nbbbbbb",
+      "T"
     ],
     [
       "2023-02-15",
       "mid|high|pos",
       0.708,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-02-16",
       "mid|high|pos",
       -0.662,
-      "nbbbbbb"
+      "nbbbbbb",
+      "R"
     ],
     [
       "2023-02-17",
       "mid|high|neg",
       0.068,
-      "nbbsbsb"
+      "nbbsbsb",
+      "R"
     ],
     [
       "2023-02-20",
       "up|high|neg",
       -0.214,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2023-02-21",
       "up|high|neg",
       -1.342,
-      "bbnsssb"
+      "bbnsssb",
+      "R"
     ],
     [
       "2023-02-22",
       "up|low|neg",
       1.288,
-      "bbssbbs"
+      "bbssbbs",
+      "R"
     ],
     [
       "2023-02-24",
       "mid|high|neg",
       -0.108,
-      "nsnssbb"
+      "nsnssbb",
+      "R"
     ],
     [
       "2023-02-27",
       "mid|high|neg",
       0.079,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-02-28",
       "mid|high|neg",
       0.259,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-03-01",
       "mid|high|neg",
       -0.064,
-      "nsnsbbb"
+      "nsnsbbb",
+      "R"
     ],
     [
       "2023-03-02",
       "mid|high|neg",
       1.559,
-      "nsnssbb"
+      "nsnssbb",
+      "R"
     ],
     [
       "2023-03-03",
       "up|high|neg",
       1.111,
-      "bbbsssb"
+      "bbbsssb",
+      "R"
     ],
     [
       "2023-03-06",
       "up|high|pos",
       0.253,
-      "bbbbssb"
+      "bbbbssb",
+      "R"
     ],
     [
       "2023-03-07",
       "up|high|pos",
       0.477,
-      "bbbbssb"
+      "bbbbssb",
+      "R"
     ],
     [
       "2023-03-08",
       "up|hot|pos",
       0.629,
-      "bbsbssb"
+      "bbsbssb",
+      "R"
     ],
     [
       "2023-03-09",
       "up|hot|pos",
       -1.674,
-      "bbsbssb"
+      "bbsbssb",
+      "R"
     ],
     [
       "2023-03-10",
       "up|high|pos",
       -1.105,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-03-13",
       "up|high|pos",
       -2.195,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2023-03-14",
       "up|low|neg",
       0.027,
-      "bbsssbs"
+      "bbsssbs",
+      "R"
     ],
     [
       "2023-03-15",
       "up|low|neg",
       -0.804,
-      "bbsssbs"
+      "bbsssbs",
+      "R"
     ],
     [
       "2023-03-16",
       "mid|low|neg",
       1.196,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2023-03-17",
       "mid|low|neg",
       -1.42,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-03-20",
       "mid|low|neg",
       1.933,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2023-03-22",
       "mid|low|neg",
       -0.171,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-03-23",
       "mid|low|neg",
       -0.125,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-03-24",
       "mid|low|neg",
       0.335,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-03-27",
       "mid|low|neg",
       0.151,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2023-03-28",
       "mid|high|neg",
       1.328,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2023-03-29",
       "mid|high|neg",
       -0.362,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2023-03-30",
       "mid|high|pos",
       0.931,
-      "nsnbbsb"
+      "nsnbbsb",
+      "R"
     ],
     [
       "2023-03-31",
       "up|high|pos",
       0.523,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-03",
       "up|high|pos",
       0.352,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-04",
       "up|high|pos",
       -1.676,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-05",
       "up|high|pos",
       -1.225,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2023-04-06",
       "up|low|pos",
       0.166,
-      "bbnbsbs"
+      "bbnbsbs",
+      "R"
     ],
     [
       "2023-04-07",
       "up|low|neg",
       0.419,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2023-04-10",
       "up|low|neg",
       1.048,
-      "bbnsbbs"
+      "bbnsbbs",
+      "R"
     ],
     [
       "2023-04-11",
       "mid|high|neg",
       0.571,
-      "nsnsbbb"
+      "nsnsbbb",
+      "R"
     ],
     [
       "2023-04-12",
       "up|high|pos",
       0.264,
-      "bbbbbbb"
+      "bbbbbbb",
+      "R"
     ],
     [
       "2023-04-13",
       "up|high|pos",
       1.195,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-14",
       "up|high|pos",
       0.075,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-17",
       "up|high|pos",
       0.505,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-18",
       "up|high|pos",
       -0.182,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-19",
       "up|high|pos",
       0.178,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-20",
       "up|high|pos",
       -0.325,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-21",
       "up|high|pos",
       0.102,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-24",
       "up|high|pos",
       0.093,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-25",
       "up|high|pos",
       -0.711,
-      "bbbbbbb"
+      "bbbbbbb",
+      "R"
     ],
     [
       "2023-04-26",
       "up|high|pos",
       0.145,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-27",
       "up|high|pos",
       1.401,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-04-28",
       "up|high|pos",
       0.924,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-05-01",
       "up|high|pos",
       0.119,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-05-02",
       "up|high|pos",
       -0.714,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-05-08",
       "up|high|pos",
       1.012,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-05-09",
       "up|high|pos",
       -0.413,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-05-10",
       "up|high|pos",
       0.016,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-05-11",
       "up|high|pos",
       0.898,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-05-12",
       "up|high|pos",
       0.81,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-05-15",
       "up|hot|pos",
       0.731,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2023-05-16",
       "up|hot|pos",
       0.84,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2023-05-17",
       "up|hot|pos",
       1.596,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2023-05-18",
       "up|hot|pos",
       0.767,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2023-05-19",
       "up|hot|pos",
       0.904,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2023-05-22",
       "up|hot|pos",
       -0.415,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2023-05-23",
       "up|hot|pos",
       -0.889,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2023-05-24",
       "up|hot|pos",
       0.386,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2023-05-25",
       "up|hot|pos",
       0.374,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2023-05-26",
       "up|hot|pos",
       1.026,
-      "bbsbbbb"
+      "bbsbbbb",
+      "T"
     ],
     [
       "2023-05-29",
       "up|hot|pos",
       0.303,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2023-05-30",
       "up|hot|pos",
       -1.405,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2023-05-31",
       "up|high|pos",
       0.842,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-06-01",
       "up|high|pos",
       1.208,
-      "bbbbbbb"
+      "bbbbbbb",
+      "T"
     ],
     [
       "2023-06-02",
       "up|hot|pos",
       2.199,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2023-06-05",
       "up|hot|pos",
       0.898,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2023-06-06",
       "up|hot|pos",
       -1.824,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2023-06-07",
       "up|high|pos",
       -0.854,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-06-08",
       "up|high|pos",
       1.972,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-06-09",
       "up|high|pos",
       0.523,
-      "bbbbbbs"
+      "bbbbbbs",
+      "T"
     ],
     [
       "2023-06-12",
       "up|hot|pos",
       1.803,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2023-06-13",
       "up|hot|pos",
       1.465,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2023-06-14",
       "up|hot|pos",
       -0.051,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2023-06-15",
       "up|hot|pos",
       0.659,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2023-06-16",
       "up|hot|pos",
       -0.996,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2023-06-19",
       "up|hot|pos",
       0.055,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2023-06-20",
       "up|hot|pos",
       0.558,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2023-06-21",
       "up|hot|pos",
       -0.924,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2023-06-22",
       "up|high|pos",
       -1.453,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-06-23",
       "up|high|neg",
       -0.252,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2023-06-26",
       "up|high|neg",
       -0.491,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2023-06-27",
       "up|high|neg",
       2.015,
-      "bbbssbb"
+      "bbbssbb",
+      "T"
     ],
     [
       "2023-06-28",
       "up|high|neg",
       0.121,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2023-06-29",
       "up|high|neg",
       -0.136,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2023-06-30",
       "up|high|neg",
       1.7,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2023-07-03",
       "up|high|neg",
       -0.98,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2023-07-04",
       "up|high|neg",
       -0.251,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2023-07-05",
       "up|high|neg",
       -1.697,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2023-07-06",
       "up|high|neg",
       -1.174,
-      "bbnssss"
+      "bbnssss",
+      "T"
     ],
     [
       "2023-07-07",
       "up|low|neg",
       -0.613,
-      "bbnssbs"
+      "bbnssbs",
+      "T"
     ],
     [
       "2023-07-10",
       "mid|low|neg",
       0.043,
-      "nsnsbbs"
+      "nsnsbbs",
+      "T"
     ],
     [
       "2023-07-11",
       "mid|low|neg",
       -0.806,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2023-07-12",
       "mid|low|neg",
       1.488,
-      "nsssbbs"
+      "nsssbbs",
+      "T"
     ],
     [
       "2023-07-13",
       "mid|low|neg",
       -0.087,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2023-07-14",
       "mid|low|neg",
       0.317,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2023-07-18",
       "mid|high|neg",
       1.238,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2023-07-19",
       "mid|high|neg",
       -1.233,
-      "nsbsbss"
+      "nsbsbss",
+      "T"
     ],
     [
       "2023-07-20",
       "mid|low|neg",
       -0.573,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2023-07-21",
       "mid|low|neg",
       1.228,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2023-07-24",
       "mid|high|neg",
       -0.056,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2023-07-25",
       "mid|high|neg",
       -0.043,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2023-07-26",
       "mid|high|neg",
       0.682,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2023-07-27",
       "mid|high|neg",
       -0.401,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2023-07-28",
       "up|high|neg",
       1.261,
-      "bbnsbsb"
+      "bbnsbsb",
+      "R"
     ],
     [
       "2023-07-31",
       "up|high|pos",
       0.918,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-08-01",
       "up|high|pos",
       -2.297,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-08-02",
       "up|high|pos",
       -1.677,
-      "bbnbbss"
+      "bbnbbss",
+      "R"
     ],
     [
       "2023-08-03",
       "up|low|neg",
       0.104,
-      "bbsssbs"
+      "bbsssbs",
+      "R"
     ],
     [
       "2023-08-04",
       "up|low|neg",
       0.192,
-      "bbsssbs"
+      "bbsssbs",
+      "R"
     ],
     [
       "2023-08-07",
       "mid|low|neg",
       0.38,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-08-08",
       "mid|low|neg",
       -0.534,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-08-09",
       "mid|low|neg",
       0.836,
-      "nssssss"
+      "nssssss",
+      "R"
     ],
     [
       "2023-08-10",
       "mid|low|neg",
       -1.274,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-08-14",
       "mid|low|neg",
       0.558,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2023-08-15",
       "mid|low|neg",
       -1.464,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-08-16",
       "mid|low|neg",
       -0.443,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2023-08-17",
       "mid|low|neg",
       -0.554,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2023-08-18",
       "mid|low|neg",
       0.365,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2023-08-21",
       "mid|low|neg",
       0.922,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2023-08-22",
       "mid|low|neg",
       0.482,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2023-08-23",
       "mid|low|neg",
       0.865,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-08-24",
       "mid|high|neg",
       -2.053,
-      "nsnsbbs"
+      "nsnsbbs",
+      "R"
     ],
     [
       "2023-08-25",
       "mid|low|neg",
       1.726,
-      "nssssss"
+      "nssssss",
+      "R"
     ],
     [
       "2023-08-28",
       "mid|low|pos",
       0.177,
-      "nsnbsss"
+      "nsnbsss",
+      "R"
     ],
     [
       "2023-08-29",
       "mid|high|pos",
       0.33,
-      "nsnbbss"
+      "nsnbbss",
+      "R"
     ],
     [
       "2023-08-30",
       "mid|high|pos",
       0.884,
-      "nsnbbsb"
+      "nsnbbsb",
+      "R"
     ],
     [
       "2023-08-31",
       "down|high|pos",
       0.28,
-      "ssbbbsb"
+      "ssbbbsb",
+      "R"
     ],
     [
       "2023-09-01",
       "mid|high|pos",
       0.699,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-09-04",
       "mid|high|pos",
       0.296,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2023-09-05",
       "mid|high|pos",
       0.618,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-09-06",
       "mid|high|pos",
       -0.752,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2023-09-07",
       "mid|high|pos",
       -1.165,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-09-08",
       "mid|high|pos",
       -0.427,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2023-09-11",
       "mid|low|pos",
       0.951,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2023-09-12",
       "mid|high|pos",
       -0.213,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2023-09-13",
       "mid|high|pos",
       1.411,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2023-09-14",
       "mid|high|pos",
       1.1,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-09-15",
       "mid|high|pos",
       -0.866,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-09-19",
       "mid|high|pos",
       -0.658,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-09-20",
       "mid|high|pos",
       -1.371,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2023-09-21",
       "mid|low|pos",
       -0.518,
-      "nbnbsbb"
+      "nbnbsbb",
+      "R"
     ],
     [
       "2023-09-22",
       "mid|low|neg",
       0.852,
-      "nbnssbs"
+      "nbnssbs",
+      "R"
     ],
     [
       "2023-09-25",
       "mid|high|neg",
       -1.113,
-      "nbnssbb"
+      "nbnssbb",
+      "R"
     ],
     [
       "2023-09-26",
       "down|low|neg",
       0.176,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2023-09-27",
       "down|low|neg",
       -1.543,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2023-09-28",
       "down|low|neg",
       -0.047,
-      "ssssbbs"
+      "ssssbbs",
+      "R"
     ],
     [
       "2023-09-29",
       "down|low|neg",
       -0.307,
-      "ssssbbs"
+      "ssssbbs",
+      "R"
     ],
     [
       "2023-10-02",
       "mid|low|neg",
       -1.643,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2023-10-03",
       "mid|low|neg",
       -2.276,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2023-10-04",
       "down|cold|neg",
       1.797,
-      "ssbsbbb"
+      "ssbsbbb",
+      "R"
     ],
     [
       "2023-10-05",
       "down|low|neg",
       -0.26,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-10-06",
       "down|low|neg",
       2.426,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-10-10",
       "down|low|neg",
       0.598,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2023-10-11",
       "down|low|neg",
       1.748,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2023-10-12",
       "down|high|pos",
       -0.55,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2023-10-13",
       "down|high|pos",
       -2.033,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2023-10-16",
       "down|low|pos",
       1.204,
-      "ssnbsss"
+      "ssnbsss",
+      "R"
     ],
     [
       "2023-10-17",
       "down|low|pos",
       0.006,
-      "ssnbbbs"
+      "ssnbbbs",
+      "R"
     ],
     [
       "2023-10-18",
       "down|low|pos",
       -1.909,
-      "ssnbbbs"
+      "ssnbbbs",
+      "R"
     ],
     [
       "2023-10-19",
       "down|low|pos",
       -0.545,
-      "sssbsss"
+      "sssbsss",
+      "R"
     ],
     [
       "2023-10-20",
       "down|low|neg",
       -0.831,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-10-23",
       "down|low|neg",
       0.203,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-10-24",
       "down|low|neg",
       0.668,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-10-25",
       "down|low|neg",
       -2.137,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-10-26",
       "down|low|neg",
       1.274,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-10-27",
       "down|low|neg",
       -0.951,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-10-30",
       "down|low|neg",
       0.527,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-10-31",
       "down|low|neg",
       2.407,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2023-11-01",
       "down|high|pos",
       1.102,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2023-11-02",
       "down|high|pos",
       2.374,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2023-11-06",
       "mid|high|pos",
       -1.335,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-11-07",
       "mid|high|pos",
       -0.326,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-11-08",
       "mid|high|pos",
       1.492,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2023-11-09",
       "mid|high|pos",
       -0.24,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-11-10",
       "mid|high|pos",
       0.052,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-11-13",
       "mid|high|pos",
       0.34,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-11-14",
       "mid|high|pos",
       2.519,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-11-15",
       "mid|high|pos",
       -0.284,
-      "nbbbsss"
+      "nbbbsss",
+      "R"
     ],
     [
       "2023-11-16",
       "mid|high|pos",
       0.481,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-11-17",
       "mid|high|pos",
       -0.587,
-      "nbbbbss"
+      "nbbbbss",
+      "R"
     ],
     [
       "2023-11-20",
       "mid|high|pos",
       -0.102,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-11-21",
       "mid|high|pos",
       0.293,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2023-11-22",
       "mid|high|pos",
       0.519,
-      "nbbbbbb"
+      "nbbbbbb",
+      "T"
     ],
     [
       "2023-11-24",
       "mid|high|pos",
       -0.529,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2023-11-27",
       "up|high|pos",
       -0.117,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-11-28",
       "up|high|pos",
       -0.261,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-11-29",
       "up|high|pos",
       0.497,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2023-11-30",
       "up|high|pos",
       -0.165,
-      "bbbbbbb"
+      "bbbbbbb",
+      "T"
     ],
     [
       "2023-12-01",
       "up|high|pos",
       -0.599,
-      "bbbbbbb"
+      "bbbbbbb",
+      "T"
     ],
     [
       "2023-12-04",
       "up|high|neg",
       -1.371,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2023-12-05",
       "up|low|neg",
       2.044,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2023-12-06",
       "up|high|neg",
       -1.757,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2023-12-07",
       "up|low|neg",
       -1.675,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2023-12-08",
       "mid|low|neg",
       1.498,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2023-12-11",
       "mid|low|neg",
       0.158,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-12-12",
       "mid|low|neg",
       0.252,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-12-13",
       "mid|high|neg",
       -0.729,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-12-14",
       "mid|low|neg",
       0.87,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2023-12-15",
       "mid|high|neg",
       -0.642,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2023-12-18",
       "mid|low|neg",
       1.405,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2023-12-19",
       "mid|high|neg",
       1.374,
-      "nsnsbsb"
+      "nsnsbsb",
+      "R"
     ],
     [
       "2023-12-20",
       "mid|high|neg",
       -1.59,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2023-12-21",
       "mid|high|neg",
       0.086,
-      "nsnsbss"
+      "nsnsbss",
+      "R"
     ],
     [
       "2023-12-22",
       "up|high|neg",
       0.256,
-      "bbnsbss"
+      "bbnsbss",
+      "R"
     ],
     [
       "2023-12-25",
       "up|high|neg",
       0.156,
-      "bbnsbbb"
+      "bbnsbbb",
+      "R"
     ],
     [
       "2023-12-26",
       "up|high|pos",
       1.127,
-      "bbnbbbb"
+      "bbnbbbb",
+      "R"
     ],
     [
       "2023-12-27",
       "up|high|pos",
       -0.42,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2023-12-28",
       "up|high|pos",
       -0.225,
-      "bbbbbbb"
+      "bbbbbbb",
+      "R"
     ],
     [
       "2023-12-29",
       "up|high|pos",
       -0.526,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-01-04",
       "up|high|pos",
       0.268,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2024-01-05",
       "up|high|pos",
       1.156,
-      "bbnbbbb"
+      "bbnbbbb",
+      "R"
     ],
     [
       "2024-01-09",
       "up|high|pos",
       2.01,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-01-10",
       "up|high|pos",
       1.766,
-      "bbbbssb"
+      "bbbbssb",
+      "R"
     ],
     [
       "2024-01-11",
       "up|hot|pos",
       1.504,
-      "bbsbsss"
+      "bbsbsss",
+      "R"
     ],
     [
       "2024-01-12",
       "up|hot|pos",
       0.913,
-      "bbsbsss"
+      "bbsbsss",
+      "R"
     ],
     [
       "2024-01-15",
       "up|hot|pos",
       -0.787,
-      "bbsbsss"
+      "bbsbsss",
+      "R"
     ],
     [
       "2024-01-16",
       "up|hot|pos",
       -0.397,
-      "bbsbbss"
+      "bbsbbss",
+      "R"
     ],
     [
       "2024-01-17",
       "up|high|pos",
       -0.033,
-      "bbbbbss"
+      "bbbbbss",
+      "R"
     ],
     [
       "2024-01-18",
       "up|high|pos",
       1.402,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2024-01-19",
       "up|hot|pos",
       1.623,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-01-22",
       "up|hot|pos",
       -0.08,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-01-23",
       "up|hot|pos",
       -0.797,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-01-24",
       "up|hot|pos",
       0.028,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-01-25",
       "up|hot|pos",
       -1.34,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-01-26",
       "up|high|pos",
       0.772,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2024-01-29",
       "up|high|pos",
       0.108,
-      "bbbbbbb"
+      "bbbbbbb",
+      "T"
     ],
     [
       "2024-01-30",
       "up|high|neg",
       0.612,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2024-01-31",
       "up|high|neg",
       -0.759,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2024-02-01",
       "up|high|neg",
       0.407,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2024-02-02",
       "up|high|neg",
       0.542,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2024-02-05",
       "up|high|neg",
       -0.532,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2024-02-06",
       "up|high|neg",
       -0.113,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2024-02-07",
       "up|high|neg",
       2.058,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2024-02-08",
       "up|high|neg",
       0.093,
-      "bbbsssb"
+      "bbbsssb",
+      "T"
     ],
     [
       "2024-02-09",
       "up|high|neg",
       2.891,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2024-02-13",
       "up|hot|pos",
       -0.687,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2024-02-14",
       "up|hot|pos",
       1.206,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2024-02-15",
       "up|hot|pos",
       0.863,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2024-02-16",
       "up|hot|pos",
       -0.044,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2024-02-19",
       "up|hot|pos",
       -0.278,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-02-20",
       "up|hot|pos",
       -0.264,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2024-02-21",
       "up|hot|pos",
       2.186,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2024-02-22",
       "up|hot|pos",
       0.345,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-02-26",
       "up|hot|pos",
       0.015,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-02-27",
       "up|hot|pos",
       -0.08,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-02-28",
       "up|hot|pos",
       -0.107,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-02-29",
       "up|hot|pos",
       1.901,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2024-03-01",
       "up|hot|pos",
       0.497,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-03-04",
       "up|hot|pos",
       -0.029,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-03-05",
       "up|hot|pos",
       -0.017,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-03-06",
       "up|hot|pos",
       -1.227,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2024-03-07",
       "up|hot|pos",
       0.228,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2024-03-08",
       "up|hot|neg",
       -2.188,
-      "bbssbsb"
+      "bbssbsb",
+      "T"
     ],
     [
       "2024-03-11",
       "up|high|neg",
       -0.059,
-      "bbbssbb"
+      "bbbssbb",
+      "T"
     ],
     [
       "2024-03-12",
       "up|high|neg",
       -0.262,
-      "bbbsssb"
+      "bbbsssb",
+      "T"
     ],
     [
       "2024-03-13",
       "up|high|neg",
       0.288,
-      "bbnssbb"
+      "bbnssbb",
+      "T"
     ],
     [
       "2024-03-14",
       "up|high|neg",
       -0.257,
-      "bbbssbb"
+      "bbbssbb",
+      "T"
     ],
     [
       "2024-03-15",
       "mid|high|neg",
       2.668,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2024-03-18",
       "up|high|neg",
       0.662,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2024-03-19",
       "up|high|neg",
       2.03,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2024-03-21",
       "up|hot|neg",
       0.178,
-      "bbssssb"
+      "bbssssb",
+      "T"
     ],
     [
       "2024-03-22",
       "up|hot|pos",
       -1.16,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2024-03-25",
       "up|high|pos",
       -0.04,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2024-03-26",
       "up|high|pos",
       0.903,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2024-03-27",
       "up|high|pos",
       -1.459,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2024-03-28",
       "up|high|neg",
       0.501,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2024-03-29",
       "up|high|neg",
       -1.403,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2024-04-01",
       "up|high|neg",
       0.09,
-      "bbnsssb"
+      "bbnsssb",
+      "T"
     ],
     [
       "2024-04-02",
       "up|high|neg",
       -0.972,
-      "bbnsbbb"
+      "bbnsbbb",
+      "T"
     ],
     [
       "2024-04-03",
       "up|low|neg",
       0.814,
-      "bbnssbs"
+      "bbnssbs",
+      "T"
     ],
     [
       "2024-04-04",
       "up|high|neg",
       -1.964,
-      "bbnssbs"
+      "bbnssbs",
+      "T"
     ],
     [
       "2024-04-05",
       "mid|low|neg",
       0.91,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2024-04-08",
       "mid|low|neg",
       1.083,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2024-04-09",
       "mid|high|neg",
       -0.481,
-      "nsnssbb"
+      "nsnssbb",
+      "T"
     ],
     [
       "2024-04-10",
       "mid|high|neg",
       -0.352,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2024-04-11",
       "mid|low|neg",
       0.205,
-      "nsnssss"
+      "nsnssss",
+      "T"
     ],
     [
       "2024-04-12",
       "mid|high|neg",
       -0.736,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-04-15",
       "mid|low|neg",
       -1.941,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2024-04-16",
       "mid|low|neg",
       -1.324,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2024-04-17",
       "mid|low|neg",
       0.311,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2024-04-18",
       "mid|low|neg",
       -2.656,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2024-04-19",
       "mid|low|neg",
       0.999,
-      "nsssbbb"
+      "nsssbbb",
+      "T"
     ],
     [
       "2024-04-22",
       "mid|low|neg",
       0.303,
-      "nssssbb"
+      "nssssbb",
+      "T"
     ],
     [
       "2024-04-23",
       "mid|low|neg",
       2.418,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2024-04-24",
       "mid|low|neg",
       -2.162,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2024-04-25",
       "mid|low|neg",
       0.814,
-      "nssssss"
+      "nssssss",
+      "T"
     ],
     [
       "2024-04-26",
       "mid|low|neg",
       1.241,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2024-04-30",
       "mid|low|neg",
       -0.343,
-      "nsnssss"
+      "nsnssss",
+      "T"
     ],
     [
       "2024-05-01",
       "mid|low|neg",
       -0.099,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2024-05-02",
       "mid|low|neg",
       1.567,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2024-05-07",
       "mid|high|pos",
       -1.629,
-      "nsnbbsb"
+      "nsnbbsb",
+      "R"
     ],
     [
       "2024-05-08",
       "mid|low|pos",
       -0.336,
-      "nsnbsss"
+      "nsnbsss",
+      "R"
     ],
     [
       "2024-05-09",
       "mid|low|pos",
       0.407,
-      "nsnbsss"
+      "nsnbsss",
+      "R"
     ],
     [
       "2024-05-10",
       "mid|low|pos",
       -0.13,
-      "nsnbsbs"
+      "nsnbsbs",
+      "R"
     ],
     [
       "2024-05-13",
       "mid|low|pos",
       0.463,
-      "nsnbsbs"
+      "nsnbsbs",
+      "R"
     ],
     [
       "2024-05-14",
       "down|low|pos",
       0.077,
-      "ssnbbss"
+      "ssnbbss",
+      "R"
     ],
     [
       "2024-05-15",
       "down|low|pos",
       1.393,
-      "ssnbbbs"
+      "ssnbbbs",
+      "R"
     ],
     [
       "2024-05-16",
       "mid|high|pos",
       -0.341,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-05-17",
       "mid|high|pos",
       0.728,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-05-20",
       "mid|high|pos",
       -0.314,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-05-21",
       "mid|high|pos",
       -0.847,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-05-22",
       "mid|high|pos",
       1.259,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-05-23",
       "mid|high|pos",
       -1.169,
-      "nbbbbbb"
+      "nbbbbbb",
+      "R"
     ],
     [
       "2024-05-24",
       "mid|high|pos",
       0.657,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-05-27",
       "mid|high|pos",
       -0.115,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-05-28",
       "mid|high|pos",
       -0.768,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-05-29",
       "mid|low|pos",
       -1.304,
-      "nbnbsbb"
+      "nbnbsbb",
+      "R"
     ],
     [
       "2024-05-30",
       "mid|low|neg",
       1.14,
-      "nbsssss"
+      "nbsssss",
+      "R"
     ],
     [
       "2024-05-31",
       "mid|low|neg",
       1.131,
-      "nbnssbb"
+      "nbnssbb",
+      "R"
     ],
     [
       "2024-06-03",
       "mid|high|pos",
       -0.22,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-06-04",
       "mid|high|pos",
       -0.894,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-06-05",
       "down|low|pos",
       0.554,
-      "ssnbsss"
+      "ssnbsss",
+      "R"
     ],
     [
       "2024-06-06",
       "mid|high|pos",
       -0.051,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2024-06-07",
       "mid|high|pos",
       0.916,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2024-06-10",
       "mid|high|pos",
       0.248,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-06-11",
       "mid|high|pos",
       -0.659,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-06-12",
       "mid|high|pos",
       -0.402,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-06-13",
       "mid|high|pos",
       0.243,
-      "nbnbssb"
+      "nbnbssb",
+      "R"
     ],
     [
       "2024-06-14",
       "mid|high|pos",
       -1.835,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-06-17",
       "mid|low|neg",
       0.996,
-      "nbssbbs"
+      "nbssbbs",
+      "R"
     ],
     [
       "2024-06-18",
       "down|low|neg",
       0.23,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2024-06-19",
       "down|low|neg",
       0.161,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2024-06-20",
       "down|low|neg",
       -0.095,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2024-06-21",
       "down|low|neg",
       0.539,
-      "ssnssss"
+      "ssnssss",
+      "R"
     ],
     [
       "2024-06-24",
       "down|high|neg",
       0.95,
-      "ssnsbbb"
+      "ssnsbbb",
+      "R"
     ],
     [
       "2024-06-25",
       "mid|high|pos",
       1.261,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-06-26",
       "mid|high|pos",
       -0.821,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2024-06-27",
       "mid|high|pos",
       0.614,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-06-28",
       "mid|high|pos",
       0.121,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-07-01",
       "mid|high|pos",
       1.119,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-07-02",
       "mid|high|pos",
       1.263,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2024-07-03",
       "mid|high|pos",
       0.82,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2024-07-04",
       "up|hot|pos",
       -0.003,
-      "bbsbssb"
+      "bbsbssb",
+      "R"
     ],
     [
       "2024-07-05",
       "up|hot|pos",
       -0.322,
-      "bbsbssb"
+      "bbsbssb",
+      "R"
     ],
     [
       "2024-07-08",
       "up|high|pos",
       1.96,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-07-09",
       "up|hot|pos",
       0.606,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2024-07-10",
       "up|hot|pos",
       0.937,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2024-07-11",
       "up|hot|pos",
       -2.447,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2024-07-12",
       "up|high|pos",
       0.205,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2024-07-16",
       "up|high|pos",
       -0.43,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2024-07-17",
       "up|high|pos",
       -2.363,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2024-07-18",
       "up|low|neg",
       -0.156,
-      "bbnssbb"
+      "bbnssbb",
+      "T"
     ],
     [
       "2024-07-19",
       "up|low|neg",
       -1.16,
-      "bbnssbb"
+      "bbnssbb",
+      "T"
     ],
     [
       "2024-07-22",
       "up|low|neg",
       -0.012,
-      "bbsssbs"
+      "bbsssbs",
+      "T"
     ],
     [
       "2024-07-23",
       "up|low|neg",
       -1.11,
-      "bbsssbs"
+      "bbsssbs",
+      "T"
     ],
     [
       "2024-07-24",
       "mid|low|neg",
       -3.283,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2024-07-25",
       "mid|low|neg",
       -0.534,
-      "nsssbbb"
+      "nsssbbb",
+      "T"
     ],
     [
       "2024-07-26",
       "mid|cold|neg",
       2.127,
-      "nsbsbbb"
+      "nsbsbbb",
+      "T"
     ],
     [
       "2024-07-29",
       "mid|low|neg",
       0.149,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2024-07-30",
       "mid|low|neg",
       1.495,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2024-07-31",
       "mid|low|neg",
       -2.495,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2024-08-01",
       "mid|low|neg",
       -5.814,
-      "nssssss"
+      "nssssss",
+      "T"
     ],
     [
       "2024-08-02",
       "mid|cold|neg",
       -12.396,
-      "nsbsbbb"
+      "nsbsbbb",
+      "T"
     ],
     [
       "2024-08-05",
       "mid|cold|neg",
       10.226,
-      "nsbsbbb"
+      "nsbsbbb",
+      "T"
     ],
     [
       "2024-08-06",
       "mid|low|neg",
       1.194,
-      "nssssbb"
+      "nssssbb",
+      "T"
     ],
     [
       "2024-08-07",
       "mid|low|neg",
       -0.737,
-      "nssssbb"
+      "nssssbb",
+      "T"
     ],
     [
       "2024-08-08",
       "mid|low|neg",
       0.557,
-      "nsssssb"
+      "nsssssb",
+      "T"
     ],
     [
       "2024-08-09",
       "down|low|neg",
       3.448,
-      "sssssbb"
+      "sssssbb",
+      "T"
     ],
     [
       "2024-08-13",
       "down|low|neg",
       0.579,
-      "sssssbb"
+      "sssssbb",
+      "T"
     ],
     [
       "2024-08-14",
       "down|low|neg",
       0.78,
-      "ssnssbs"
+      "ssnssbs",
+      "T"
     ],
     [
       "2024-08-15",
       "down|low|pos",
       3.638,
-      "ssnbsss"
+      "ssnbsss",
+      "T"
     ],
     [
       "2024-08-16",
       "down|high|pos",
       -1.771,
-      "ssnbbsb"
+      "ssnbbsb",
+      "T"
     ],
     [
       "2024-08-19",
       "down|low|pos",
       1.803,
-      "ssnbbss"
+      "ssnbbss",
+      "T"
     ],
     [
       "2024-08-20",
       "down|high|pos",
       -0.292,
-      "ssnbbsb"
+      "ssnbbsb",
+      "T"
     ],
     [
       "2024-08-21",
       "mid|high|pos",
       0.683,
-      "nbnbbsb"
+      "nbnbbsb",
+      "T"
     ],
     [
       "2024-08-22",
       "mid|high|pos",
       0.401,
-      "nbnbbsb"
+      "nbnbbsb",
+      "T"
     ],
     [
       "2024-08-23",
       "mid|high|pos",
       -0.662,
-      "nbnbbsb"
+      "nbnbbsb",
+      "T"
     ],
     [
       "2024-08-26",
       "mid|high|pos",
       0.468,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-08-27",
       "mid|high|pos",
       0.217,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-08-28",
       "mid|high|pos",
       -0.024,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-08-29",
       "mid|high|pos",
       0.743,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-08-30",
       "mid|high|pos",
       0.137,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-09-02",
       "mid|high|pos",
       -0.038,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-09-03",
       "mid|high|pos",
       -4.236,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-09-04",
       "mid|low|pos",
       -1.054,
-      "nbsbsbs"
+      "nbsbsbs",
+      "R"
     ],
     [
       "2024-09-05",
       "mid|low|neg",
       -0.725,
-      "nbsssbs"
+      "nbsssbs",
+      "R"
     ],
     [
       "2024-09-06",
       "mid|low|neg",
       -0.483,
-      "nbsssbs"
+      "nbsssbs",
+      "R"
     ],
     [
       "2024-09-09",
       "mid|low|neg",
       -0.156,
-      "nbsssbs"
+      "nbsssbs",
+      "R"
     ],
     [
       "2024-09-10",
       "down|low|neg",
       -1.492,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2024-09-11",
       "down|low|neg",
       3.407,
-      "ssssbbs"
+      "ssssbbs",
+      "R"
     ],
     [
       "2024-09-12",
       "down|low|neg",
       -0.683,
-      "ssnssbs"
+      "ssnssbs",
+      "R"
     ],
     [
       "2024-09-13",
       "down|low|neg",
       -1.035,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2024-09-17",
       "down|low|neg",
       0.489,
-      "sssssss"
+      "sssssss",
+      "R"
     ],
     [
       "2024-09-18",
       "down|low|neg",
       2.131,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2024-09-19",
       "down|high|neg",
       1.53,
-      "ssnssss"
+      "ssnssss",
+      "R"
     ],
     [
       "2024-09-20",
       "down|high|pos",
       0.574,
-      "ssnbbsb"
+      "ssnbbsb",
+      "R"
     ],
     [
       "2024-09-24",
       "down|high|pos",
       -0.185,
-      "ssbbbsb"
+      "ssbbbsb",
+      "R"
     ],
     [
       "2024-09-25",
       "down|high|pos",
       2.787,
-      "ssbbbsb"
+      "ssbbbsb",
+      "R"
     ],
     [
       "2024-09-26",
       "mid|high|pos",
       2.322,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-09-27",
       "mid|high|pos",
       -4.795,
-      "nbbbsss"
+      "nbbbsss",
+      "R"
     ],
     [
       "2024-09-30",
       "mid|high|pos",
       1.932,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-10-01",
       "mid|high|pos",
       -2.182,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-10-02",
       "mid|high|pos",
       1.966,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-10-03",
       "mid|high|pos",
       0.217,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-10-04",
       "mid|high|pos",
       1.804,
-      "nbbbbbb"
+      "nbbbbbb",
+      "R"
     ],
     [
       "2024-10-07",
       "mid|high|pos",
       -1.005,
-      "nbbbbbb"
+      "nbbbbbb",
+      "R"
     ],
     [
       "2024-10-08",
       "mid|high|pos",
       0.874,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-10-09",
       "mid|high|pos",
       0.262,
-      "nbbbbbb"
+      "nbbbbbb",
+      "R"
     ],
     [
       "2024-10-10",
       "mid|high|pos",
       0.571,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-10-11",
       "mid|high|pos",
       0.769,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-10-15",
       "mid|high|pos",
       -1.83,
-      "nbbbbss"
+      "nbbbbss",
+      "R"
     ],
     [
       "2024-10-16",
       "mid|high|pos",
       -0.687,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2024-10-17",
       "mid|high|pos",
       0.181,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2024-10-18",
       "mid|high|pos",
       -0.07,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2024-10-21",
       "up|high|neg",
       -1.393,
-      "bbnsbbb"
+      "bbnsbbb",
+      "R"
     ],
     [
       "2024-10-22",
       "up|low|neg",
       -0.799,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2024-10-23",
       "up|low|neg",
       0.101,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2024-10-24",
       "mid|low|neg",
       -0.601,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-10-25",
       "mid|low|neg",
       1.824,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2024-10-28",
       "mid|high|neg",
       0.772,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-10-29",
       "mid|high|neg",
       0.961,
-      "nsnsbbb"
+      "nsnsbbb",
+      "R"
     ],
     [
       "2024-10-30",
       "mid|high|neg",
       -0.499,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2024-10-31",
       "mid|high|neg",
       -2.629,
-      "nsnsbsb"
+      "nsnsbsb",
+      "R"
     ],
     [
       "2024-11-01",
       "mid|low|neg",
       1.107,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2024-11-05",
       "mid|low|neg",
       2.614,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2024-11-06",
       "up|high|neg",
       -0.251,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2024-11-07",
       "up|high|pos",
       0.302,
-      "bbbbbbb"
+      "bbbbbbb",
+      "R"
     ],
     [
       "2024-11-08",
       "up|high|pos",
       0.083,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-11-11",
       "up|high|pos",
       -0.398,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-11-12",
       "up|high|pos",
       -1.662,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-11-13",
       "up|low|pos",
       -0.48,
-      "bbnbsss"
+      "bbnbsss",
+      "R"
     ],
     [
       "2024-11-14",
       "up|low|neg",
       0.278,
-      "bbnssss"
+      "bbnssss",
+      "R"
     ],
     [
       "2024-11-15",
       "up|low|neg",
       -1.092,
-      "bbnssss"
+      "bbnssss",
+      "R"
     ],
     [
       "2024-11-18",
       "mid|low|neg",
       0.506,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2024-11-19",
       "mid|low|neg",
       -0.162,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-11-20",
       "mid|low|neg",
       -0.85,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-11-21",
       "mid|low|neg",
       0.678,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2024-11-22",
       "mid|low|neg",
       1.296,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-11-25",
       "mid|high|neg",
       -0.872,
-      "nsnssbb"
+      "nsnssbb",
+      "R"
     ],
     [
       "2024-11-26",
       "mid|low|neg",
       -0.799,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-11-27",
       "mid|low|neg",
       0.561,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2024-11-28",
       "mid|low|neg",
       -0.368,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-11-29",
       "mid|low|neg",
       0.798,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-12-02",
       "mid|low|neg",
       1.911,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2024-12-03",
       "mid|high|pos",
       0.07,
-      "nsbbbsb"
+      "nsbbbsb",
+      "R"
     ],
     [
       "2024-12-04",
       "mid|high|pos",
       0.304,
-      "nsbbbsb"
+      "nsbbbsb",
+      "R"
     ],
     [
       "2024-12-05",
       "up|high|pos",
       -0.773,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-12-06",
       "up|high|pos",
       0.177,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2024-12-09",
       "up|high|pos",
       0.529,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-12-10",
       "up|high|pos",
       0.012,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-12-11",
       "up|high|pos",
       1.211,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-12-12",
       "up|high|pos",
       -0.95,
-      "bbbbssb"
+      "bbbbssb",
+      "R"
     ],
     [
       "2024-12-13",
       "up|high|pos",
       -0.033,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-12-16",
       "up|high|pos",
       -0.235,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-12-17",
       "up|high|pos",
       -0.719,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2024-12-18",
       "up|high|pos",
       -0.686,
-      "bbnbbbb"
+      "bbnbbbb",
+      "R"
     ],
     [
       "2024-12-19",
       "up|low|neg",
       -0.288,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2024-12-20",
       "up|low|neg",
       1.187,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2024-12-23",
       "up|high|neg",
       -0.318,
-      "bbnsbbb"
+      "bbnsbbb",
+      "R"
     ],
     [
       "2024-12-24",
       "up|high|neg",
       0.24,
-      "bbnssbb"
+      "bbnssbb",
+      "R"
     ],
     [
       "2024-12-25",
       "up|high|neg",
       1.118,
-      "bbnsbbb"
+      "bbnsbbb",
+      "R"
     ],
     [
       "2024-12-26",
       "up|high|neg",
       1.802,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2024-12-27",
       "up|high|pos",
       -0.96,
-      "bbbbssb"
+      "bbbbssb",
+      "R"
     ],
     [
       "2024-12-30",
       "up|high|pos",
       -1.473,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-01-06",
       "up|high|pos",
       1.975,
-      "bbnbssb"
+      "bbnbssb",
+      "R"
     ],
     [
       "2025-01-07",
       "up|high|pos",
       -0.255,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-01-08",
       "up|high|pos",
       -0.94,
-      "bbbbbbb"
+      "bbbbbbb",
+      "R"
     ],
     [
       "2025-01-09",
       "up|high|pos",
       -1.047,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2025-01-10",
       "up|low|neg",
       -1.827,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2025-01-14",
       "up|low|neg",
       -0.077,
-      "bbsssbs"
+      "bbsssbs",
+      "R"
     ],
     [
       "2025-01-15",
       "mid|low|neg",
       0.333,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2025-01-16",
       "mid|low|neg",
       -0.314,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2025-01-17",
       "mid|low|neg",
       1.173,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2025-01-20",
       "mid|low|neg",
       0.323,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-01-21",
       "mid|low|neg",
       1.584,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-01-22",
       "mid|high|neg",
       0.789,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2025-01-23",
       "mid|high|pos",
       -0.067,
-      "nsbbbsb"
+      "nsbbbsb",
+      "R"
     ],
     [
       "2025-01-24",
       "up|high|pos",
       -0.917,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-01-27",
       "up|high|pos",
       -1.387,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2025-01-28",
       "up|low|pos",
       1.02,
-      "bbnbsss"
+      "bbnbsss",
+      "R"
     ],
     [
       "2025-01-29",
       "up|high|pos",
       0.252,
-      "bbnbbbb"
+      "bbnbbbb",
+      "R"
     ],
     [
       "2025-01-30",
       "up|high|pos",
       0.148,
-      "bbnbbbb"
+      "bbnbbbb",
+      "R"
     ],
     [
       "2025-01-31",
       "up|high|pos",
       -2.659,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2025-02-03",
       "mid|low|neg",
       0.722,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2025-02-04",
       "mid|low|neg",
       0.085,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2025-02-05",
       "mid|low|neg",
       0.605,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-02-06",
       "mid|low|neg",
       -0.715,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-02-07",
       "mid|low|neg",
       0.036,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-02-10",
       "mid|low|neg",
       0.419,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2025-02-12",
       "mid|low|neg",
       1.278,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-02-13",
       "mid|high|neg",
       -0.791,
-      "nsnsbsb"
+      "nsnsbsb",
+      "R"
     ],
     [
       "2025-02-14",
       "mid|high|pos",
       0.063,
-      "nsnbsbb"
+      "nsnbsbb",
+      "R"
     ],
     [
       "2025-02-17",
       "up|high|pos",
       0.245,
-      "bbnbssb"
+      "bbnbssb",
+      "R"
     ],
     [
       "2025-02-18",
       "up|high|pos",
       -0.269,
-      "bbnbbbb"
+      "bbnbbbb",
+      "R"
     ],
     [
       "2025-02-19",
       "up|high|pos",
       -1.242,
-      "bbnbssb"
+      "bbnbssb",
+      "R"
     ],
     [
       "2025-02-20",
       "mid|low|neg",
       0.256,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2025-02-21",
       "mid|low|neg",
       -1.39,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2025-02-25",
       "mid|low|neg",
       -0.25,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2025-02-26",
       "mid|low|neg",
       0.298,
-      "nsssbbs"
+      "nsssbbs",
+      "R"
     ],
     [
       "2025-02-27",
       "mid|low|neg",
       -2.877,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2025-02-28",
       "down|low|neg",
       1.695,
-      "ssssbbs"
+      "ssssbbs",
+      "R"
     ],
     [
       "2025-03-03",
       "down|low|neg",
       -1.202,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2025-03-04",
       "down|low|neg",
       0.233,
-      "ssssbss"
+      "ssssbss",
+      "R"
     ],
     [
       "2025-03-05",
       "down|low|neg",
       0.766,
-      "sssssss"
+      "sssssss",
+      "R"
     ],
     [
       "2025-03-06",
       "down|low|neg",
       -2.169,
-      "sssssbs"
+      "sssssbs",
+      "R"
     ],
     [
       "2025-03-07",
       "down|low|neg",
       0.383,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2025-03-10",
       "down|low|neg",
       -0.635,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2025-03-11",
       "down|low|neg",
       0.071,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2025-03-12",
       "down|low|neg",
       -0.079,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2025-03-13",
       "down|low|neg",
       0.715,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2025-03-14",
       "down|low|neg",
       0.927,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2025-03-17",
       "down|low|neg",
       1.2,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2025-03-18",
       "down|low|pos",
       -0.247,
-      "ssnbbss"
+      "ssnbbss",
+      "T"
     ],
     [
       "2025-03-19",
       "down|low|pos",
       -0.198,
-      "ssnbbss"
+      "ssnbbss",
+      "T"
     ],
     [
       "2025-03-21",
       "down|low|pos",
       -0.182,
-      "ssnbbss"
+      "ssnbbss",
+      "T"
     ],
     [
       "2025-03-24",
       "down|low|pos",
       0.457,
-      "ssnbbss"
+      "ssnbbss",
+      "T"
     ],
     [
       "2025-03-25",
       "down|low|pos",
       0.653,
-      "ssnbbbs"
+      "ssnbbbs",
+      "T"
     ],
     [
       "2025-03-26",
       "mid|high|pos",
       -0.598,
-      "nbnbbsb"
+      "nbnbbsb",
+      "T"
     ],
     [
       "2025-03-27",
       "mid|low|pos",
       -1.798,
-      "nbnbbsb"
+      "nbnbbsb",
+      "T"
     ],
     [
       "2025-03-28",
       "mid|low|pos",
       -4.048,
-      "nbsbsbs"
+      "nbsbsbs",
+      "T"
     ],
     [
       "2025-03-31",
       "down|cold|neg",
       0.019,
-      "ssbsbbs"
+      "ssbsbbs",
+      "T"
     ],
     [
       "2025-04-01",
       "down|cold|neg",
       0.285,
-      "ssbsbbs"
+      "ssbsbbs",
+      "T"
     ],
     [
       "2025-04-02",
       "down|low|neg",
       -2.771,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2025-04-03",
       "down|cold|neg",
       -2.75,
-      "ssbsbbb"
+      "ssbsbbb",
+      "T"
     ],
     [
       "2025-04-04",
       "down|cold|neg",
       -7.827,
-      "ssbsbbb"
+      "ssbsbbb",
+      "T"
     ],
     [
       "2025-04-07",
       "down|cold|neg",
       6.025,
-      "ssbsbbb"
+      "ssbsbbb",
+      "T"
     ],
     [
       "2025-04-08",
       "down|low|neg",
       -3.933,
-      "sssssbb"
+      "sssssbb",
+      "T"
     ],
     [
       "2025-04-09",
       "down|cold|neg",
       9.128,
-      "ssbsbbb"
+      "ssbsbbb",
+      "T"
     ],
     [
       "2025-04-10",
       "down|low|neg",
       -2.957,
-      "sssssbs"
+      "sssssbs",
+      "T"
     ],
     [
       "2025-04-11",
       "down|low|neg",
       1.181,
-      "sssssbb"
+      "sssssbb",
+      "T"
     ],
     [
       "2025-04-14",
       "down|low|neg",
       0.839,
-      "sssssbb"
+      "sssssbb",
+      "T"
     ],
     [
       "2025-04-15",
       "down|low|neg",
       -1.013,
-      "sssssss"
+      "sssssss",
+      "T"
     ],
     [
       "2025-04-16",
       "down|low|pos",
       1.348,
-      "sssbsss"
+      "sssbsss",
+      "T"
     ],
     [
       "2025-04-17",
       "down|low|pos",
       1.026,
-      "ssnbsss"
+      "ssnbsss",
+      "T"
     ],
     [
       "2025-04-18",
       "down|low|pos",
       -1.297,
-      "ssnbsss"
+      "ssnbsss",
+      "T"
     ],
     [
       "2025-04-21",
       "down|low|pos",
       -0.173,
-      "ssnbsss"
+      "ssnbsss",
+      "T"
     ],
     [
       "2025-04-22",
       "down|low|pos",
       1.894,
-      "sssbsss"
+      "sssbsss",
+      "T"
     ],
     [
       "2025-04-23",
       "down|low|pos",
       0.489,
-      "ssnbbss"
+      "ssnbbss",
+      "T"
     ],
     [
       "2025-04-24",
       "down|low|pos",
       1.902,
-      "ssnbbsb"
+      "ssnbbsb",
+      "T"
     ],
     [
       "2025-04-25",
       "down|high|pos",
       0.376,
-      "ssnbbsb"
+      "ssnbbsb",
+      "T"
     ],
     [
       "2025-04-28",
       "mid|high|pos",
       0.573,
-      "nbnbbsb"
+      "nbnbbsb",
+      "T"
     ],
     [
       "2025-04-30",
       "mid|high|pos",
       1.129,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2025-05-01",
       "mid|high|pos",
       1.038,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2025-05-02",
       "mid|high|pos",
       -0.139,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2025-05-07",
       "mid|high|pos",
       0.405,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2025-05-08",
       "mid|high|pos",
       1.556,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2025-05-09",
       "mid|high|pos",
       0.376,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2025-05-12",
       "mid|high|pos",
       1.432,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2025-05-13",
       "mid|high|pos",
       -0.144,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2025-05-14",
       "mid|high|pos",
       -0.977,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2025-05-15",
       "mid|high|pos",
       -0.005,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2025-05-16",
       "mid|high|pos",
       -0.676,
-      "nbbbbss"
+      "nbbbbss",
+      "T"
     ],
     [
       "2025-05-19",
       "mid|high|pos",
       0.082,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2025-05-20",
       "mid|high|pos",
       -0.614,
-      "nbbbbsb"
+      "nbbbbsb",
+      "T"
     ],
     [
       "2025-05-21",
       "mid|high|pos",
       -0.839,
-      "nbbbbbb"
+      "nbbbbbb",
+      "T"
     ],
     [
       "2025-05-22",
       "mid|high|pos",
       0.472,
-      "nbnbbbb"
+      "nbnbbbb",
+      "T"
     ],
     [
       "2025-05-23",
       "mid|high|neg",
       0.999,
-      "nbbsbbb"
+      "nbbsbbb",
+      "T"
     ],
     [
       "2025-05-26",
       "mid|high|neg",
       0.513,
-      "nbbsbbb"
+      "nbbsbbb",
+      "R"
     ],
     [
       "2025-05-27",
       "mid|high|neg",
       -0.005,
-      "nbbsbsb"
+      "nbbsbsb",
+      "R"
     ],
     [
       "2025-05-28",
       "mid|high|neg",
       1.884,
-      "nbbsbbb"
+      "nbbsbbb",
+      "T"
     ],
     [
       "2025-05-29",
       "up|high|pos",
       -1.217,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-05-30",
       "up|high|pos",
       -1.302,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-06-02",
       "up|high|neg",
       -0.064,
-      "bbnsssb"
+      "bbnsssb",
+      "T"
     ],
     [
       "2025-06-03",
       "up|high|neg",
       0.803,
-      "bbnsssb"
+      "bbnsssb",
+      "R"
     ],
     [
       "2025-06-04",
       "up|high|neg",
       -0.511,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2025-06-05",
       "up|high|neg",
       0.498,
-      "bbnsssb"
+      "bbnsssb",
+      "R"
     ],
     [
       "2025-06-06",
       "up|high|neg",
       0.919,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-06-09",
       "up|high|neg",
       0.323,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2025-06-10",
       "up|high|neg",
       0.549,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2025-06-11",
       "up|high|neg",
       -0.646,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-06-12",
       "up|high|neg",
       -0.888,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-06-13",
       "up|high|neg",
       1.261,
-      "bbnsbsb"
+      "bbnsbsb",
+      "R"
     ],
     [
       "2025-06-16",
       "up|high|neg",
       0.588,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2025-06-17",
       "up|high|neg",
       0.904,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-06-18",
       "up|high|pos",
       -1.02,
-      "bbbbssb"
+      "bbbbssb",
+      "R"
     ],
     [
       "2025-06-19",
       "up|high|pos",
       -0.221,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-06-20",
       "up|high|neg",
       -0.128,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-06-23",
       "up|high|neg",
       1.138,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-06-24",
       "up|high|neg",
       0.391,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-06-25",
       "up|high|pos",
       1.65,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-06-26",
       "up|high|pos",
       1.43,
-      "bbbbssb"
+      "bbbbssb",
+      "R"
     ],
     [
       "2025-06-27",
       "up|hot|pos",
       0.838,
-      "bbsbssb"
+      "bbsbssb",
+      "R"
     ],
     [
       "2025-06-30",
       "up|hot|pos",
       -1.238,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-07-01",
       "up|high|pos",
       -0.56,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-07-02",
       "up|high|pos",
       0.059,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-07-03",
       "up|high|pos",
       0.063,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-07-04",
       "up|high|pos",
       -0.561,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-07-07",
       "up|high|pos",
       0.255,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-07-08",
       "up|high|neg",
       0.334,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-07-09",
       "up|high|neg",
       -0.439,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-07-10",
       "up|high|neg",
       -0.193,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-07-11",
       "up|high|neg",
       -0.278,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-07-14",
       "up|high|neg",
       0.553,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-07-15",
       "up|high|neg",
       -0.037,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-07-16",
       "up|high|neg",
       0.6,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-07-17",
       "up|high|neg",
       -0.206,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-07-18",
       "up|high|neg",
       -0.111,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-07-22",
       "up|high|neg",
       3.511,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-07-23",
       "up|hot|pos",
       1.591,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2025-07-24",
       "up|hot|pos",
       -0.885,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-07-25",
       "up|hot|pos",
       -1.105,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2025-07-28",
       "up|high|pos",
       -0.79,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-07-29",
       "up|high|pos",
       -0.049,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-07-30",
       "up|high|pos",
       1.021,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-07-31",
       "up|high|pos",
       -0.658,
-      "bbbbbbb"
+      "bbbbbbb",
+      "T"
     ],
     [
       "2025-08-01",
       "up|high|neg",
       -1.247,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-08-04",
       "up|high|neg",
       0.642,
-      "bbnsbbb"
+      "bbnsbbb",
+      "T"
     ],
     [
       "2025-08-05",
       "up|high|neg",
       0.605,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-08-06",
       "up|high|neg",
       0.648,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-08-07",
       "up|high|neg",
       1.854,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-08-08",
       "up|high|pos",
       2.147,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-08-12",
       "up|hot|pos",
       1.303,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-08-13",
       "up|hot|pos",
       -1.445,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-08-14",
       "up|high|pos",
       1.709,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-08-15",
       "up|hot|pos",
       0.775,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-08-18",
       "up|hot|pos",
       -0.384,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-08-19",
       "up|hot|pos",
       -1.51,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2025-08-20",
       "up|high|pos",
       -0.649,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-08-21",
       "up|high|pos",
       0.054,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-08-22",
       "up|high|pos",
       0.409,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-08-25",
       "up|high|neg",
       -0.966,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-08-26",
       "up|high|neg",
       0.297,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-08-27",
       "up|high|neg",
       0.726,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-08-28",
       "up|high|neg",
       -0.258,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-08-29",
       "up|high|neg",
       -1.24,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-09-01",
       "up|high|neg",
       0.288,
-      "bbnsssb"
+      "bbnsssb",
+      "T"
     ],
     [
       "2025-09-02",
       "up|high|neg",
       -0.878,
-      "bbnssbb"
+      "bbnssbb",
+      "T"
     ],
     [
       "2025-09-03",
       "up|low|neg",
       1.529,
-      "bbnssbs"
+      "bbnssbs",
+      "T"
     ],
     [
       "2025-09-04",
       "up|high|neg",
       1.03,
-      "bbbssbb"
+      "bbbssbb",
+      "R"
     ],
     [
       "2025-09-05",
       "up|high|neg",
       1.453,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-09-08",
       "up|high|neg",
       -0.423,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-09-09",
       "up|high|neg",
       0.871,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2025-09-10",
       "up|high|pos",
       1.22,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-09-11",
       "up|high|pos",
       0.892,
-      "bbbbssb"
+      "bbbbssb",
+      "T"
     ],
     [
       "2025-09-12",
       "up|hot|pos",
       0.3,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2025-09-16",
       "up|hot|pos",
       -0.249,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2025-09-17",
       "up|high|pos",
       1.145,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-09-18",
       "up|hot|pos",
       -0.569,
-      "bbsbssb"
+      "bbsbssb",
+      "T"
     ],
     [
       "2025-09-19",
       "up|high|pos",
       0.994,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-09-22",
       "up|hot|pos",
       0.3,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2025-09-24",
       "up|hot|pos",
       0.273,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2025-09-25",
       "up|hot|pos",
       -0.874,
-      "bbsbbsb"
+      "bbsbbsb",
+      "T"
     ],
     [
       "2025-09-26",
       "up|high|pos",
       -0.686,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-09-29",
       "up|high|pos",
       -0.247,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-09-30",
       "up|high|neg",
       -0.85,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-10-01",
       "up|high|neg",
       0.866,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-10-02",
       "up|high|neg",
       1.853,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-10-03",
       "up|high|neg",
       4.753,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-10-06",
       "up|hot|pos",
       0.013,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-10-07",
       "up|hot|pos",
       -0.45,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-10-08",
       "up|hot|pos",
       1.771,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2025-10-09",
       "up|hot|pos",
       -1.012,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-10-10",
       "up|hot|pos",
       -2.582,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2025-10-14",
       "up|high|pos",
       1.762,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-10-15",
       "up|high|pos",
       1.269,
-      "bbbbbbb"
+      "bbbbbbb",
+      "T"
     ],
     [
       "2025-10-16",
       "up|high|pos",
       -1.441,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2025-10-17",
       "up|high|pos",
       3.37,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-10-20",
       "up|high|pos",
       0.265,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2025-10-21",
       "up|high|pos",
       -0.017,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2025-10-22",
       "up|high|pos",
       -1.351,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2025-10-23",
       "up|high|pos",
       1.353,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-10-24",
       "up|high|pos",
       2.46,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-10-27",
       "up|hot|pos",
       -0.58,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2025-10-28",
       "up|high|pos",
       2.167,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2025-10-29",
       "up|hot|pos",
       0.035,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2025-10-30",
       "up|hot|pos",
       2.115,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2025-10-31",
       "up|hot|pos",
       -1.744,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2025-11-04",
       "up|high|pos",
       -2.495,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2025-11-05",
       "up|high|pos",
       1.337,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2025-11-06",
       "up|high|neg",
       -1.194,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-11-07",
       "up|high|neg",
       1.264,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-11-10",
       "up|high|neg",
       -0.135,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-11-11",
       "up|high|neg",
       0.433,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-11-12",
       "up|high|neg",
       0.428,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-11-13",
       "up|high|neg",
       -1.765,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2025-11-14",
       "up|high|neg",
       -0.104,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2025-11-17",
       "up|high|neg",
       -3.221,
-      "bbbssbb"
+      "bbbssbb",
+      "T"
     ],
     [
       "2025-11-18",
       "up|low|neg",
       -0.339,
-      "bbnssbs"
+      "bbnssbs",
+      "T"
     ],
     [
       "2025-11-19",
       "mid|low|neg",
       2.65,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2025-11-20",
       "mid|high|neg",
       -2.405,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-11-21",
       "mid|low|neg",
       0.069,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-11-25",
       "mid|low|neg",
       1.849,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-11-26",
       "mid|high|neg",
       1.227,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-11-27",
       "mid|high|neg",
       0.173,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-11-28",
       "mid|high|neg",
       -1.892,
-      "nsnsssb"
+      "nsnsssb",
+      "R"
     ],
     [
       "2025-12-01",
       "mid|low|neg",
       0.0,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2025-12-02",
       "mid|low|neg",
       1.138,
-      "nsnssss"
+      "nsnssss",
+      "R"
     ],
     [
       "2025-12-03",
       "mid|high|neg",
       2.334,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-12-04",
       "mid|high|neg",
       -1.051,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2025-12-05",
       "mid|high|neg",
       0.178,
-      "nsbsbsb"
+      "nsbsbsb",
+      "R"
     ],
     [
       "2025-12-08",
       "up|high|pos",
       0.145,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-12-09",
       "up|high|pos",
       -0.103,
-      "bbbbbbb"
+      "bbbbbbb",
+      "R"
     ],
     [
       "2025-12-10",
       "up|high|pos",
       -0.897,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-12-11",
       "up|high|pos",
       1.371,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2025-12-12",
       "up|high|pos",
       -1.315,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-12-15",
       "up|high|neg",
       -1.564,
-      "bbnsbsb"
+      "bbnsbsb",
+      "R"
     ],
     [
       "2025-12-16",
       "up|low|neg",
       0.261,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2025-12-17",
       "up|low|neg",
       -1.032,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2025-12-18",
       "mid|low|neg",
       1.032,
-      "nssssbs"
+      "nssssbs",
+      "R"
     ],
     [
       "2025-12-19",
       "mid|low|neg",
       1.808,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2025-12-22",
       "mid|high|neg",
       0.021,
-      "nsnsbbb"
+      "nsnsbbb",
+      "R"
     ],
     [
       "2025-12-23",
       "mid|high|neg",
       -0.136,
-      "nsnsbbb"
+      "nsnsbbb",
+      "R"
     ],
     [
       "2025-12-24",
       "up|high|neg",
       0.127,
-      "bbnsbsb"
+      "bbnsbsb",
+      "R"
     ],
     [
       "2025-12-25",
       "up|high|neg",
       0.68,
-      "bbnsbsb"
+      "bbnsbsb",
+      "R"
     ],
     [
       "2025-12-26",
       "up|high|pos",
       -0.44,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2025-12-29",
       "up|high|pos",
       -0.371,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2025-12-30",
       "up|high|pos",
       2.966,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2026-01-05",
       "up|high|pos",
       1.322,
-      "bbbbssb"
+      "bbbbssb",
+      "R"
     ],
     [
       "2026-01-06",
       "up|high|pos",
       -1.059,
-      "bbbbssb"
+      "bbbbssb",
+      "R"
     ],
     [
       "2026-01-07",
       "up|high|pos",
       -1.626,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2026-01-08",
       "up|high|pos",
       1.609,
-      "bbnbbsb"
+      "bbnbbsb",
+      "R"
     ],
     [
       "2026-01-09",
       "up|high|pos",
       3.098,
-      "bbbbbbb"
+      "bbbbbbb",
+      "R"
     ],
     [
       "2026-01-13",
       "up|high|pos",
       1.479,
-      "bbbbsss"
+      "bbbbsss",
+      "R"
     ],
     [
       "2026-01-14",
       "up|high|pos",
       -0.425,
-      "bbbbsss"
+      "bbbbsss",
+      "R"
     ],
     [
       "2026-01-15",
       "up|high|pos",
       -0.322,
-      "bbbbbss"
+      "bbbbbss",
+      "R"
     ],
     [
       "2026-01-16",
       "up|high|pos",
       -0.654,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-01-19",
       "up|high|pos",
       -1.106,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-01-20",
       "up|high|pos",
       -0.408,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-01-21",
       "up|high|pos",
       1.732,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2026-01-22",
       "up|high|pos",
       0.294,
-      "bbbbbbb"
+      "bbbbbbb",
+      "T"
     ],
     [
       "2026-01-23",
       "up|high|pos",
       -1.786,
-      "bbbbbbb"
+      "bbbbbbb",
+      "T"
     ],
     [
       "2026-01-26",
       "up|high|neg",
       0.848,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2026-01-27",
       "up|high|neg",
       0.047,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2026-01-28",
       "up|high|neg",
       0.032,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2026-01-29",
       "up|high|neg",
       -0.099,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2026-01-30",
       "up|high|neg",
       -1.252,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2026-02-02",
       "up|high|neg",
       3.923,
-      "bbnsssb"
+      "bbnsssb",
+      "R"
     ],
     [
       "2026-02-03",
       "up|high|neg",
       -0.781,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2026-02-04",
       "up|high|neg",
       -0.875,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2026-02-05",
       "up|high|neg",
       0.809,
-      "bbbsbsb"
+      "bbbsbsb",
+      "R"
     ],
     [
       "2026-02-06",
       "up|high|neg",
       3.89,
-      "bbbsbbb"
+      "bbbsbbb",
+      "R"
     ],
     [
       "2026-02-09",
       "up|high|pos",
       2.283,
-      "bbbbsbs"
+      "bbbbsbs",
+      "T"
     ],
     [
       "2026-02-10",
       "up|hot|pos",
       -0.019,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2026-02-12",
       "up|hot|pos",
       -1.211,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2026-02-13",
       "up|high|pos",
       -0.238,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-02-16",
       "up|high|pos",
       -0.422,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-02-17",
       "up|high|pos",
       1.021,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-02-18",
       "up|high|pos",
       0.567,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-02-19",
       "up|high|pos",
       -1.117,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-02-20",
       "up|high|pos",
       0.872,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-02-24",
       "up|high|pos",
       2.202,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-02-25",
       "up|high|pos",
       0.291,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-02-26",
       "up|hot|pos",
       0.165,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2026-02-27",
       "up|hot|pos",
       -1.348,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2026-03-02",
       "up|high|pos",
       -3.063,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-03-03",
       "up|high|neg",
       -3.613,
-      "bbnssbb"
+      "bbnssbb",
+      "T"
     ],
     [
       "2026-03-04",
       "up|low|neg",
       1.903,
-      "bbsssbs"
+      "bbsssbs",
+      "T"
     ],
     [
       "2026-03-05",
       "up|low|neg",
       0.62,
-      "bbnssbs"
+      "bbnssbs",
+      "T"
     ],
     [
       "2026-03-06",
       "mid|low|neg",
       -5.2,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2026-03-09",
       "mid|low|neg",
       2.882,
-      "nsssbbb"
+      "nsssbbb",
+      "T"
     ],
     [
       "2026-03-10",
       "mid|low|neg",
       1.432,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2026-03-11",
       "mid|low|neg",
       -1.04,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2026-03-12",
       "mid|low|neg",
       -1.163,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2026-03-13",
       "mid|low|neg",
       -0.127,
-      "nssssss"
+      "nssssss",
+      "T"
     ],
     [
       "2026-03-16",
       "mid|low|neg",
       -0.094,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2026-03-17",
       "mid|low|neg",
       2.866,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2026-03-18",
       "mid|high|neg",
       -3.38,
-      "nsnssss"
+      "nsnssss",
+      "T"
     ],
     [
       "2026-03-19",
       "mid|low|neg",
       -3.479,
-      "nssssss"
+      "nssssss",
+      "T"
     ],
     [
       "2026-03-23",
       "mid|low|neg",
       1.43,
-      "nssssbb"
+      "nssssbb",
+      "T"
     ],
     [
       "2026-03-24",
       "mid|low|neg",
       2.866,
-      "nssssbb"
+      "nssssbb",
+      "T"
     ],
     [
       "2026-03-25",
       "mid|low|neg",
       -0.272,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2026-03-26",
       "mid|low|neg",
       -0.43,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2026-03-27",
       "mid|low|neg",
       -2.786,
-      "nsnssss"
+      "nsnssss",
+      "T"
     ],
     [
       "2026-03-30",
       "mid|low|neg",
       -1.585,
-      "nsssssb"
+      "nsssssb",
+      "T"
     ],
     [
       "2026-03-31",
       "mid|low|neg",
       5.24,
-      "nsssbbb"
+      "nsssbbb",
+      "T"
     ],
     [
       "2026-04-01",
       "mid|low|neg",
       -2.375,
-      "nsnsbss"
+      "nsnsbss",
+      "T"
     ],
     [
       "2026-04-02",
       "mid|low|neg",
       1.258,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2026-04-03",
       "mid|low|neg",
       0.546,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2026-04-06",
       "mid|low|pos",
       0.03,
-      "nsnbbbs"
+      "nsnbbbs",
+      "T"
     ],
     [
       "2026-04-07",
       "down|low|pos",
       5.388,
-      "ssnbbbs"
+      "ssnbbbs",
+      "R"
     ],
     [
       "2026-04-08",
       "mid|high|pos",
       -0.734,
-      "nbbbssb"
+      "nbbbssb",
+      "R"
     ],
     [
       "2026-04-09",
       "mid|high|pos",
       1.841,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2026-04-10",
       "mid|high|pos",
       -0.74,
-      "nbbbsss"
+      "nbbbsss",
+      "R"
     ],
     [
       "2026-04-13",
       "mid|high|pos",
       2.433,
-      "nbbbbsb"
+      "nbbbbsb",
+      "R"
     ],
     [
       "2026-04-14",
       "mid|high|pos",
       0.444,
-      "nbbbsss"
+      "nbbbsss",
+      "R"
     ],
     [
       "2026-04-15",
       "mid|high|pos",
       2.381,
-      "nbbbbss"
+      "nbbbbss",
+      "R"
     ],
     [
       "2026-04-16",
       "mid|high|pos",
       -1.751,
-      "nbbbsss"
+      "nbbbsss",
+      "T"
     ],
     [
       "2026-04-17",
       "up|high|pos",
       0.597,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-04-20",
       "up|high|pos",
       0.891,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-04-21",
       "up|high|pos",
       0.399,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-04-22",
       "up|high|pos",
       -0.748,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-04-23",
       "up|high|pos",
       0.974,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-04-24",
       "up|high|pos",
       1.375,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-04-27",
       "up|high|pos",
       -1.024,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-04-28",
       "up|high|pos",
       -1.056,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-04-30",
       "up|high|pos",
       0.385,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-05-01",
       "up|high|pos",
       5.58,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-05-07",
       "up|hot|pos",
       -0.191,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2026-05-08",
       "up|high|pos",
       -0.472,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-05-11",
       "up|high|pos",
       0.52,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-05-12",
       "up|high|pos",
       0.844,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-05-13",
       "up|hot|pos",
       -0.977,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2026-05-14",
       "up|high|pos",
       -1.987,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-05-15",
       "up|high|pos",
       -0.966,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-05-18",
       "up|high|neg",
       -0.436,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2026-05-19",
       "up|high|neg",
       -1.232,
-      "bbnssbb"
+      "bbnssbb",
+      "T"
     ],
     [
       "2026-05-20",
       "up|high|neg",
       3.143,
-      "bbnssbs"
+      "bbnssbs",
+      "T"
     ],
     [
       "2026-05-21",
       "up|high|neg",
       2.683,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2026-05-22",
       "up|high|neg",
       2.872,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2026-05-25",
       "up|high|pos",
       -0.249,
-      "bbbbsss"
+      "bbbbsss",
+      "T"
     ],
     [
       "2026-05-26",
       "up|high|pos",
       0.005,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-05-27",
       "up|high|pos",
       -0.471,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-05-28",
       "up|high|pos",
       2.529,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-05-29",
       "up|hot|pos",
       0.912,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2026-06-01",
       "up|hot|pos",
       -0.299,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2026-06-02",
       "up|hot|pos",
       2.499,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2026-06-03",
       "up|hot|pos",
       -1.362,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2026-06-04",
       "up|high|pos",
       -1.308,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-06-05",
       "up|high|pos",
       -3.85,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-06-08",
       "up|high|neg",
       2.174,
-      "bbnssbb"
+      "bbnssbb",
+      "T"
     ],
     [
       "2026-06-09",
       "up|high|neg",
       -1.892,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2026-06-10",
       "up|high|neg",
       0.059,
-      "bbnssbb"
+      "bbnssbb",
+      "T"
     ],
     [
       "2026-06-11",
       "up|high|neg",
       2.807,
-      "bbnssbb"
+      "bbnssbb",
+      "T"
     ],
     [
       "2026-06-12",
       "up|high|neg",
       4.995,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2026-06-15",
       "up|high|neg",
       0.126,
-      "bbbsbss"
+      "bbbsbss",
+      "T"
     ],
     [
       "2026-06-16",
       "up|high|pos",
       0.717,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-06-17",
       "up|high|pos",
       1.647,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-06-18",
       "up|hot|pos",
       0.277,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2026-06-19",
       "up|hot|pos",
       1.549,
-      "bbsbbss"
+      "bbsbbss",
+      "T"
     ],
     [
       "2026-06-22",
       "up|hot|pos",
       -3.546,
-      "bbsbsss"
+      "bbsbsss",
+      "T"
     ],
     [
       "2026-06-23",
       "up|high|pos",
       -0.879,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-06-24",
       "up|high|pos",
       4.613,
-      "bbbbbsb"
+      "bbbbbsb",
+      "T"
     ],
     [
       "2026-06-25",
       "up|high|pos",
       -4.153,
-      "bbbbbss"
+      "bbbbbss",
+      "T"
     ],
     [
       "2026-06-26",
       "up|high|neg",
       0.155,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2026-06-29",
       "up|high|neg",
       0.855,
-      "bbbsbsb"
+      "bbbsbsb",
+      "T"
     ],
     [
       "2026-06-30",
       "up|high|neg",
       0.589,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2026-07-01",
       "up|high|neg",
       -2.472,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2026-07-02",
       "up|high|neg",
       1.471,
-      "bbnsbbb"
+      "bbnsbbb",
+      "T"
     ],
     [
       "2026-07-03",
       "up|high|neg",
       -0.009,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2026-07-06",
       "up|high|neg",
       -2.123,
-      "bbbsbbb"
+      "bbbsbbb",
+      "T"
     ],
     [
       "2026-07-07",
       "up|high|neg",
       -2.107,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2026-07-08",
       "up|low|neg",
       1.384,
-      "bbnssbs"
+      "bbnssbs",
+      "R"
     ],
     [
       "2026-07-09",
       "mid|low|neg",
       1.201,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2026-07-10",
       "mid|high|neg",
       -1.918,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2026-07-13",
       "mid|low|neg",
       0.745,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2026-07-14",
       "mid|low|neg",
       1.488,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2026-07-15",
       "mid|high|neg",
       -2.787,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2026-07-16",
       "mid|low|neg",
       -4.031,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2026-07-17",
       "mid|low|neg",
       3.26,
-      "nsssbbb"
+      "nsssbbb",
+      "R"
     ],
     [
       "2026-07-21",
       "mid|low|neg",
       -0.176,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2026-07-22",
       "mid|low|neg",
       0.464,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2026-07-23",
       "mid|low|neg",
       -2.727,
-      "nsnssbs"
+      "nsnssbs",
+      "R"
     ],
     [
       "2026-07-24",
       "mid|low|neg",
       0.495,
-      "nsssssb"
+      "nsssssb",
+      "R"
     ],
     [
       "2026-07-27",
       "mid|low|neg",
       -3.952,
-      "nssssss"
+      "nssssss",
+      "R"
     ],
     [
       "2026-07-28",
       "mid|low|neg",
       -1.492,
-      "nsssbbb"
+      "nsssbbb",
+      "R"
     ],
     [
       "2026-07-29",
       "mid|low|neg",
       0.705,
-      "nsssbbb"
+      "nsssbbb",
+      "T"
     ],
     [
       "2026-07-30",
       "mid|low|neg",
       4.032,
-      "nssssbb"
+      "nssssbb",
+      "T"
     ],
     [
       "2026-07-31",
       "mid|low|neg",
       -0.943,
-      "nsnssbs"
+      "nsnssbs",
+      "T"
     ],
     [
       "2026-08-03",
       "mid|low|neg",
       0.318,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2026-08-04",
       "mid|low|neg",
       3.663,
-      "nssssbs"
+      "nssssbs",
+      "T"
     ],
     [
       "2026-08-05",
       "mid|high|neg",
       -0.931,
-      "nsnsbsb"
+      "nsnsbsb",
+      "T"
     ],
     [
       "2026-08-06",
       "mid|high|pos",
       -0.117,
-      "nsnbbss"
+      "nsnbbss",
+      "R"
     ],
     [
       "2026-08-07",
       "mid|low|pos",
       2.078,
-      "nsnbbss"
+      "nsnbbss",
+      "R"
     ],
     [
       "2026-08-10",
       "mid|high|pos",
       0.827,
-      "nsnbbsb"
+      "nsnbbsb",
+      "R"
     ],
     [
       "2026-08-12",
       "up|high|pos",
       1.162,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2026-08-13",
       "up|high|pos",
       0.593,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2026-08-14",
       "up|high|pos",
       0.737,
-      "bbbbbsb"
+      "bbbbbsb",
+      "R"
     ],
     [
       "2026-08-17",
       "up|high|pos",
       -2.542,
-      "bbbbbss"
+      "bbbbbss",
+      "R"
     ],
     [
       "2026-08-18",
       "mid|high|pos",
       -3.164,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2026-08-19",
       "mid|low|pos",
       1.363,
-      "nbnbsbs"
+      "nbnbsbs",
+      "R"
     ],
     [
       "2026-08-20",
       "mid|low|pos",
       -0.303,
-      "nbnbbsb"
+      "nbnbbsb",
+      "R"
     ],
     [
       "2026-08-21",
       "mid|low|pos",
       -0.74,
-      "nbnbbbb"
+      "nbnbbbb",
+      "R"
     ],
     [
       "2026-08-24",
       "mid|low|pos",
       0.501,
-      "nbnbsbs"
+      "nbnbsbs",
+      "R"
     ],
     [
       "2026-08-25",
       "mid|low|neg",
       0.616,
-      "nbnsbbb"
+      "nbnsbbb",
+      "R"
     ],
     [
       "2026-08-26",
       "mid|low|neg",
       -0.196,
-      "nbnsbbb"
+      "nbnsbbb",
+      "R"
     ],
     [
       "2026-08-27",
       "mid|low|neg",
-      0.272,
-      "nbnsbbb"
+      0.414,
+      "nbnsbbb",
+      "R"
+    ],
+    [
+      "2026-08-28",
+      "mid|high|neg",
+      -0.141,
+      "nbnsbbb",
+      "R"
     ],
     [
       "2026-08-31",
       "mid|high|neg",
       -0.146,
-      "nbnsbbb"
+      "nbnssbb",
+      "R"
     ],
     [
       "2026-09-01",
       "mid|low|neg",
       -2.854,
-      "nbnssbb"
+      "nbnssbb",
+      "R"
     ]
   ],
   "indicators": [
@@ -7528,40 +8692,40 @@
       "display": "下降トレンド",
       "signal": "bear",
       "reading": "下降トレンド",
-      "weight": 2.0,
+      "weight": 0.8,
       "detail": "短期(5日)・中期(25日)・長期(75日)の並び順で相場の向きを見ます。上から短→中→長の順（パーフェクトオーダー）なら強い上昇、逆なら強い下降。",
       "group": "tech"
     },
     {
       "id": "cross",
       "name": "移動平均クロス",
-      "value": -0.46,
-      "display": "-0.46%",
+      "value": -0.68,
+      "display": "-0.68%",
       "signal": "bear",
       "reading": "短期<中期",
-      "weight": 1.5,
+      "weight": 1.0,
       "detail": "短期線が中期線を上抜けるのがゴールデンクロス（買いサイン）、下抜けるのがデッドクロス（売りサイン）。数値は5日線と25日線の差(%)です。",
       "group": "tech"
     },
     {
       "id": "rsi14",
       "name": "RSI (14)",
-      "value": 41.2,
-      "display": "41.2",
+      "value": 40.7,
+      "display": "40.7",
       "signal": "bear",
       "reading": "弱気",
-      "weight": 1.5,
+      "weight": 1.2,
       "detail": "買われすぎ・売られすぎを0〜100で示す指標。一般に70以上で過熱（反落警戒）、30以下で売られすぎ（反発期待）。50より上なら買い方優勢と見ます。",
       "group": "tech"
     },
     {
       "id": "macd",
       "name": "MACD",
-      "value": -213.4,
-      "display": "-213.4",
+      "value": -211.2,
+      "display": "-211.2",
       "signal": "bear",
       "reading": "下落の勢い",
-      "weight": 1.3,
+      "weight": 0.3,
       "detail": "2本の移動平均の差から勢い（モメンタム）を見る指標。MACDが signal線を上抜け・ヒストグラムがプラスなら上昇の勢い、逆なら下落の勢い。",
       "group": "tech"
     },
@@ -7572,7 +8736,7 @@
       "display": "0.07",
       "signal": "bear",
       "reading": "中央より下",
-      "weight": 1.0,
+      "weight": 1.3,
       "detail": "価格が変動幅（バンド）のどこにいるかを0〜1で表します。1超で上限突破＝過熱、0未満で下限突破＝売られすぎ。0.5が移動平均（真ん中）です。",
       "group": "tech"
     },
@@ -7583,26 +8747,26 @@
       "display": "13.9",
       "signal": "bull",
       "reading": "売られすぎ",
-      "weight": 0.8,
+      "weight": 1.0,
       "detail": "一定期間の高値・安値の中で現在値がどの位置かを見る指標。80以上で買われすぎ、20以下で売られすぎ。%K が %D を上抜けると買いサイン。",
       "group": "tech"
     },
     {
       "id": "dev25",
       "name": "25日移動平均乖離率",
-      "value": -2.32,
-      "display": "-2.32%",
+      "value": -2.62,
+      "display": "-2.62%",
       "signal": "bear",
       "reading": "平均より下",
-      "weight": 1.0,
+      "weight": 2.2,
       "detail": "価格が25日移動平均からどれだけ離れているか(%)。プラスに大きすぎると反落、マイナスに大きすぎると反発しやすい（行き過ぎの目安）。",
       "group": "tech"
     },
     {
       "id": "us",
       "name": "米国株（前日S&P500）",
-      "value": 0.46,
-      "display": "+0.46%",
+      "value": 0.43,
+      "display": "+0.43%",
       "signal": "bull",
       "reading": "前日プラス",
       "weight": 1.6,
@@ -7612,8 +8776,8 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -2.28,
-      "display": "-2.28%",
+      "value": -2.99,
+      "display": "-2.99%",
       "signal": "bear",
       "reading": "円高方向",
       "weight": 1.2,
@@ -7623,10 +8787,10 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": -0.04,
-      "display": "-0.04%",
-      "signal": "neutral",
-      "reading": "ほぼ同水準",
+      "value": -0.43,
+      "display": "-0.43%",
+      "signal": "bear",
+      "reading": "現物より安い",
       "weight": 1.0,
       "group": "overnight",
       "detail": "日経先物が現物(現在の日経平均)より高いか安いか。先物が高ければ市場は上を見ている目安。ただしEOD(日足)のため夜間の最新値ではない点に注意。"

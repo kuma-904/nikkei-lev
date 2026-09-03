@@ -21,6 +21,7 @@
   "ov_side": "bull",
   "next_ret": null,
   "verdict_correct": null,
-  "pred_correct": null
+  "pred_correct": null,
+  "ov_correct": null
  }
 ]
