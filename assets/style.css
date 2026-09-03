@@ -652,20 +652,24 @@ section { margin-top: 22px; }
 
 .tr-wait { color: var(--faint); font-size: 11px; text-align: right; }
 
-/* ===== メニュータブ（v1.10.0） ===== */
+/* ===== メニュータブ（下部固定・v1.16.0） ===== */
 .tabs {
-  position: sticky; top: 0; z-index: 30;
-  display: flex; gap: 6px; padding: 10px 0 9px; margin-bottom: 4px;
-  background: var(--ink); border-bottom: 1px solid var(--line);
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+  max-width: var(--maxw); margin: 0 auto;
+  display: flex; gap: 2px; padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+  background: rgba(12, 16, 23, .95); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line-2);
 }
 .tab {
-  flex: 1 1 0; min-width: 0; white-space: nowrap;
-  border: 1px solid var(--line-2); background: var(--surface-2); color: var(--muted);
-  font: inherit; font-size: 13px; font-weight: 700; padding: 9px 4px;
-  border-radius: 999px; cursor: pointer; transition: background .2s, color .2s, border-color .2s;
+  flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  border: none; background: none; color: var(--faint);
+  font: inherit; font-size: 10.5px; font-weight: 700; padding: 6px 2px 4px;
+  border-radius: 12px; cursor: pointer; transition: color .2s, background .2s;
 }
-.tab:active { transform: scale(.97); }
-.tab.active { background: var(--gold-soft); border-color: var(--gold); color: var(--gold); }
+.tab .ti { font-size: 19px; line-height: 1; filter: grayscale(.4) opacity(.75); }
+.tab:active { transform: scale(.95); }
+.tab.active { color: var(--gold); background: var(--gold-soft); }
+.tab.active .ti { filter: none; }
 .pane { display: none; }
 .pane.show { display: block; }
 .pane.show + .pane.show { margin-top: 22px; }
@@ -681,3 +685,16 @@ button.method-link.tag:hover, .hint.method-link:hover { color: var(--gold); bord
 .bk-note { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
 .bk-btns { display: flex; gap: 10px; flex-wrap: wrap; }
 .bk-status { font-size: 12px; color: var(--gold); font-weight: 700; margin-top: 12px; min-height: 16px; }
+
+/* ===== UX見直し（v1.16.0） ===== */
+/* 下部タブぶんの余白を確保 */
+body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+/* ヘッダーのボタン2つ */
+.top-btns { display: flex; gap: 6px; justify-content: flex-end; }
+/* 綱引きのしきい値ライン＋注記 */
+.tug-th { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 1.5px dashed var(--line-2); z-index: 1; transform: translateX(-50%); }
+.tug-cap { text-align: center; font-size: 10.5px; color: var(--faint); margin-top: 9px; }
+/* 使い方ガイド（シート内） */
+.sheet .guide-tabs { display: grid; gap: 8px; margin: 12px 0; }
+.sheet .guide-tabs > div { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.sheet .guide-tabs b { color: var(--text); }

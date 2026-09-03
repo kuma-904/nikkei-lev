@@ -9,7 +9,7 @@
   const REGIME_JP = { up: "上昇トレンド", down: "下降トレンド", mid: "もみ合い" };
   const RZONE_JP = { hot: "過熱", cold: "底値圏", high: "やや強", low: "やや弱" };
 
-  const APP_VERSION = "1.15.0";
+  const APP_VERSION = "1.17.0";
   let DATA = null, params = null, firstVerdict = true;
 
   document.addEventListener("DOMContentLoaded", init);
@@ -43,6 +43,13 @@
     wirePresets();
     wireBackup();
     updateMethodologyValues();
+    const gb = $("guideBtn"); if (gb) gb.addEventListener("click", openGuide);
+    try {
+      if (!localStorage.getItem("akaao_seen_v1")) {
+        localStorage.setItem("akaao_seen_v1", "1");
+        setTimeout(openGuide, 600);
+      }
+    } catch (e) { /* */ }
   }
 
   // DATA と params に依存する描画をまとめて実行（初回・手動更新の両方で使う）
@@ -474,6 +481,12 @@
     if (reduce || !firstVerdict) marker.style.left = pos + "%";
     else { marker.style.left = "50%"; requestAnimationFrame(() => setTimeout(() => (marker.style.left = pos + "%"), 60)); }
     firstVerdict = false;
+    // しきい値ライン＋注記（スコアの意味を明示）
+    const th = params.threshold;
+    const tb = $("tugThBull"), ts = $("tugThBear"), cap = $("tugCap");
+    if (tb) tb.style.left = ((th + 100) / 2) + "%";
+    if (ts) ts.style.left = ((-th + 100) / 2) + "%";
+    if (cap) cap.textContent = `点線（±${th}）を超えると「ブル寄り／ベア寄り」`;
 
     const pips = $("pips"); pips.innerHTML = "";
     for (let i = 0; i < 5; i++) {
@@ -665,8 +678,8 @@
 
   /* ---- プリセット・タイプ診断 ---- */
   const PRESETS = {
-    balanced: { name: "バランス型", threshold: 20,
-      w: { trend: 2.0, cross: 1.5, rsi14: 1.5, macd: 1.3, bb: 1.0, stoch: 0.8, dev25: 1.0, us: 1.6, jpy: 1.2, fut: 1.0 } },
+    balanced: { name: "バランス型（データ調整済み）", threshold: 16,
+      w: { trend: 0.8, cross: 1.0, rsi14: 1.2, macd: 0.3, bb: 1.3, stoch: 1.0, dev25: 2.2, us: 1.6, jpy: 1.2, fut: 1.0 } },
     trend: { name: "順張り型", threshold: 18,
       w: { trend: 2.5, cross: 2.0, rsi14: 0.8, macd: 1.8, bb: 0.6, stoch: 0.6, dev25: 0.6, us: 1.6, jpy: 1.2, fut: 1.0 } },
     contra: { name: "逆張り型", threshold: 22,
@@ -1071,7 +1084,7 @@
         `<li>スコア ≦ −<b>${th}</b> → <span class="read-bear">ベア寄り</span></li>` +
         `<li>その間 → <span class="read-neutral">様子見</span></li></ul>` +
         `<div class="wtable">${chips}</div>` +
-        `<p class="mnote">重み・しきい値は「設定」タブの「数字を調整」で変えられます。</p>`;
+        `<p class="mnote">既定の重みは実データ検証で調整済み：日経は日次でやや逆張り（乖離率・ボリンジャー）が効きやすく、順張り（MACD）は効きにくいため、乖離率を重め・MACDを軽めにしています。ただし優位は小さく将来を保証しません。重み・しきい値は「設定」タブで変更可能。</p>`;
       fillSheet({ eyebrow: "仕組み", title: "ルールベース判定はどう出している？", html });
     } else {
       const lb = params.lookback, ms = params.minSamples;
@@ -1084,6 +1097,20 @@
         `<p class="mnote">遡り年数・最小サンプル数は「設定」タブで調整できます。別枠で「オーバーナイト予測」（前夜の米国株×ドル円が同じだった翌営業日の上昇率）も出しています。</p>`;
       fillSheet({ eyebrow: "仕組み", title: "過去データからの予測はどう出している？", html });
     }
+  }
+  function openGuide() {
+    const html =
+      `<p>日経平均の<b style="color:var(--bull)">ブル4.3倍</b> / <b style="color:var(--bear)">ベア3.8倍</b>を1日単位で売買するための判断ダッシュボードです。色は<b style="color:var(--bull)">赤＝上げ</b>・<b style="color:var(--bear)">青＝下げ</b>。</p>` +
+      `<div class="guide-tabs">` +
+        `<div><b>📅 今日</b> … その日の判断（3つの見立て・ルールベース・予測）</div>` +
+        `<div><b>📊 指標</b> … テクニカル・海外材料・日経チャート</div>` +
+        `<div><b>🏅 成績</b> … 過去の的中率と、実運用の実績</div>` +
+        `<div><b>💰 資金</b> … 1日の想定損益とポジション計算</div>` +
+        `<div><b>⚙️ 設定</b> … 重みの調整・タイプ診断・バックアップ</div>` +
+      `</div>` +
+      `<p>使い方：まず「今日」で <b>ブル寄り／ベア寄り／様子見</b> を確認。数字や指標カードは<b>タップで解説</b>が出ます。設定は端末に保存され、変えると実績にも反映されます。</p>` +
+      `<p class="mnote">投資助言ではありません。テクニカルと過去データの機械的な集計で、将来を保証しません。購入申込は15:20まで。</p>`;
+    fillSheet({ eyebrow: "はじめに", title: "赤青ナビの使い方", html });
   }
   function openSheet() { $("backdrop").classList.add("open"); $("sheet").classList.add("open"); sheetOpen = true; }
   function closeSheet() {

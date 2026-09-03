@@ -33,7 +33,7 @@ BEAR_MULT = 3.8   # 楽天日経平均ベア3.8倍
 LOOKBACK_YEARS = 5    # 予測で遡る年数（直近N年に限定）
 MIN_SAMPLES = 8       # 類似局面がこれ未満なら区分を広げる
 SHIP_YEARS = 8        # サイトのスライダー用に出荷するサンプル履歴の年数
-SCORE_THRESHOLD = 20  # |スコア| がこれ以上で ブル寄り/ベア寄り
+SCORE_THRESHOLD = 16  # |スコア| がこれ以上で ブル寄り/ベア寄り
 ORDER_CUTOFF = "15:20"  # 楽天ブル4.3倍/ベア3.8倍の購入申込締切（引け15:30の10分前）
 ADX_CUTOFF = 23         # ADXがこれ以上→トレンド相場、未満→もみ合い
 
@@ -380,7 +380,7 @@ def indicator_signals(row: pd.Series) -> list[dict]:
     else:
         sig, reading = "neutral", "方向感なし"
     out.append(dict(id="trend", name="トレンド（移動平均の並び）", value=None,
-                    display=reading, signal=sig, reading=reading, weight=2.0,
+                    display=reading, signal=sig, reading=reading, weight=0.8,
                     detail="短期(5日)・中期(25日)・長期(75日)の並び順で相場の向きを見ます。"
                            "上から短→中→長の順（パーフェクトオーダー）なら強い上昇、逆なら強い下降。"))
 
@@ -393,7 +393,7 @@ def indicator_signals(row: pd.Series) -> list[dict]:
     else:
         sig, reading = "neutral", "接近"
     out.append(dict(id="cross", name="移動平均クロス", value=round(gap, 2),
-                    display=f"{gap:+.2f}%", signal=sig, reading=reading, weight=1.5,
+                    display=f"{gap:+.2f}%", signal=sig, reading=reading, weight=1.0,
                     detail="短期線が中期線を上抜けるのがゴールデンクロス（買いサイン）、"
                            "下抜けるのがデッドクロス（売りサイン）。数値は5日線と25日線の差(%)です。"))
 
@@ -410,7 +410,7 @@ def indicator_signals(row: pd.Series) -> list[dict]:
     else:
         sig, reading = "neutral", "中立"
     out.append(dict(id="rsi14", name="RSI (14)", value=round(v, 1),
-                    display=f"{v:.1f}", signal=sig, reading=reading, weight=1.5,
+                    display=f"{v:.1f}", signal=sig, reading=reading, weight=1.2,
                     detail="買われすぎ・売られすぎを0〜100で示す指標。一般に70以上で過熱（反落警戒）、"
                            "30以下で売られすぎ（反発期待）。50より上なら買い方優勢と見ます。"))
 
@@ -425,7 +425,7 @@ def indicator_signals(row: pd.Series) -> list[dict]:
     else:
         sig, reading = "bear", "悪化中"
     out.append(dict(id="macd", name="MACD", value=round(h, 1),
-                    display=f"{h:+.1f}", signal=sig, reading=reading, weight=1.3,
+                    display=f"{h:+.1f}", signal=sig, reading=reading, weight=0.3,
                     detail="2本の移動平均の差から勢い（モメンタム）を見る指標。"
                            "MACDが signal線を上抜け・ヒストグラムがプラスなら上昇の勢い、逆なら下落の勢い。"))
 
@@ -440,7 +440,7 @@ def indicator_signals(row: pd.Series) -> list[dict]:
     else:
         sig, reading = "bear", "中央より下"
     out.append(dict(id="bb", name="ボリンジャーバンド %b", value=round(float(b), 2),
-                    display=f"{b:.2f}", signal=sig, reading=reading, weight=1.0,
+                    display=f"{b:.2f}", signal=sig, reading=reading, weight=1.3,
                     detail="価格が変動幅（バンド）のどこにいるかを0〜1で表します。1超で上限突破＝過熱、"
                            "0未満で下限突破＝売られすぎ。0.5が移動平均（真ん中）です。"))
 
@@ -455,7 +455,7 @@ def indicator_signals(row: pd.Series) -> list[dict]:
     else:
         sig, reading = "bear", "下向き"
     out.append(dict(id="stoch", name="ストキャスティクス", value=round(k, 1),
-                    display=f"{k:.1f}", signal=sig, reading=reading, weight=0.8,
+                    display=f"{k:.1f}", signal=sig, reading=reading, weight=1.0,
                     detail="一定期間の高値・安値の中で現在値がどの位置かを見る指標。"
                            "80以上で買われすぎ、20以下で売られすぎ。%K が %D を上抜けると買いサイン。"))
 
@@ -470,7 +470,7 @@ def indicator_signals(row: pd.Series) -> list[dict]:
     else:
         sig, reading = "bear", "平均より下"
     out.append(dict(id="dev25", name="25日移動平均乖離率", value=round(dv, 2),
-                    display=f"{dv:+.2f}%", signal=sig, reading=reading, weight=1.0,
+                    display=f"{dv:+.2f}%", signal=sig, reading=reading, weight=2.2,
                     detail="価格が25日移動平均からどれだけ離れているか(%)。"
                            "プラスに大きすぎると反落、マイナスに大きすぎると反発しやすい（行き過ぎの目安）。"))
 
@@ -734,6 +734,41 @@ def resolve_and_log(df: pd.DataFrame, verdict: dict, prediction: dict, overnight
     return summarize_track(log)
 
 
+def export_research_csv(force_sample: bool, path: str):
+    """分析用に、全期間の生データ（OHLC・指標の生値・ADX・米国株/ドル円/先物・翌日リターン）をCSV出力。"""
+    raw, is_sample, source = load_data(force_sample)
+    df = build_features(raw)
+    aux, _prov = load_aux(is_sample, raw)
+    d = attach_overnight(df, aux)  # nk_ret, us_ret, jpy_ret を付与
+
+    fut = aux.get("futures")
+    if fut is not None and len(fut):
+        f = fut.rename(columns={"close": "fut_close"})
+        d = pd.merge_asof(d.sort_values("date"), f[["date", "fut_close"]].sort_values("date"),
+                          on="date", direction="backward")
+        d["fut_premium"] = (d["fut_close"] - d["close"]) / d["close"] * 100
+    else:
+        d["fut_premium"] = np.nan
+
+    d["ma_gap_5_25"] = (d["sma5"] - d["sma25"]) / d["sma25"] * 100
+    d["ma_gap_25_75"] = (d["sma25"] - d["sma75"]) / d["sma75"] * 100
+    d["dow"] = pd.to_datetime(d["date"]).dt.dayofweek  # 0=月〜4=金
+    d_cls = classify(df)  # key（トレンド区分×RSI×MACD）
+    keymap = dict(zip(d_cls["date"], d_cls["key"]))
+    d["key"] = d["date"].map(keymap)
+
+    cols = ["date", "open", "high", "low", "close", "volume",
+            "ret1", "fwd_ret1",
+            "rsi14", "macd", "macd_hist", "bb_pctb", "dev25", "stoch_k", "stoch_d",
+            "adx", "roc10", "ma_gap_5_25", "ma_gap_25_75",
+            "us_ret", "jpy_ret", "fut_premium", "dow", "key"]
+    out = d[[c for c in cols if c in d.columns]].dropna(subset=["fwd_ret1"]).copy()
+    out.to_csv(path, index=False, float_format="%.5f")
+    tag = "SAMPLE" if is_sample else "LIVE"
+    print(f"[{tag}][research] {path} 書き出し {len(out)}行  "
+          f"期間 {out['date'].min()}〜{out['date'].max()}  source={source}")
+
+
 def build_payload(force_sample: bool, pred_log_path: str = "data/predictions.json") -> dict:
     raw, is_sample, source = load_data(force_sample)
     df = build_features(raw)
@@ -843,7 +878,12 @@ def main():
     ap.add_argument("--sample", action="store_true", help="合成データを強制使用（ローカル検証用）")
     ap.add_argument("--out", default="data/data.json")
     ap.add_argument("--pred-out", default="data/predictions.json")
+    ap.add_argument("--research-csv", default=None, help="研究用の生データCSVを書き出す")
     args = ap.parse_args()
+
+    if args.research_csv:
+        export_research_csv(args.sample, args.research_csv)
+        return
 
     payload = build_payload(args.sample, args.pred_out)
     with open(args.out, "w", encoding="utf-8") as f:

@@ -27,7 +27,10 @@
       <small>日経平均　ブル4.3倍 / ベア3.8倍　判断ダッシュボード</small>
     </div>
     <div class="top-right">
-      <button class="news-btn" id="newsBtn">🔔 お知らせ</button>
+      <div class="top-btns">
+        <button class="news-btn" id="guideBtn">使い方</button>
+        <button class="news-btn" id="newsBtn">お知らせ</button>
+      </div>
       <div class="freshness" id="freshness">
         <div>読み込み中…</div>
       </div>
@@ -35,11 +38,11 @@
   </header>
 
   <nav class="tabs" id="tabs">
-    <button class="tab active" data-tab="today">今日</button>
-    <button class="tab" data-tab="indic">指標</button>
-    <button class="tab" data-tab="perf">成績</button>
-    <button class="tab" data-tab="money">資金</button>
-    <button class="tab" data-tab="settings">設定</button>
+    <button class="tab active" data-tab="today"><span class="ti">📅</span>今日</button>
+    <button class="tab" data-tab="indic"><span class="ti">📊</span>指標</button>
+    <button class="tab" data-tab="perf"><span class="ti">🏅</span>成績</button>
+    <button class="tab" data-tab="money"><span class="ti">💰</span>資金</button>
+    <button class="tab" data-tab="settings"><span class="ti">⚙️</span>設定</button>
   </nav>
 
   <!-- ===== 3つの見立ての一致（UI向上） ===== -->
@@ -69,8 +72,11 @@
       </div>
       <div class="tug-track">
         <div class="tug-center"></div>
+        <div class="tug-th" id="tugThBear"></div>
+        <div class="tug-th" id="tugThBull"></div>
         <div class="tug-marker" id="tugMarker"></div>
       </div>
+      <div class="tug-cap" id="tugCap"></div>
     </div>
 
     <div class="conviction">
@@ -336,7 +342,24 @@
       <p class="news-lead">各バージョンでリリースした機能の履歴です。フッターに現在のバージョンを表示しています。</p>
 
       <article class="rel">
-        <div class="rel-top"><span class="rel-ver">v1.15.0</span><span class="rel-tag">最新</span></div>
+        <div class="rel-top"><span class="rel-ver">v1.17.0</span><span class="rel-tag">最新</span></div>
+        <ul>
+          <li>ルールベースの既定重みを実データ（約4.7年）で検証して調整。日経は日次でやや逆張り（乖離率・ボリンジャー）が効き、順張り（MACD）は効きにくいため、乖離率を重め・MACDを軽めに。しきい値も±20→±16に。</li>
+          <li>検証は「古い期間で調整→直近で確認」で実施。過去に合わせすぎ（overfit）の案は不採用にしました。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.16.0</span></div>
+        <ul>
+          <li>UI/UX見直し：メニュータブを画面下部に固定（片手で操作しやすく・アイコン付き）。</li>
+          <li>「使い方」ガイドを追加（初回に自動表示・ヘッダーからいつでも再表示）。色の意味やタブ構成がひと目でわかるように。</li>
+          <li>綱引きメーターに「±しきい値」の線と注記を追加し、スコアの意味を明確化。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.15.0</span></div>
         <ul>
           <li>実績のバックフィル：前回から空いた営業日を、次に開いたとき今の設定で自動的に遡って記録・採点（毎日開けなくても抜けを埋められます）。</li>
           <li>バックアップ機能：設定と実績をファイルに書き出し／読み込み。機種変更やデータ削除に備え、別端末への引き継ぎも可能（設定タブ）。</li>
