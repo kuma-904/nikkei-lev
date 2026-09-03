@@ -698,3 +698,10 @@ body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
 .sheet .guide-tabs { display: grid; gap: 8px; margin: 12px 0; }
 .sheet .guide-tabs > div { font-size: 13px; color: var(--muted); line-height: 1.5; }
 .sheet .guide-tabs b { color: var(--text); }
+
+/* 検証の結論（v1.18.0） */
+.concl { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+.concl-list { list-style: none; display: grid; gap: 10px; }
+.concl-list li { font-size: 12.5px; color: var(--muted); line-height: 1.65; padding-left: 16px; position: relative; }
+.concl-list li::before { content: "•"; position: absolute; left: 0; color: var(--gold); }
+.concl-list b { color: var(--text); }

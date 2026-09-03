@@ -9,7 +9,7 @@
   const REGIME_JP = { up: "上昇トレンド", down: "下降トレンド", mid: "もみ合い" };
   const RZONE_JP = { hot: "過熱", cold: "底値圏", high: "やや強", low: "やや弱" };
 
-  const APP_VERSION = "1.17.0";
+  const APP_VERSION = "1.18.1";
   let DATA = null, params = null, firstVerdict = true;
 
   document.addEventListener("DOMContentLoaded", init);

@@ -136,6 +136,20 @@
     </div>
   </section>
 
+  <!-- ===== 検証の結論（正直） ===== -->
+  <section class="pane" data-tab="perf">
+    <div class="sec-head"><h2>検証の結論</h2></div>
+    <div class="card">
+      <p class="concl">実データ約5年で厳密に検証した結果です（学習期間で調整→別期間で確認）。</p>
+      <ul class="concl-list">
+        <li>この1日運用（15:20締切・NAVベース）では、テクニカル・オーバーナイト・機械学習のいずれでも、<b>コストを超える取れる優位は見つかりませんでした</b>（学習/検証で過学習を排除）。</li>
+        <li>再現する本物の偏りは<b>25日乖離率の平均回帰</b>（行き過ぎたら戻る）だけ。既定の重みはこれを反映済み。ただし弱く、乖離±5%の日でも<b>4.3倍レバ＋往復コストで期待値マイナス</b>でした。</li>
+        <li>オーバーナイト（米国株・先物）は翌日の<b>寄り付きギャップ</b>を高精度で当てますが、市場が開いた時点で動き済みで、この仕組みでは取れません。</li>
+        <li>本ツールは<b>相場の把握・リスク管理・記録</b>の道具として使い、シグナルは過信しないでください。優位が実証できるまで、レバレッジの実弾は入れないのが安全です。</li>
+      </ul>
+    </div>
+  </section>
+
   <!-- ===== テクニカル指標（タップで解説） ===== -->
   <section class="pane" data-tab="indic">
     <div class="sec-head"><h2>テクニカル指標</h2><span class="hint">カードをタップで解説</span></div>
@@ -342,7 +356,15 @@
       <p class="news-lead">各バージョンでリリースした機能の履歴です。フッターに現在のバージョンを表示しています。</p>
 
       <article class="rel">
-        <div class="rel-top"><span class="rel-ver">v1.17.0</span><span class="rel-tag">最新</span></div>
+        <div class="rel-top"><span class="rel-ver">v1.18.0</span><span class="rel-tag">最新</span></div>
+        <ul>
+          <li>オーバーナイト込みの本格検証（実データ約5年）を実施。結論を「成績」タブに正直に明記しました。</li>
+          <li>研究用CSV書き出し機能とワークフローを追加（Actionsタブの research-export）。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.17.0</span></div>
         <ul>
           <li>ルールベースの既定重みを実データ（約4.7年）で検証して調整。日経は日次でやや逆張り（乖離率・ボリンジャー）が効き、順張り（MACD）は効きにくいため、乖離率を重め・MACDを軽めに。しきい値も±20→±16に。</li>
           <li>検証は「古い期間で調整→直近で確認」で実施。過去に合わせすぎ（overfit）の案は不採用にしました。</li>

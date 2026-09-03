@@ -734,6 +734,29 @@ def resolve_and_log(df: pd.DataFrame, verdict: dict, prediction: dict, overnight
     return summarize_track(log)
 
 
+def _fetch_vol():
+    """日経VI（取れれば）と米国VIXを取得。(vi_df|None, vix_df|None, meta) を返す。"""
+    vi = vix = None; used = {}
+    for sym in ("^jniv", "^nkvix"):
+        try:
+            vi = _stooq_close(sym); used["nikkei_vi"] = f"stooq {sym}"; break
+        except Exception:
+            pass
+    if vi is None:
+        for sym in ("^JNIV", "^N225VI"):
+            try:
+                vi = _yf_close(sym); used["nikkei_vi"] = f"Yahoo {sym}"; break
+            except Exception:
+                pass
+    for fn, lab in ((lambda: _stooq_close("^vix"), "stooq ^vix"),
+                    (lambda: _yf_close("^VIX"), "Yahoo ^VIX")):
+        try:
+            vix = fn(); used["vix"] = lab; break
+        except Exception:
+            pass
+    return vi, vix, used
+
+
 def export_research_csv(force_sample: bool, path: str):
     """分析用に、全期間の生データ（OHLC・指標の生値・ADX・米国株/ドル円/先物・翌日リターン）をCSV出力。"""
     raw, is_sample, source = load_data(force_sample)
@@ -757,16 +780,44 @@ def export_research_csv(force_sample: bool, path: str):
     keymap = dict(zip(d_cls["date"], d_cls["key"]))
     d["key"] = d["date"].map(keymap)
 
+    # --- 日経VI / 米国VIX ---
+    if force_sample:
+        rng = np.random.default_rng(11)
+        base = 20 + np.cumsum(rng.normal(0, 0.4, len(d)))
+        d["nikkei_vi"] = np.clip(base, 12, 45)
+        d["vix"] = np.clip(base * 0.9 + rng.normal(0, 1, len(d)), 10, 40)
+        vmeta = {"nikkei_vi": "サンプル", "vix": "サンプル"}
+    else:
+        vi, vix, vmeta = _fetch_vol()
+        if vi is not None:
+            vi = vi.rename(columns={"close": "nikkei_vi"})
+            d = pd.merge_asof(d.sort_values("date"), vi[["date", "nikkei_vi"]].sort_values("date"),
+                              on="date", direction="backward")  # 東京引けの当日VI（15:20時点で既知）
+        else:
+            d["nikkei_vi"] = np.nan
+        if vix is not None:
+            vix = vix.rename(columns={"close": "vix"})
+            d = pd.merge_asof(d.sort_values("date"), vix[["date", "vix"]].sort_values("date"),
+                              on="date", direction="backward", allow_exact_matches=False)  # 前夜の米国VIX
+        else:
+            d["vix"] = np.nan
+    d["nikkei_vi_chg"] = d["nikkei_vi"].pct_change() * 100
+    d["vix_chg"] = d["vix"].pct_change() * 100
+
     cols = ["date", "open", "high", "low", "close", "volume",
             "ret1", "fwd_ret1",
             "rsi14", "macd", "macd_hist", "bb_pctb", "dev25", "stoch_k", "stoch_d",
             "adx", "roc10", "ma_gap_5_25", "ma_gap_25_75",
-            "us_ret", "jpy_ret", "fut_premium", "dow", "key"]
+            "us_ret", "jpy_ret", "fut_premium",
+            "nikkei_vi", "nikkei_vi_chg", "vix", "vix_chg",
+            "dow", "key"]
     out = d[[c for c in cols if c in d.columns]].dropna(subset=["fwd_ret1"]).copy()
     out.to_csv(path, index=False, float_format="%.5f")
     tag = "SAMPLE" if is_sample else "LIVE"
+    vi_ok = "nikkei_vi" in out.columns and out["nikkei_vi"].notna().any()
     print(f"[{tag}][research] {path} 書き出し {len(out)}行  "
-          f"期間 {out['date'].min()}〜{out['date'].max()}  source={source}")
+          f"期間 {out['date'].min()}〜{out['date'].max()}  source={source}  "
+          f"日経VI={'取得OK' if vi_ok else '取得できず(VIXで代替)'}  vol元={vmeta}")
 
 
 def build_payload(force_sample: bool, pred_log_path: str = "data/predictions.json") -> dict:
