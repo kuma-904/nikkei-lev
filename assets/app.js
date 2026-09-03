@@ -9,7 +9,7 @@
   const REGIME_JP = { up: "上昇トレンド", down: "下降トレンド", mid: "もみ合い" };
   const RZONE_JP = { hot: "過熱", cold: "底値圏", high: "やや強", low: "やや弱" };
 
-  const APP_VERSION = "1.12.1";
+  const APP_VERSION = "1.15.0";
   let DATA = null, params = null, firstVerdict = true;
 
   document.addEventListener("DOMContentLoaded", init);
@@ -41,6 +41,7 @@
     buildAdjuster();
     wireSizing();
     wirePresets();
+    wireBackup();
     updateMethodologyValues();
   }
 
@@ -51,7 +52,6 @@
     renderLeverage(DATA.leverage);
     renderIndicators(DATA.indicators);
     renderOvernight(DATA.overnight);
-    renderTrack(DATA.track_record);
     renderRegime();
     renderSources(DATA.sources, DATA.generated_at, DATA.config.run_times_jst);
     recompute();
@@ -135,6 +135,128 @@
     const ovSide = (ov && ov.available && ov.prediction && ov.prediction.available) ? ov.prediction.side : null;
     renderAlign(v.side, p.side, ovSide);
     renderSizing(v);
+    renderTrack(updateForward(v.side, p.side, ovSide));
+  }
+
+  /* ---- フォワード実績（端末側・あなたの設定で記録） ---- */
+  const FWD_KEY = "akaao_forward_v1";
+  const BK_KEYS = ["akaao_params_v1", "akaao_forward_v1", "akaao_sizing_v1"];
+  function loadFwd() { try { return JSON.parse(localStorage.getItem(FWD_KEY)) || { entries: {} }; } catch (e) { return { entries: {} }; } }
+  function saveFwd(o) { try { localStorage.setItem(FWD_KEY, JSON.stringify(o)); } catch (e) { /* */ } }
+
+  function exportBackup() {
+    const data = { _app: "akaao", _ver: APP_VERSION, _exported: new Date().toISOString() };
+    BK_KEYS.forEach((k) => { try { const v = localStorage.getItem(k); if (v != null) data[k] = v; } catch (e) { /* */ } });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = `akaao-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    const st = $("bkStatus"); if (st) st.textContent = "書き出しました（ダウンロード）。";
+  }
+  function importBackup(file) {
+    const st = $("bkStatus");
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        if (!data || data._app !== "akaao") { if (st) st.textContent = "このファイルは赤青ナビのバックアップではありません。"; return; }
+        let n = 0;
+        BK_KEYS.forEach((k) => { if (typeof data[k] === "string") { localStorage.setItem(k, data[k]); n++; } });
+        if (st) st.textContent = `読み込みました（${n}件）。反映のため再読み込みします…`;
+        setTimeout(() => location.reload(), 700);
+      } catch (e) { if (st) st.textContent = "読み込みに失敗しました（ファイルが壊れている可能性）。"; }
+    };
+    reader.onerror = () => { if (st) st.textContent = "ファイルを読めませんでした。"; };
+    reader.readAsText(file);
+  }
+  function wireBackup() {
+    const ex = $("bkExport"), im = $("bkImport"), file = $("bkFile");
+    if (ex) ex.addEventListener("click", exportBackup);
+    if (im && file) {
+      im.addEventListener("click", () => file.click());
+      file.addEventListener("change", (e) => { if (e.target.files && e.target.files[0]) importBackup(e.target.files[0]); e.target.value = ""; });
+    }
+  }
+  // 過去日Dのルールベース側（現在設定でsigstrから）
+  function verdictSideAt(sigstr, regimeChar) {
+    const order = DATA.config.bt_order;
+    const w = params.regimeMode ? (regimeChar === "T" ? params.weightsTrend : params.weightsRange) : params.weights;
+    const totW = order.reduce((a, id) => a + (w[id] != null ? w[id] : 0), 0) || 1;
+    let raw = 0;
+    for (let i = 0; i < order.length; i++) raw += (SIGVAL[sigstr[i]] || 0) * (w[order[i]] != null ? w[order[i]] : 0);
+    const score = Math.round(raw / totW * 100);
+    return score >= params.threshold ? "bull" : (score <= -params.threshold ? "bear" : "neutral");
+  }
+  // 過去日Dの予測側（現在設定・先読みなしのトレイリング窓）
+  function predictSideAt(samples, dateD, key) {
+    const cut = new Date(dateD + "T00:00:00"); cut.setFullYear(cut.getFullYear() - params.lookback);
+    const cutStr = cut.toISOString().slice(0, 10);
+    const reg = key.split("|")[0];
+    const win = samples.filter((s) => s[0] >= cutStr && s[0] < dateD);
+    let matched = win.filter((s) => s[1] === key);
+    if (matched.length < params.minSamples) matched = win.filter((s) => s[1].split("|")[0] === reg);
+    const n = matched.length;
+    const up = n ? matched.filter((s) => s[2] > 0).length / n : 0.5;
+    return up >= 0.55 ? "bull" : (up <= 0.45 ? "bear" : "neutral");
+  }
+
+  function updateForward(vSide, pSide, ovSide) {
+    const store = loadFwd();
+    const ent = store.entries || (store.entries = {});
+    const today = DATA.index.date;
+    const samples = DATA.pred_samples || [];
+    const cor = (side, r) => side === "bull" ? (r > 0) : (side === "bear" ? (r < 0) : null);
+
+    // 1) 当日は現在の設定で記録（未採点）。過去日は保持
+    const prevT = ent[today] || {};
+    ent[today] = { v: vSide, p: pSide, o: ovSide, src: "open",
+                   ret: prevT.ret ?? null, vc: prevT.vc ?? null, pc: prevT.pc ?? null, oc: prevT.oc ?? null };
+
+    // 2) バックフィル：記録開始日〜今日の間で、未記録の営業日を現在設定で埋める（開いていない日）
+    const recorded = Object.keys(ent);
+    if (recorded.length > 1) {
+      const earliest = recorded.slice().sort()[0];
+      for (const s of samples) {
+        const d = s[0];
+        if (d <= earliest || d >= today || ent[d]) continue;   // 開始日以前・当日以降・既存はスキップ
+        const ret = s[2];
+        const v = verdictSideAt(s[3], s[4]);
+        const pp = predictSideAt(samples, d, s[1]);
+        ent[d] = { v, p: pp, o: null, src: "backfill",
+                   ret, vc: cor(v, ret), pc: cor(pp, ret), oc: null };
+      }
+    }
+
+    // 3) 未採点の記録（開いた日など）を、翌日リターンが判明していれば採点
+    const fwd = {};
+    samples.forEach((s) => { fwd[s[0]] = s[2]; });
+    Object.keys(ent).forEach((d) => {
+      const e = ent[d];
+      if (e.ret == null && d !== today && fwd[d] != null) {
+        e.ret = fwd[d]; e.vc = cor(e.v, e.ret); e.pc = cor(e.p, e.ret); e.oc = cor(e.o, e.ret);
+      }
+    });
+
+    // 4) 上限（最新400日）
+    const all = Object.keys(ent).sort();
+    if (all.length > 400) all.slice(0, all.length - 400).forEach((d) => delete ent[d]);
+    saveFwd(store);
+
+    const rows = Object.keys(ent).sort().map((d) => ({
+      date: d, verdict_side: ent[d].v, pred_side: ent[d].p, ov_side: ent[d].o,
+      next_ret: ent[d].ret, verdict_correct: ent[d].vc, pred_correct: ent[d].pc, ov_correct: ent[d].oc,
+    }));
+    const scored = rows.filter((r) => r.next_ret != null);
+    const hr = (key) => { const xs = scored.filter((r) => r[key] != null); return xs.length ? Math.round(xs.filter((r) => r[key]).length / xs.length * 1000) / 10 : null; };
+    const nOf = (key) => scored.filter((r) => r[key] != null).length;
+    return {
+      resolved: scored.length, total_logged: rows.length,
+      verdict_hit_rate: hr("verdict_correct"), verdict_n: nOf("verdict_correct"),
+      pred_hit_rate: hr("pred_correct"), pred_n: nOf("pred_correct"),
+      ov_hit_rate: hr("ov_correct"), ov_n: nOf("ov_correct"),
+      recent: rows.slice(-12).reverse(),
+    };
   }
 
   const SIDE_JP = { bull: "ブル", bear: "ベア", neutral: "中立" };
@@ -465,8 +587,10 @@
     sec.style.display = "";
     $("trVer").textContent = tr.verdict_hit_rate != null ? tr.verdict_hit_rate + "%" : "—";
     $("trPred").textContent = tr.pred_hit_rate != null ? tr.pred_hit_rate + "%" : "—";
-    $("trVerN").textContent = tr.verdict_n ? `（${tr.verdict_n}件）` : "";
-    $("trPredN").textContent = tr.pred_n ? `（${tr.pred_n}件）` : "";
+    $("trOv").textContent = tr.ov_hit_rate != null ? tr.ov_hit_rate + "%" : "—";
+    $("trVerN").textContent = tr.verdict_n ? `（${tr.verdict_n}）` : "";
+    $("trPredN").textContent = tr.pred_n ? `（${tr.pred_n}）` : "";
+    $("trOvN").textContent = tr.ov_n ? `（${tr.ov_n}）` : "";
     const empty = $("trEmpty"), list = $("trList");
     const recent = tr.recent || [];
     if (!recent.length) {
@@ -477,21 +601,21 @@
     empty.style.display = tr.resolved ? "none" : "";
     if (!tr.resolved) empty.textContent = `記録を蓄積中（${tr.total_logged}件）。翌営業日の結果が出るごとに採点されます。`;
     const mark = (c) => c === true ? '<span class="ok">○</span>' : (c === false ? '<span class="ng">×</span>' : "－");
+    const side = (s) => `<span class="tr-s read-${s}">${SIDE_JP[s] || "－"}</span>`;
     const rows = recent.map((r) => {
-      const vd = `<span class="tr-s read-${r.verdict_side}">${SIDE_JP[r.verdict_side] || "－"}</span>`;
-      const pr = `<span class="tr-s read-${r.pred_side}">${SIDE_JP[r.pred_side] || "－"}</span>`;
+      const sides = side(r.verdict_side) + side(r.pred_side) + side(r.ov_side);
       if (r.next_ret == null) {
-        return `<div class="tr-row"><span class="tr-d">${fmtMD(r.date)}</span>${vd}${pr}` +
-          `<span class="tr-r tr-wait">採点待ち</span><span class="tr-m">…</span></div>`;
+        return `<div class="tr-row"><span class="tr-d">${fmtMD(r.date)}</span>${sides}` +
+          `<span class="tr-r tr-wait">待ち</span><span class="tr-m">…</span></div>`;
       }
       const rc = r.next_ret > 0 ? "up" : "down";
-      return `<div class="tr-row"><span class="tr-d">${fmtMD(r.date)}</span>${vd}${pr}` +
+      return `<div class="tr-row"><span class="tr-d">${fmtMD(r.date)}</span>${sides}` +
         `<span class="tr-r num ${rc}">${(r.next_ret > 0 ? "+" : "") + r.next_ret}%</span>` +
-        `<span class="tr-m">${mark(r.verdict_correct)}${mark(r.pred_correct)}</span></div>`;
+        `<span class="tr-m">${mark(r.verdict_correct)}${mark(r.pred_correct)}${mark(r.ov_correct)}</span></div>`;
     }).join("");
     list.innerHTML =
       `<div class="tr-row tr-hd"><span class="tr-d">日付</span><span class="tr-s">ルール</span>` +
-      `<span class="tr-s">予測</span><span class="tr-r">翌日</span><span class="tr-m">的中</span></div>` + rows;
+      `<span class="tr-s">予測</span><span class="tr-s">海外</span><span class="tr-r">翌日</span><span class="tr-m">的中</span></div>` + rows;
   }
 
   /* ---- ポジションサイズ ---- */

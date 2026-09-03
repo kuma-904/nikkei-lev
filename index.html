@@ -120,11 +120,13 @@
     <div class="sec-head"><h2>実運用の実績</h2><span class="hint" data-term="forward">フォワード ⓘ</span></div>
     <div class="card">
       <div class="tr-top">
-        <div class="tr-cell"><div class="tr-rate num" id="trVer">—</div><div class="tr-cap">ルールベース的中率<span id="trVerN"></span></div></div>
-        <div class="tr-cell"><div class="tr-rate num" id="trPred">—</div><div class="tr-cap">予測 的中率<span id="trPredN"></span></div></div>
+        <div class="tr-cell"><div class="tr-rate num" id="trVer">—</div><div class="tr-cap">ルール的中<span id="trVerN"></span></div></div>
+        <div class="tr-cell"><div class="tr-rate num" id="trPred">—</div><div class="tr-cap">予測的中<span id="trPredN"></span></div></div>
+        <div class="tr-cell"><div class="tr-rate num" id="trOv">—</div><div class="tr-cap">海外的中<span id="trOvN"></span></div></div>
       </div>
       <div class="tr-empty" id="trEmpty"></div>
       <div class="tr-list" id="trList"></div>
+      <div class="tr-note">この記録は<b>あなたの設定</b>で、<b>この端末</b>にだけ保存されます。前回から空いた営業日は、次に開いたとき<b>今の設定で自動的に遡って記録</b>します（オーバーナイトは開いた日のみ）。設定を変えると以降の記録に反映されます。バックアップは「設定」タブから。</div>
     </div>
   </section>
 
@@ -286,6 +288,20 @@
     </div>
   </section>
 
+  <!-- ===== バックアップ ===== -->
+  <section class="pane" data-tab="settings">
+    <div class="sec-head"><h2>バックアップ</h2></div>
+    <div class="card">
+      <div class="bk-note">設定と実績はこの端末にだけ保存されます。機種変更・ブラウザのデータ削除で消えることがあるので、たまに書き出して保管しておくと安心です。別の端末で読み込めば引き継げます。</div>
+      <div class="bk-btns">
+        <button class="preset" id="bkExport">書き出し（ダウンロード）</button>
+        <button class="preset" id="bkImport">読み込み</button>
+        <input type="file" id="bkFile" accept="application/json,.json" style="display:none">
+      </div>
+      <div class="bk-status" id="bkStatus"></div>
+    </div>
+  </section>
+
   <!-- ===== 用語集 ===== -->
   <section class="pane" data-tab="settings">
     <div class="sec-head"><h2>用語をタップで学ぶ</h2></div>
@@ -320,7 +336,29 @@
       <p class="news-lead">各バージョンでリリースした機能の履歴です。フッターに現在のバージョンを表示しています。</p>
 
       <article class="rel">
-        <div class="rel-top"><span class="rel-ver">v1.12.1</span><span class="rel-tag">最新</span></div>
+        <div class="rel-top"><span class="rel-ver">v1.15.0</span><span class="rel-tag">最新</span></div>
+        <ul>
+          <li>実績のバックフィル：前回から空いた営業日を、次に開いたとき今の設定で自動的に遡って記録・採点（毎日開けなくても抜けを埋められます）。</li>
+          <li>バックアップ機能：設定と実績をファイルに書き出し／読み込み。機種変更やデータ削除に備え、別端末への引き継ぎも可能（設定タブ）。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.14.0</span></div>
+        <ul>
+          <li>実運用の実績を「あなたの設定・この端末」ベースに変更。重みやしきい値を変えると記録に反映され、端末ごと（＝人ごと）に別々の成績になります。開いた日ぶんが記録されます。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.13.0</span></div>
+        <ul>
+          <li>実運用の実績にオーバーナイト予測を追加。ルール・予測・海外の3つを毎日記録し翌営業日に採点、それぞれの的中率を表示。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.12.1</span></div>
         <ul>
           <li>オーバーナイト予測（翌営業日の上昇率）を「今日」タブへ。米国株・ドル円・先物の材料カードは「指標」タブに残置。</li>
         </ul>

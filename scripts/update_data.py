@@ -642,14 +642,16 @@ def summarize_track(log: list) -> dict:
     resolved = [r for r in log if r.get("next_ret") is not None]
     vd = [r for r in resolved if r.get("verdict_correct") is not None]
     pr = [r for r in resolved if r.get("pred_correct") is not None]
+    ovl = [r for r in resolved if r.get("ov_correct") is not None]
     pct = lambda xs: round(sum(1 for r in xs if r) / len(xs) * 100, 1) if xs else None
     keys = ("date", "close", "verdict_side", "pred_side", "ov_side",
-            "next_ret", "verdict_correct", "pred_correct")
+            "next_ret", "verdict_correct", "pred_correct", "ov_correct")
     recent = [{k: r.get(k) for k in keys} for r in log[-12:][::-1]]
     return {
         "resolved": len(resolved),
         "verdict_hit_rate": pct([r["verdict_correct"] for r in vd]), "verdict_n": len(vd),
         "pred_hit_rate": pct([r["pred_correct"] for r in pr]), "pred_n": len(pr),
+        "ov_hit_rate": pct([r["ov_correct"] for r in ovl]), "ov_n": len(ovl),
         "since": log[0]["date"] if log else None,
         "total_logged": len(log),
         "recent": recent,
@@ -667,11 +669,12 @@ def synth_track_record() -> dict:
         ret = round(float(rng.normal(0.05, 1.1)), 3)
         vs = rng.choice(["bull", "bear", "neutral"], p=[0.4, 0.4, 0.2])
         ps = rng.choice(["bull", "bear", "neutral"], p=[0.35, 0.35, 0.3])
+        os_ = rng.choice(["bull", "bear", "neutral"])
         log.append({
             "date": (d0 - timedelta(days=(16 - i) * 1)).strftime("%Y-%m-%d"),
-            "close": round(base, 2), "verdict_side": vs, "pred_side": ps,
-            "ov_side": rng.choice(["bull", "bear", "neutral"]),
-            "next_ret": ret, "verdict_correct": _correct(vs, ret), "pred_correct": _correct(ps, ret),
+            "close": round(base, 2), "verdict_side": vs, "pred_side": ps, "ov_side": os_,
+            "next_ret": ret, "verdict_correct": _correct(vs, ret),
+            "pred_correct": _correct(ps, ret), "ov_correct": _correct(os_, ret),
         })
     return summarize_track(log)
 
@@ -706,6 +709,7 @@ def resolve_and_log(df: pd.DataFrame, verdict: dict, prediction: dict, overnight
     rec.setdefault("next_ret", None)
     rec.setdefault("verdict_correct", None)
     rec.setdefault("pred_correct", None)
+    rec.setdefault("ov_correct", None)
     by_date[tdate] = rec
 
     # 結果の採点：記録日の翌営業日の終値が判明していれば埋める
@@ -719,6 +723,7 @@ def resolve_and_log(df: pd.DataFrame, verdict: dict, prediction: dict, overnight
             r["next_ret"] = round(ret, 3)
             r["verdict_correct"] = _correct(r.get("verdict_side"), ret)
             r["pred_correct"] = _correct(r.get("pred_side"), ret)
+            r["ov_correct"] = _correct(r.get("ov_side"), ret)
 
     log = [by_date[d] for d in sorted(by_date.keys())]
     try:

@@ -578,7 +578,7 @@ section { margin-top: 22px; }
 .tr-cap span { color: var(--faint); }
 .tr-empty { font-size: 12.5px; color: var(--faint); line-height: 1.6; margin-top: 14px; }
 .tr-list { margin-top: 14px; display: grid; gap: 2px; }
-.tr-row { display: grid; grid-template-columns: 46px 1fr 1fr 62px 42px; align-items: center; gap: 6px; padding: 7px 2px; border-bottom: 1px solid var(--line); font-size: 12.5px; }
+.tr-row { display: grid; grid-template-columns: 36px 1fr 1fr 1fr 52px 46px; align-items: center; gap: 5px; padding: 7px 2px; border-bottom: 1px solid var(--line); font-size: 12.5px; }
 .tr-row.tr-hd { color: var(--faint); font-size: 10.5px; font-weight: 700; border-bottom: 1px solid var(--line-2); }
 .tr-d { color: var(--muted); }
 .tr-s { font-weight: 700; }
@@ -676,3 +676,8 @@ button.method-link.tag { background: transparent; font-family: inherit; }
 button.method-link.tag:hover, .hint.method-link:hover { color: var(--gold); border-color: var(--gold); }
 .sheet .formula, .sheet .rules, .sheet .wtable { margin-top: 12px; }
 .sheet .rules li { color: var(--muted); }
+
+/* バックアップ（v1.15.0） */
+.bk-note { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.bk-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.bk-status { font-size: 12px; color: var(--gold); font-weight: 700; margin-top: 12px; min-height: 16px; }
