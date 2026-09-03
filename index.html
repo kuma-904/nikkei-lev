@@ -34,13 +34,28 @@
     </div>
   </header>
 
-  <!-- ===== 今日の判断（主役） ===== -->
-  <div class="verdict is-neutral" id="verdict">
-    <div class="verdict-head">
-      <span>今日の判断</span>
-      <span class="tag">ルールベース総合</span>
-    </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="today">今日</button>
+    <button class="tab" data-tab="indic">指標</button>
+    <button class="tab" data-tab="perf">成績</button>
+    <button class="tab" data-tab="money">資金</button>
+    <button class="tab" data-tab="settings">設定</button>
+  </nav>
 
+  <!-- ===== 3つの見立ての一致（UI向上） ===== -->
+  <div class="align pane" data-tab="today" id="alignCard">
+    <div class="align-h">3つの見立て</div>
+    <div class="align-row">
+      <div class="align-item"><span class="al-lbl">ルールベース</span><b id="alRule">—</b></div>
+      <div class="align-item"><span class="al-lbl">過去予測</span><b id="alPred">—</b></div>
+      <div class="align-item"><span class="al-lbl">オーバーナイト</span><b id="alOv">—</b></div>
+    </div>
+  </div>
+
+  <!-- ===== ルールベース判定 ===== -->
+  <section class="pane" data-tab="today">
+    <div class="sec-head"><h2>ルールベース</h2><span class="hint method-link" data-method="rules">仕組み ⓘ</span></div>
+  <div class="verdict is-neutral" id="verdict">
     <div class="call">
       <div class="call-side num" id="callSide">—</div>
       <div class="call-score num" id="callScore">—</div>
@@ -63,36 +78,12 @@
       <div class="pips" id="pips"></div>
     </div>
 
-    <div class="picks">
-      <button class="pick bull" id="pickBull" data-term="bull-fund">
-        <div class="cap">上げ相場で買う</div>
-        <div class="nm">楽天日経平均ブル4.3倍</div>
-        <div class="mv num" id="bullMove">—</div>
-      </button>
-      <button class="pick bear" id="pickBear" data-term="bear-fund">
-        <div class="cap">下げ相場で買う</div>
-        <div class="nm">楽天日経平均ベア3.8倍</div>
-        <div class="mv num" id="bearMove">—</div>
-      </button>
-    </div>
-
-    <button class="cutoff" data-term="cutoff">⏰ <span id="cutoffNote">—</span></button>
   </div>
+  </section>
 
-  <!-- ===== 3つの見立ての一致（UI向上） ===== -->
-  <div class="align" id="alignCard">
-    <div class="align-h">3つの見立て</div>
-    <div class="align-row">
-      <div class="align-item"><span class="al-lbl">ルールベース</span><b id="alRule">—</b></div>
-      <div class="align-item"><span class="al-lbl">予測</span><b id="alPred">—</b></div>
-      <div class="align-item"><span class="al-lbl">海外</span><b id="alOv">—</b></div>
-    </div>
-    <div class="align-note" id="alNote">—</div>
-  </div>
-
-  <!-- ===== 予測（過去データ）＝1日運用の主役 ===== -->
-  <section>
-    <div class="sec-head"><h2>過去データからの予測</h2><span class="hint" data-term="prediction">仕組み ⓘ</span></div>
+<!-- ===== 予測（過去データ）＝1日運用の主役 ===== -->
+  <section class="pane" data-tab="today">
+    <div class="sec-head"><h2>過去データからの予測</h2><span class="hint method-link" data-method="prediction">仕組み ⓘ</span></div>
     <div class="card">
       <div class="pred-lead">1日で解約する運用は、この<b>翌日の方向</b>が勝敗を決めます。</div>
       <div class="pred-top">
@@ -106,20 +97,8 @@
     </div>
   </section>
 
-  <!-- ===== 日経平均 ===== -->
-  <section>
-    <div class="sec-head"><h2>日経平均株価</h2><span class="hint" id="idxDate"></span></div>
-    <div class="card price-card">
-      <div class="price-main">
-        <div class="now num" id="idxNow">—</div>
-        <div class="chg num" id="idxChg">—</div>
-      </div>
-      <div class="spark" id="spark"></div>
-    </div>
-  </section>
-
   <!-- ===== 過去の的中率（バックテスト） ===== -->
-  <section id="btSection">
+  <section class="pane" data-tab="perf" id="btSection">
     <div class="sec-head"><h2>過去の的中率</h2><span class="hint" data-term="backtest">バックテスト ⓘ</span></div>
     <div class="card">
       <div class="bt-block">
@@ -133,12 +112,11 @@
         <div class="bt-sub" id="pbSub"></div>
       </div>
       <div class="bt-baseline">単純上昇率（基準）<b class="num" id="btBase">—</b></div>
-      <div class="bt-note" id="btNote">—</div>
     </div>
   </section>
 
   <!-- ===== 実運用の実績（フォワード・独自DB） ===== -->
-  <section id="trackSection">
+  <section class="pane" data-tab="perf" id="trackSection">
     <div class="sec-head"><h2>実運用の実績</h2><span class="hint" data-term="forward">フォワード ⓘ</span></div>
     <div class="card">
       <div class="tr-top">
@@ -147,34 +125,18 @@
       </div>
       <div class="tr-empty" id="trEmpty"></div>
       <div class="tr-list" id="trList"></div>
-      <div class="tr-note" id="trNote">実際に出した予測を毎日記録し、翌日の結果で採点した“本番の成績”です（過去当てはめのバックテストとは別）。記録が増えるほど信頼できます。</div>
     </div>
   </section>
 
   <!-- ===== テクニカル指標（タップで解説） ===== -->
-  <section>
+  <section class="pane" data-tab="indic">
     <div class="sec-head"><h2>テクニカル指標</h2><span class="hint">カードをタップで解説</span></div>
     <div class="grid" id="gridTech"></div>
   </section>
 
-  <!-- ===== データの取得状況 ===== -->
-  <section>
-    <div class="sec-head"><h2>データの取得状況</h2><span class="hint">時点と次回更新</span></div>
-    <div class="card">
-      <div class="src-rows" id="srcRows"></div>
-      <div class="src-foot">
-        <div class="src-line"><span>最終取得</span><b class="num" id="srcGen">—</b></div>
-        <div class="src-line"><span>次回取得予定</span><b class="num" id="srcNext">—</b></div>
-      </div>
-      <button class="refresh" id="refreshBtn">🔄 最新データを再読み込み</button>
-      <div class="refresh-status" id="refreshStatus"></div>
-      <div class="src-note">※ 自動更新は GitHub Actions のスケジュール（平日 8:00〜20:00 の毎時 JST）に従います。混雑時は数分〜遅れることがあります。ボタンは公開済みの最新データを取り直すもので、新しい取得を起動するものではありません（日足のため日中は基本変わりません）。</div>
-    </div>
-  </section>
-
-  <!-- ===== オーバーナイト要因（前日の海外） ===== -->
-  <section id="ovSection">
-    <div class="sec-head"><h2>オーバーナイト要因</h2><span class="hint" data-term="overnight">前日の海外 ⓘ</span></div>
+  <!-- ===== オーバーナイト予測（今日タブ） ===== -->
+  <section class="pane" data-tab="today" id="ovPredSection">
+    <div class="sec-head"><h2>オーバーナイト予測</h2><span class="hint" data-term="overnight">前日の海外 ⓘ</span></div>
     <div class="card ov-pred" id="ovPredCard">
       <div class="ovp-lead">前夜の海外が同じだった<b>翌営業日</b>の日経</div>
       <div class="ovp-top">
@@ -186,12 +148,43 @@
       </div>
       <div class="pred-meta" id="ovMeta"></div>
     </div>
+  </section>
+
+  <!-- ===== オーバーナイト要因（前日の海外） ===== -->
+  <section class="pane" data-tab="indic" id="ovSection">
+    <div class="sec-head"><h2>オーバーナイト要因</h2><span class="hint" data-term="overnight">前日の海外 ⓘ</span></div>
     <div class="grid" id="gridOv"></div>
     <div class="ov-hint">※ オーバーナイト要因は前夜に確定するため、<b>朝に確認して当日のセッションに賭ける</b>のが効果的です。</div>
   </section>
 
+  <!-- ===== 日経平均 ===== -->
+  <section class="pane" data-tab="indic">
+    <div class="sec-head"><h2>日経平均株価</h2><span class="hint" id="idxDate"></span></div>
+    <div class="card price-card">
+      <div class="price-main">
+        <div class="now num" id="idxNow">—</div>
+        <div class="chg num" id="idxChg">—</div>
+      </div>
+      <div class="spark" id="spark"></div>
+    </div>
+  </section>
+
+  <!-- ===== データの取得状況 ===== -->
+  <section class="pane" data-tab="settings">
+    <div class="sec-head"><h2>データの取得状況</h2><span class="hint">時点と次回更新</span></div>
+    <div class="card">
+      <div class="src-rows" id="srcRows"></div>
+      <div class="src-foot">
+        <div class="src-line"><span>次回取得まで</span><b class="num" id="srcCountdown">—</b></div>
+      </div>
+      <button class="refresh" id="refreshBtn">🔄 最新データを再読み込み</button>
+      <div class="refresh-status" id="refreshStatus"></div>
+      <div class="src-note">※ 自動更新は GitHub Actions のスケジュール（平日 8:10〜20:10頃の毎時＋15:03 JST（15:20締切前の更新用）。GitHubの都合で数分〜遅れ・稀にスキップあり）に従います。混雑時は数分〜遅れることがあります。ボタンは公開済みの最新データを取り直すもので、新しい取得を起動するものではありません（日足のため日中は基本変わりません）。</div>
+    </div>
+  </section>
+
   <!-- ===== 1日運用の損益イメージ ===== -->
-  <section>
+  <section class="pane" data-tab="money">
     <div class="sec-head"><h2>1日運用の損益イメージ</h2><span class="hint" data-term="leverage">倍率とは ⓘ</span></div>
     <div class="card">
       <div class="lev-lead">日経が1日で <b class="num" id="dailyMove">—</b> 動いた場合の振れ幅の目安</div>
@@ -215,7 +208,7 @@
   </section>
 
   <!-- ===== 資金・ポジションサイズ ===== -->
-  <section>
+  <section class="pane" data-tab="money">
     <div class="sec-head"><h2>資金とポジションサイズ</h2><span class="hint" data-term="sizing">考え方 ⓘ</span></div>
     <div class="card sizing">
       <label class="sz-in"><span>総資金（円）</span>
@@ -223,45 +216,11 @@
       <label class="sz-in"><span>1トレードの許容リスク　<b id="szRiskV">5</b>%</span>
         <input type="range" id="szRisk" min="1" max="30" step="1" value="5"></label>
       <div class="sz-out" id="szOut">総資金を入力すると、判定中のファンドに合わせた推奨ポジションと1日の想定損益を表示します。</div>
-      <div class="sz-note">※ 判定中のファンドの「1日の振れ幅」を基準にした<b>目安</b>で、投資助言ではありません。入力値はこの端末にのみ保存されます。レバレッジ商品は損失も倍率ぶん大きくなります。</div>
     </div>
   </section>
 
-  <!-- ===== 判定と予測の仕組み ===== -->
-  <section>
-    <div class="sec-head"><h2>判定と予測の仕組み</h2><span class="hint">タップで開く</span></div>
-    <details class="method">
-      <summary>ルールベース判定はどう出している？</summary>
-      <div class="method-body">
-        <p>テクニカル7指標に加え、オーバーナイト要因（米国株・ドル円・先物）も同じ仕組みで「強気(+1)／弱気(−1)／中立(0)」を投票し、指標ごとの重みを掛けて合計します。合計を −100〜+100 のスコアに正規化して判定します。</p>
-        <div class="formula">スコア ＝ Σ(各指標の投票 × 重み) ÷ Σ(重み) × 100</div>
-        <ul class="rules">
-          <li>スコア ≧ ＋<b id="mThOver">20</b> → <span class="read-bull">ブル寄り</span></li>
-          <li>スコア ≦ −<b id="mThUnder">20</b> → <span class="read-bear">ベア寄り</span></li>
-          <li>その間 → <span class="read-neutral">様子見</span></li>
-        </ul>
-        <div class="wtable" id="mWeights"></div>
-        <p class="mnote">この重み・しきい値は下の「数字を調整」で変えられます。</p>
-      </div>
-    </details>
-    <details class="method">
-      <summary>過去データからの予測はどう出している？</summary>
-      <div class="method-body">
-        <p>今日の相場を〈トレンド区分 × RSIゾーン × MACD符号〉で分類し、<b id="mLb">直近5年</b>で同じ状態だった日の「翌日の値動き」を集計。上昇した割合を上昇確率として表示します。</p>
-        <ul class="rules">
-          <li>トレンド区分：移動平均の並び（上昇／下降／もみ合い）</li>
-          <li>RSIゾーン：過熱(≧70)／やや強(≧50)／やや弱(>30)／底値圏(≦30)</li>
-          <li>MACD符号：ヒストグラムの ＋／−</li>
-        </ul>
-        <p>同じ状態が <b id="mMin">8</b> 回に満たないときは、条件をトレンド区分だけに広げて集計します。サンプルが多いほど信頼度は上がります（40回以上で「高」）。</p>
-        <p>これとは別に「オーバーナイト予測」も出しています。前夜の米国株×ドル円の方向が今と同じだった翌営業日、日経が上昇した割合を集計したもので、1日運用の方向感を補います。</p>
-        <p class="mnote">遡り年数・最小サンプル数も下で調整できます。</p>
-      </div>
-    </details>
-  </section>
-
   <!-- ===== タイプ診断・プリセット ===== -->
-  <section>
+  <section class="pane" data-tab="settings">
     <div class="sec-head"><h2>タイプ診断・プリセット</h2><span class="hint">重みを一括セット</span></div>
     <div class="card">
       <div class="preset-lead">スタイルを選ぶと、指標の重みとしきい値をまとめて切り替えます。</div>
@@ -279,8 +238,25 @@
     </div>
   </section>
 
+  <!-- ===== レジーム切替（ADX） ===== -->
+  <section class="pane" data-tab="settings">
+    <div class="sec-head"><h2>レジーム切替（ADX）</h2><span class="hint" data-term="regime">相場つき ⓘ</span></div>
+    <div class="card">
+      <div class="rg-now" id="rgNow">—</div>
+      <div class="rg-desc">ADXで「トレンド相場かもみ合いか」を見分け、相場つきに合わせて重みを切り替えます（トレンド時は順張り系を重く、もみ合い時は逆張り系を重く）。順張りと逆張りが常に相殺して様子見に張り付く問題への対策です。</div>
+      <button class="optimize" id="rgTestBtn">🔬 レジーム切替を検証（両方を最適化して比較）</button>
+      <div class="rg-result" id="rgResult"></div>
+      <div class="rg-actions" id="rgActions" style="display:none">
+        <button class="preset" id="rgApply">この設定を使う（切替ON）</button>
+        <button class="reset" id="rgOff" style="display:none">単一設定に戻す</button>
+      </div>
+      <div class="preset-status" id="rgApplyStatus"></div>
+      <div class="opt-note">検証は現在の遡り年数で、単一設定・レジーム切替の<b>両方を自動最適化</b>して比較します。テクニカルのみ・売買コスト除く・過剰最適化に注意（実運用の実績で必ず確認を）。<span id="rgModeBadge"></span></div>
+    </div>
+  </section>
+
   <!-- ===== 数字を調整（プレビュー） ===== -->
-  <section>
+  <section class="pane" data-tab="settings">
     <div class="sec-head"><h2>数字を調整</h2><span class="hint">この端末だけのプレビュー</span></div>
     <div class="card adjuster">
       <div class="adj-note">スライダーを動かすと、上の判定・予測がその場で計算し直されます。日々のデータは次回更新まで固定で、この調整は<b>あなたの端末にだけ</b>保存されます。</div>
@@ -311,7 +287,7 @@
   </section>
 
   <!-- ===== 用語集 ===== -->
-  <section>
+  <section class="pane" data-tab="settings">
     <div class="sec-head"><h2>用語をタップで学ぶ</h2></div>
     <div class="card">
       <div class="terms" id="terms"></div>
@@ -319,7 +295,7 @@
   </section>
 
   <!-- ===== 免責 ===== -->
-  <div class="disclaimer">
+  <div class="disclaimer pane" data-tab="settings">
     <h3>ご利用にあたって</h3>
     <p>
       本サイトはKuma個人の学習・記録用ツールであり、投資勧誘や助言ではありません。
@@ -344,7 +320,74 @@
       <p class="news-lead">各バージョンでリリースした機能の履歴です。フッターに現在のバージョンを表示しています。</p>
 
       <article class="rel">
-        <div class="rel-top"><span class="rel-ver">v1.8.0</span><span class="rel-tag">最新</span></div>
+        <div class="rel-top"><span class="rel-ver">v1.12.1</span><span class="rel-tag">最新</span></div>
+        <ul>
+          <li>オーバーナイト予測（翌営業日の上昇率）を「今日」タブへ。米国株・ドル円・先物の材料カードは「指標」タブに残置。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.12.0</span></div>
+        <ul>
+          <li>「今日」タブを判断に集中（3つの見立て・ルールベース・過去データからの予測）。オーバーナイト要因と日経平均は「指標」タブへ移動。</li>
+          <li>ルールベースに枠外タイトルを追加。3つの見立てのラベルを各セクション名に合わせ、下の説明文を削除。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.11.0</span></div>
+        <ul>
+          <li>「3つの見立て」を判定の上に移動。オーバーナイト要因を「今日」タブへ集約。</li>
+          <li>判定・予測の「仕組み」解説をタップ式のポップアップに変更（ルールベース側にも「仕組み」リンクを追加）。設定タブの重複解説は削除。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.10.0</span></div>
+        <ul>
+          <li>メニュータブを追加（今日／指標／成績／資金／設定）。1画面の情報量を減らし、目的別に切り替えられるように。</li>
+          <li>判定パネルの購入ファンド表示と15:20バッジ、各カードの重複した注意書きを整理・削除。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.9.3</span></div>
+        <ul>
+          <li>実運用の実績に「採点待ち」の行を表示（今日の予測は翌営業日に採点されます）。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.9.2</span></div>
+        <ul>
+          <li>自動更新を毎時10分＋15:03に変更（15:20の購入締切前に更新できるように）。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.9.1</span></div>
+        <ul>
+          <li>自動更新の実行時刻を毎時00分→25分に変更（GitHubの混雑でスキップされにくくする対策）。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.9.0</span></div>
+        <ul>
+          <li>レジーム切替（ADX）を追加。トレンド相場では順張り系を、もみ合い相場では逆張り系を重くして、様子見への張り付きを軽減。</li>
+          <li>「切替なし／あり」を両方とも自動最適化して過去データで的中率を比較するボタンを搭載。良ければワンタップで適用できます。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.8.1</span></div>
+        <ul>
+          <li>データの取得状況を項目ごとに「時点／取得日時／次回取得日時」で表示するように改善。</li>
+        </ul>
+      </article>
+
+      <article class="rel">
+        <div class="rel-top"><span class="rel-ver">v1.8.0</span></div>
         <ul>
           <li>実運用の実績（フォワード）を追加。毎日の予測を記録し翌日の結果で採点する“本番の成績”を表示。</li>
           <li>資金とポジションサイズ計算を追加（総資金と許容リスクから推奨額・想定損益を算出）。</li>

@@ -445,16 +445,19 @@ section { margin-top: 22px; }
 /* データ取得状況 */
 .src-rows { display: grid; gap: 2px; }
 .src-row {
-  display: grid; grid-template-columns: 14px 1fr auto auto; align-items: center;
-  gap: 10px; padding: 9px 2px; border-bottom: 1px solid var(--line);
+  display: grid; grid-template-columns: 14px 1fr; align-items: start;
+  gap: 10px; padding: 11px 2px; border-bottom: 1px solid var(--line);
 }
 .src-row:last-child { border-bottom: 0; }
-.src-dot { width: 8px; height: 8px; border-radius: 50%; }
+.src-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; }
 .src-dot.ok { background: #46c98b; box-shadow: 0 0 0 3px rgba(70,201,139,.14); }
 .src-dot.ng { background: var(--gold); box-shadow: 0 0 0 3px var(--gold-soft); }
-.src-name { font-size: 13px; font-weight: 600; }
-.src-asof { font-size: 12.5px; color: var(--text); font-weight: 700; }
-.src-prov { font-size: 10.5px; color: var(--faint); }
+.src-l1 { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.src-name { font-size: 13px; font-weight: 700; }
+.src-prov { font-size: 10.5px; color: var(--faint); white-space: nowrap; }
+.src-l2 { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.src-tag { font-size: 11px; color: var(--faint); }
+.src-tag b { color: var(--muted); font-weight: 700; margin-left: 3px; }
 .src-foot {
   display: grid; gap: 6px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-2);
 }
@@ -627,3 +630,49 @@ section { margin-top: 22px; }
 .quiz-opt { flex: 1; border: 1px solid var(--line-2); background: var(--surface-2); color: var(--muted); font: inherit; font-size: 12px; font-weight: 600; padding: 10px; border-radius: var(--r-sm); cursor: pointer; line-height: 1.3; }
 .quiz-opt.sel { border-color: var(--gold); color: var(--text); background: var(--gold-soft); }
 .preset-status { font-size: 12px; color: var(--gold); font-weight: 700; margin-top: 12px; min-height: 16px; text-align: center; }
+
+/* レジーム切替（ADX） v1.9.0 */
+.rg-now { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.rg-now b { font-weight: 800; }
+.rg-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+.rg-result { margin-top: 14px; }
+.rg-cmp { display: flex; align-items: center; gap: 8px; }
+.rg-col { flex: 1; text-align: center; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface-2); padding: 12px 8px; }
+.rg-lbl { font-size: 10.5px; color: var(--faint); line-height: 1.35; min-height: 28px; }
+.rg-v { font-size: 26px; font-weight: 900; color: var(--gold); margin-top: 6px; line-height: 1; }
+.rg-v.up { color: var(--bull); } .rg-v.down { color: var(--bear); }
+.rg-sub { font-size: 10.5px; color: var(--muted); margin-top: 5px; }
+.rg-arrow { color: var(--faint); font-size: 16px; flex: 0 0 auto; }
+.rg-delta { text-align: center; font-size: 13px; font-weight: 800; color: var(--muted); margin-top: 12px; }
+.rg-delta.up { color: var(--bull); } .rg-delta.down { color: var(--bear); }
+.rg-delta span { display: block; font-size: 11px; font-weight: 500; color: var(--faint); margin-top: 3px; }
+.rg-actions { display: flex; gap: 10px; margin-top: 14px; }
+.rg-actions .preset { flex: 1; text-align: center; }
+.rg-actions .reset { flex: 1; width: auto; }
+
+.tr-wait { color: var(--faint); font-size: 11px; text-align: right; }
+
+/* ===== メニュータブ（v1.10.0） ===== */
+.tabs {
+  position: sticky; top: 0; z-index: 30;
+  display: flex; gap: 6px; padding: 10px 0 9px; margin-bottom: 4px;
+  background: var(--ink); border-bottom: 1px solid var(--line);
+}
+.tab {
+  flex: 1 1 0; min-width: 0; white-space: nowrap;
+  border: 1px solid var(--line-2); background: var(--surface-2); color: var(--muted);
+  font: inherit; font-size: 13px; font-weight: 700; padding: 9px 4px;
+  border-radius: 999px; cursor: pointer; transition: background .2s, color .2s, border-color .2s;
+}
+.tab:active { transform: scale(.97); }
+.tab.active { background: var(--gold-soft); border-color: var(--gold); color: var(--gold); }
+.pane { display: none; }
+.pane.show { display: block; }
+.pane.show + .pane.show { margin-top: 22px; }
+
+/* 仕組みリンク（v1.11.0） */
+.method-link { cursor: pointer; }
+button.method-link.tag { background: transparent; font-family: inherit; }
+button.method-link.tag:hover, .hint.method-link:hover { color: var(--gold); border-color: var(--gold); }
+.sheet .formula, .sheet .rules, .sheet .wtable { margin-top: 12px; }
+.sheet .rules li { color: var(--muted); }

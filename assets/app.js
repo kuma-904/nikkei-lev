@@ -9,7 +9,7 @@
   const REGIME_JP = { up: "上昇トレンド", down: "下降トレンド", mid: "もみ合い" };
   const RZONE_JP = { hot: "過熱", cold: "底値圏", high: "やや強", low: "やや弱" };
 
-  const APP_VERSION = "1.8.0";
+  const APP_VERSION = "1.12.1";
   let DATA = null, params = null, firstVerdict = true;
 
   document.addEventListener("DOMContentLoaded", init);
@@ -25,6 +25,8 @@
     renderTerms();
     wireRefresh();
     wireNews();
+    wireRegime();
+    wireTabs();
     $("appVer").textContent = "v" + APP_VERSION;
     try {
       await loadData();
@@ -50,11 +52,28 @@
     renderIndicators(DATA.indicators);
     renderOvernight(DATA.overnight);
     renderTrack(DATA.track_record);
+    renderRegime();
     renderSources(DATA.sources, DATA.generated_at, DATA.config.run_times_jst);
-    renderCutoff();
     recompute();
     $("foot").textContent =
       `データ元: ${DATA.source}　/　テクニカルの機械的集計であり投資助言ではありません`;
+  }
+
+  function wireTabs() {
+    const nav = document.getElementById("tabs"); if (!nav) return;
+    const tabs = nav.querySelectorAll(".tab");
+    const panes = document.querySelectorAll(".pane");
+    const activate = (name) => {
+      tabs.forEach((t) => t.classList.toggle("active", t.getAttribute("data-tab") === name));
+      panes.forEach((p) => p.classList.toggle("show", p.getAttribute("data-tab") === name));
+      try { localStorage.setItem("akaao_tab", name); } catch (e) { /* */ }
+      window.scrollTo(0, 0);
+    };
+    tabs.forEach((t) => t.addEventListener("click", () => activate(t.getAttribute("data-tab"))));
+    let init = "today";
+    try { init = localStorage.getItem("akaao_tab") || "today"; } catch (e) { /* */ }
+    if (![...tabs].some((t) => t.getAttribute("data-tab") === init)) init = "today";
+    activate(init);
   }
 
   function wireNews() {
@@ -98,13 +117,18 @@
 
   /* ============================================================ 再計算コア */
   function recompute() {
-    const v = computeVerdict(DATA.indicators, params.weights, params.threshold);
+    const regimeState = (DATA.regime && DATA.regime.state === "trend") ? "trend" : "range";
+    const vWeights = params.regimeMode
+      ? (regimeState === "trend" ? params.weightsTrend : params.weightsRange)
+      : params.weights;
+    const v = computeVerdict(DATA.indicators, vWeights, params.threshold);
     renderVerdict(v);
     const p = computePrediction(
       DATA.pred_samples, DATA.prediction.key, params.lookback, params.minSamples);
     renderPrediction(p);
-    const rules = computeBacktest(
-      DATA.pred_samples, DATA.config.bt_order, params.weights, params.threshold, params.lookback);
+    const rules = params.regimeMode
+      ? computeBacktestRegime(DATA.pred_samples, DATA.config.bt_order, params.weightsTrend, params.weightsRange, params.threshold, params.lookback)
+      : computeBacktest(DATA.pred_samples, DATA.config.bt_order, params.weights, params.threshold, params.lookback);
     const pred = computePredictionBacktest(DATA.pred_samples, params.minSamples, params.lookback);
     renderBacktest(rules, pred);
     const ov = DATA.overnight;
@@ -129,7 +153,7 @@
     else if (nb > 0 && ns === 0) msg = nb >= 3 ? "3つとも上向き。方向感が揃っています。" : `上向き寄り（${nb}つが上）。`;
     else if (ns > 0 && nb === 0) msg = ns >= 3 ? "3つとも下向き。方向感が揃っています。" : `下向き寄り（${ns}つが下）。`;
     else msg = "見解が分かれています。無理せず様子見も選択肢。";
-    $("alNote").textContent = msg;
+    const _an = $("alNote"); if (_an) _an.textContent = msg;
   }
 
   // ルールベース判定の過去的中率（重み・しきい値・遡り年数に連動して再計算）
@@ -217,6 +241,55 @@
     return { weights: w, threshold: th, ok: score(w, th) >= 0 };
   }
 
+  // レジーム別バックテスト：各日の相場つき(row[4]=T/R)で重みセットを切り替える
+  function computeBacktestRegime(samples, order, wT, wR, threshold, lookbackYears) {
+    if (!order || !samples || !samples.length || !samples[0][3] || samples[0][4] == null) return null;
+    const anchor = new Date(DATA.index.date + "T00:00:00");
+    const cut = new Date(anchor); cut.setFullYear(cut.getFullYear() - lookbackYears);
+    const cutStr = cut.toISOString().slice(0, 10);
+    const totT = order.reduce((a, id) => a + (wT[id] != null ? wT[id] : 0), 0) || 1;
+    const totR = order.reduce((a, id) => a + (wR[id] != null ? wR[id] : 0), 0) || 1;
+    let total = 0, up = 0, sig = 0, hit = 0, bn = 0, bh = 0, sn = 0, sh = 0;
+    for (const row of samples) {
+      if (row[0] < cutStr) continue;
+      const str = row[3]; if (!str) continue;
+      const isT = row[4] === "T", w = isT ? wT : wR, totW = isT ? totT : totR, fwd = row[2];
+      let raw = 0;
+      for (let i = 0; i < order.length; i++) raw += (SIGVAL[str[i]] || 0) * (w[order[i]] != null ? w[order[i]] : 0);
+      const score = Math.round(raw / totW * 100);
+      total++; if (fwd > 0) up++;
+      if (score >= threshold) { sig++; bn++; if (fwd > 0) { hit++; bh++; } }
+      else if (score <= -threshold) { sig++; sn++; if (fwd < 0) { hit++; sh++; } }
+    }
+    const pct = (a, b) => b ? Math.round(a / b * 1000) / 10 : null;
+    return {
+      total, signals: sig, coverage: pct(sig, total), hit_rate: pct(hit, sig),
+      bull_hit: pct(bh, bn), bear_hit: pct(sh, sn), bull_signals: bn, bear_signals: sn,
+      baseline: pct(up, total), lookback: lookbackYears,
+    };
+  }
+
+  // レジーム切替を自動最適化（トレンド用・もみ合い用の2セット＋しきい値）
+  function optimizeRegime() {
+    const order = DATA.config.bt_order;
+    const probe = computeBacktest(DATA.pred_samples, order, params.weights, params.threshold, params.lookback);
+    const minSig = probe ? Math.max(30, Math.round(probe.total * 0.05)) : 30;
+    const score = (wT, wR, th) => {
+      const bt = computeBacktestRegime(DATA.pred_samples, order, wT, wR, th, params.lookback);
+      if (!bt || bt.signals < minSig || bt.hit_rate == null) return -1;
+      return bt.hit_rate;
+    };
+    const wT = Object.assign({}, PRESETS.trend.w), wR = Object.assign({}, PRESETS.contra.w);
+    let th = params.threshold;
+    const wvals = [0, 0.5, 1, 1.5, 2, 2.5, 3], thvals = []; for (let t = 8; t <= 40; t += 2) thvals.push(t);
+    for (let pass = 0; pass < 3; pass++) {
+      for (const id of order) { let best = score(wT, wR, th), bv = wT[id]; for (const v of wvals) { const s = score(Object.assign({}, wT, { [id]: v }), wR, th); if (s > best) { best = s; bv = v; } } wT[id] = bv; }
+      for (const id of order) { let best = score(wT, wR, th), bv = wR[id]; for (const v of wvals) { const s = score(wT, Object.assign({}, wR, { [id]: v }), th); if (s > best) { best = s; bv = v; } } wR[id] = bv; }
+      let best = score(wT, wR, th), bth = th; for (const t of thvals) { const s = score(wT, wR, t); if (s > best) { best = s; bth = t; } } th = bth;
+    }
+    return { weightsTrend: wT, weightsRange: wR, threshold: th, ok: score(wT, wR, th) >= 0 };
+  }
+
   function computeVerdict(indicators, weights, threshold) {
     const map = { bull: 1, bear: -1, neutral: 0 };
     let totalW = 0, raw = 0, nb = 0, ns = 0;
@@ -286,16 +359,6 @@
       p.className = "pip" + (i < v.conviction ? " on" : "");
       pips.appendChild(p);
     }
-    const lev = DATA.leverage;
-    $("bullMove").textContent = "1日 ±" + lev.swing_bull_pct + "%";
-    $("bearMove").textContent = "1日 ±" + lev.swing_bear_pct + "%";
-    $("pickBull").classList.toggle("active", v.side === "bull");
-    $("pickBear").classList.toggle("active", v.side === "bear");
-  }
-
-  function renderCutoff() {
-    const c = (DATA.config && DATA.config.order_cutoff) || "15:20";
-    $("cutoffNote").textContent = `購入申込は ${c} まで（引け15:30の10分前）`;
   }
 
   function renderIndex(ix) {
@@ -327,8 +390,6 @@
     fillBtBlock("bt", rules);
     fillBtBlock("pb", pred);
     $("btBase").textContent = rules.baseline != null ? rules.baseline + "%" : "—";
-    $("btNote").textContent =
-      `直近${rules.lookback}年で検証。「ルールベース」は現在の重み・しきい値で、「予測」は各日その日より前のデータだけで（先読みなし）判定し、翌日の方向が当たった割合です。テクニカル中心の検証で、売買コストやレバレッジは含みません。過去の結果は将来を保証しません。`;
   }
   function fillBtBlock(pfx, bt) {
     if (!bt || !bt.total) {
@@ -369,8 +430,13 @@
   }
 
   function renderOvernight(ov) {
-    const sec = $("ovSection");
-    if (!ov || !ov.available) { if (sec) sec.style.display = "none"; return; }
+    const predSec = $("ovPredSection"), factSec = $("ovSection");
+    if (!ov || !ov.available) {
+      if (predSec) predSec.style.display = "none";
+      if (factSec) factSec.style.display = "none";
+      return;
+    }
+    if (factSec) factSec.style.display = "";
     const p = ov.prediction;
     if (p && p.available) {
       $("ovProb").textContent = Math.round(p.up_probability * 100) + "%";
@@ -382,9 +448,9 @@
         `<span class="chipstat">翌日平均 <b>${fmtPct(p.avg_next_return_pct)}</b></span>`,
         `<span class="chipstat">信頼度 <b>${p.confidence}</b></span>`,
       ].join("");
-      $("ovPredCard").style.display = "";
+      if (predSec) predSec.style.display = "";
     } else {
-      $("ovPredCard").style.display = "none";
+      if (predSec) predSec.style.display = "none";
     }
   }
 
@@ -402,26 +468,30 @@
     $("trVerN").textContent = tr.verdict_n ? `（${tr.verdict_n}件）` : "";
     $("trPredN").textContent = tr.pred_n ? `（${tr.pred_n}件）` : "";
     const empty = $("trEmpty"), list = $("trList");
-    if (!tr.resolved) {
-      empty.textContent = tr.total_logged
-        ? `記録を蓄積中（${tr.total_logged}件）。翌日の結果が出るごとに採点されます。`
-        : "まだ記録がありません。明日以降、毎日の予測と結果がここにたまります。";
+    const recent = tr.recent || [];
+    if (!recent.length) {
       empty.style.display = ""; list.innerHTML = "";
-    } else {
-      empty.style.display = "none";
-      const mark = (c) => c === true ? '<span class="ok">○</span>' : (c === false ? '<span class="ng">×</span>' : "－");
-      const rows = (tr.recent || []).filter((r) => r.next_ret != null).map((r) => {
-        const rc = r.next_ret > 0 ? "up" : "down";
-        return `<div class="tr-row"><span class="tr-d">${fmtMD(r.date)}</span>` +
-          `<span class="tr-s read-${r.verdict_side}">${SIDE_JP[r.verdict_side] || "－"}</span>` +
-          `<span class="tr-s read-${r.pred_side}">${SIDE_JP[r.pred_side] || "－"}</span>` +
-          `<span class="tr-r num ${rc}">${(r.next_ret > 0 ? "+" : "") + r.next_ret}%</span>` +
-          `<span class="tr-m">${mark(r.verdict_correct)}${mark(r.pred_correct)}</span></div>`;
-      }).join("");
-      list.innerHTML =
-        `<div class="tr-row tr-hd"><span class="tr-d">日付</span><span class="tr-s">ルール</span>` +
-        `<span class="tr-s">予測</span><span class="tr-r">翌日</span><span class="tr-m">的中</span></div>` + rows;
+      empty.textContent = "まだ記録がありません。明日以降、毎日の予測と結果がここにたまります。";
+      return;
     }
+    empty.style.display = tr.resolved ? "none" : "";
+    if (!tr.resolved) empty.textContent = `記録を蓄積中（${tr.total_logged}件）。翌営業日の結果が出るごとに採点されます。`;
+    const mark = (c) => c === true ? '<span class="ok">○</span>' : (c === false ? '<span class="ng">×</span>' : "－");
+    const rows = recent.map((r) => {
+      const vd = `<span class="tr-s read-${r.verdict_side}">${SIDE_JP[r.verdict_side] || "－"}</span>`;
+      const pr = `<span class="tr-s read-${r.pred_side}">${SIDE_JP[r.pred_side] || "－"}</span>`;
+      if (r.next_ret == null) {
+        return `<div class="tr-row"><span class="tr-d">${fmtMD(r.date)}</span>${vd}${pr}` +
+          `<span class="tr-r tr-wait">採点待ち</span><span class="tr-m">…</span></div>`;
+      }
+      const rc = r.next_ret > 0 ? "up" : "down";
+      return `<div class="tr-row"><span class="tr-d">${fmtMD(r.date)}</span>${vd}${pr}` +
+        `<span class="tr-r num ${rc}">${(r.next_ret > 0 ? "+" : "") + r.next_ret}%</span>` +
+        `<span class="tr-m">${mark(r.verdict_correct)}${mark(r.pred_correct)}</span></div>`;
+    }).join("");
+    list.innerHTML =
+      `<div class="tr-row tr-hd"><span class="tr-d">日付</span><span class="tr-s">ルール</span>` +
+      `<span class="tr-s">予測</span><span class="tr-r">翌日</span><span class="tr-m">的中</span></div>` + rows;
   }
 
   /* ---- ポジションサイズ ---- */
@@ -521,26 +591,109 @@
     });
   }
 
+  /* ---- レジーム切替（ADX） ---- */
+  let lastRegimeOpt = null;
+  function renderRegime() {
+    const rg = DATA.regime, now = $("rgNow");
+    if (now) {
+      if (rg && rg.adx != null) {
+        const st = rg.state === "trend" ? "トレンド相場" : "もみ合い相場";
+        now.innerHTML = `現在：<b class="read-${rg.state === "trend" ? "bull" : "neutral"}">${st}</b>　ADX <b class="num">${rg.adx}</b>（境目 ${rg.cutoff}）`;
+      } else now.textContent = "—";
+    }
+    const badge = $("rgModeBadge");
+    if (badge) badge.textContent = params.regimeMode ? "　現在：切替ON" : "";
+    const off = $("rgOff"); if (off) off.style.display = params.regimeMode ? "" : "none";
+  }
+  function wireRegime() {
+    const t = $("rgTestBtn"); if (t) t.addEventListener("click", runRegimeTest);
+    const a = $("rgApply"); if (a) a.addEventListener("click", applyRegime);
+    const o = $("rgOff"); if (o) o.addEventListener("click", regimeOff);
+  }
+  function runRegimeTest() {
+    const btn = $("rgTestBtn"), res = $("rgResult"), act = $("rgActions");
+    btn.disabled = true; res.innerHTML = "両方を最適化して比較中…（数秒）";
+    setTimeout(() => {
+      const order = DATA.config.bt_order;
+      const single = optimizeParams();
+      const btS = single.ok ? computeBacktest(DATA.pred_samples, order, single.weights, single.threshold, params.lookback) : null;
+      const reg = optimizeRegime();
+      const btR = reg.ok ? computeBacktestRegime(DATA.pred_samples, order, reg.weightsTrend, reg.weightsRange, reg.threshold, params.lookback) : null;
+      lastRegimeOpt = reg;
+      if (!btS || !btR) { res.textContent = "十分な判定回数の設定が見つかりませんでした。遡り年数を増やしてください。"; btn.disabled = false; return; }
+      const d = Math.round((btR.hit_rate - btS.hit_rate) * 10) / 10;
+      const cls = d > 0 ? "up" : (d < 0 ? "down" : "");
+      res.innerHTML =
+        `<div class="rg-cmp">` +
+          `<div class="rg-col"><div class="rg-lbl">切替なし<br>（単一・最適化後）</div><div class="rg-v num">${btS.hit_rate}%</div><div class="rg-sub">判定 ${btS.coverage}%</div></div>` +
+          `<div class="rg-arrow">→</div>` +
+          `<div class="rg-col"><div class="rg-lbl">ADXレジーム切替<br>（最適化後）</div><div class="rg-v num ${cls}">${btR.hit_rate}%</div><div class="rg-sub">判定 ${btR.coverage}%</div></div>` +
+        `</div>` +
+        `<div class="rg-delta ${cls}">差 ${d > 0 ? "+" : ""}${d}pt　<span>直近${params.lookback}年・単純上昇率 ${btS.baseline}%</span></div>`;
+      act.style.display = "";
+      btn.disabled = false;
+    }, 30);
+  }
+  function applyRegime() {
+    if (!lastRegimeOpt || !lastRegimeOpt.ok) return;
+    params.regimeMode = true;
+    params.weightsTrend = lastRegimeOpt.weightsTrend;
+    params.weightsRange = lastRegimeOpt.weightsRange;
+    params.threshold = lastRegimeOpt.threshold;
+    saveParams(); recompute(); updateMethodologyValues(); renderRegime();
+    const s = $("rgApplyStatus"); if (s) s.textContent = `レジーム切替をONにしました（しきい値 ±${params.threshold}）。判定・的中率に反映されています。`;
+  }
+  function regimeOff() {
+    params.regimeMode = false; saveParams(); recompute(); updateMethodologyValues(); renderRegime();
+    const s = $("rgApplyStatus"); if (s) s.textContent = "単一設定に戻しました。";
+  }
+
   function renderSources(sources, genAt, runTimes) {
-    const box = $("srcRows"); if (box) {
+    const dt = new Date(genAt);
+    const fetched = isNaN(dt) ? genAt
+      : `${dt.getMonth() + 1}/${dt.getDate()} ${pad(dt.getHours())}:${pad(dt.getMinutes())}`;
+    const nx = nextRun(runTimes || ["08:00", "18:00", "20:00"]);
+    const nextStr = nx ? fmtNextShort(nx) : "—";
+
+    const box = $("srcRows");
+    if (box) {
       box.innerHTML = "";
       (sources || []).forEach((s) => {
         const ok = s.ok !== false;
+        const asof = ok && s.as_of ? fmtMD(s.as_of) + " 時点" : "取得できず";
         const row = document.createElement("div");
         row.className = "src-row";
         row.innerHTML =
           `<span class="src-dot ${ok ? "ok" : "ng"}"></span>` +
-          `<span class="src-name">${s.name}</span>` +
-          `<span class="src-asof num">${ok && s.as_of ? fmtMD(s.as_of) + " 時点" : "取得できず"}</span>` +
-          `<span class="src-prov">${s.provider || ""}</span>`;
+          `<div class="src-main">` +
+            `<div class="src-l1"><span class="src-name">${s.name}</span><span class="src-prov">${s.provider || ""}</span></div>` +
+            `<div class="src-l2">` +
+              `<span class="src-tag">時点 <b class="num">${asof}</b></span>` +
+              `<span class="src-tag">取得 <b class="num">${fetched}</b></span>` +
+              `<span class="src-tag">次回 <b class="num">${nextStr}</b></span>` +
+            `</div>` +
+          `</div>`;
         box.appendChild(row);
       });
     }
-    const dt = new Date(genAt);
-    $("srcGen").textContent = isNaN(dt) ? genAt
-      : `${dt.getMonth() + 1}/${dt.getDate()} ${pad(dt.getHours())}:${pad(dt.getMinutes())}`;
-    const nx = nextRun(runTimes || ["08:00", "18:00", "20:00"]);
-    $("srcNext").textContent = nx ? fmtNext(nx) : "—";
+    // 次回までのカウントダウン（相対）
+    const cd = $("srcCountdown");
+    if (cd) {
+      if (nx) {
+        const diffMin = Math.max(0, Math.round((nx.cand - nx.jstNow) / 60000));
+        cd.textContent = diffMin < 60 ? `約${diffMin}分` : `約${Math.round(diffMin / 60)}時間`;
+      } else cd.textContent = "—";
+    }
+  }
+
+  // 次回実行の短い絶対表記（例: 本日 9:00頃 / 明日 8:00頃 / 9/8(月) 8:00頃）
+  function fmtNextShort({ cand, jstNow }) {
+    const d0 = new Date(jstNow); d0.setHours(0, 0, 0, 0);
+    const c0 = new Date(cand); c0.setHours(0, 0, 0, 0);
+    const dayDiff = Math.round((c0 - d0) / 86400000);
+    const wd = ["日", "月", "火", "水", "木", "金", "土"][cand.getDay()];
+    const dayLabel = dayDiff === 0 ? "本日" : (dayDiff === 1 ? "明日" : `${cand.getMonth() + 1}/${cand.getDate()}(${wd})`);
+    return `${dayLabel} ${cand.getHours()}:${pad(cand.getMinutes())}頃`;
   }
 
   // 平日の指定時刻（JST）から次回実行を求める。端末TZに関わらずJST基準で計算。
@@ -599,6 +752,7 @@
 
   /* ============================================================ 仕組み表示 */
   function updateMethodologyValues() {
+    if (!$("mThOver")) return;
     $("mThOver").textContent = params.threshold;
     $("mThUnder").textContent = params.threshold;
     $("mLb").textContent = "直近" + params.lookback + "年";
@@ -616,6 +770,9 @@
       threshold: cfg.score_threshold,
       lookback: cfg.lookback_years,
       minSamples: cfg.min_samples,
+      regimeMode: false,
+      weightsTrend: Object.assign({}, PRESETS.trend.w),
+      weightsRange: Object.assign({}, PRESETS.contra.w),
     };
   }
   function loadParams(cfg) {
@@ -627,6 +784,9 @@
         threshold: s.threshold ?? def.threshold,
         lookback: s.lookback ?? def.lookback,
         minSamples: s.minSamples ?? def.minSamples,
+        regimeMode: s.regimeMode ?? false,
+        weightsTrend: Object.assign({}, def.weightsTrend, s.weightsTrend || {}),
+        weightsRange: Object.assign({}, def.weightsRange, s.weightsRange || {}),
       };
     } catch (e) { /* localStorage 不可でも既定で動く */ }
     return def;
@@ -728,6 +888,8 @@
     $("sheetClose").addEventListener("click", closeSheet);
     document.addEventListener("keydown", (e) => e.key === "Escape" && closeSheet());
     document.body.addEventListener("click", (e) => {
+      const m = e.target.closest("[data-method]");
+      if (m) { openMethod(m.getAttribute("data-method")); return; }
       const t = e.target.closest("[data-term]");
       if (t) openTerm(t.getAttribute("data-term"));
     });
@@ -744,14 +906,15 @@
       sheet.style.transform = ""; if (dy > 90) closeSheet(); y0 = null;
     });
   }
-  function fillSheet({ eyebrow, side, title, val, body, how }) {
+  function fillSheet({ eyebrow, side, title, val, body, html, how }) {
     const eb = $("sheetEyebrow");
     eb.className = "sheet-eyebrow" + (side ? " " + side : "");
     eb.textContent = eyebrow || "";
     $("sheetTitle").textContent = title || "";
     $("sheetVal").textContent = val || "";
     $("sheetVal").style.display = val ? "" : "none";
-    $("sheetBody").textContent = body || "";
+    if (html != null) $("sheetBody").innerHTML = html;
+    else $("sheetBody").textContent = body || "";
     const howBox = $("sheetHow"); howBox.innerHTML = "";
     (how || []).forEach((r) => {
       const row = document.createElement("div");
@@ -769,6 +932,34 @@
   function openTerm(key) {
     const g = window.GLOSSARY[key]; if (!g) return;
     fillSheet({ eyebrow: g.eyebrow, side: g.side, title: g.title, body: g.body, how: g.how });
+  }
+  function openMethod(kind) {
+    if (kind === "rules") {
+      const th = params.threshold;
+      const chips = DATA.indicators.map((i) => {
+        const w = (params.weights[i.id] != null) ? params.weights[i.id] : i.weight;
+        return `<span class="wt">${i.name}<b>${Number(w).toFixed(1)}</b></span>`;
+      }).join("");
+      const html =
+        `<p>テクニカル7指標に加え、オーバーナイト要因（米国株・ドル円・先物）も同じ仕組みで「強気(+1)／弱気(−1)／中立(0)」を投票し、指標ごとの重みを掛けて合計します。合計を −100〜+100 のスコアに正規化して判定します。</p>` +
+        `<div class="formula">スコア ＝ Σ(各指標の投票 × 重み) ÷ Σ(重み) × 100</div>` +
+        `<ul class="rules"><li>スコア ≧ ＋<b>${th}</b> → <span class="read-bull">ブル寄り</span></li>` +
+        `<li>スコア ≦ −<b>${th}</b> → <span class="read-bear">ベア寄り</span></li>` +
+        `<li>その間 → <span class="read-neutral">様子見</span></li></ul>` +
+        `<div class="wtable">${chips}</div>` +
+        `<p class="mnote">重み・しきい値は「設定」タブの「数字を調整」で変えられます。</p>`;
+      fillSheet({ eyebrow: "仕組み", title: "ルールベース判定はどう出している？", html });
+    } else {
+      const lb = params.lookback, ms = params.minSamples;
+      const html =
+        `<p>今日の相場を〈トレンド区分 × RSIゾーン × MACD符号〉で分類し、<b>直近${lb}年</b>で同じ状態だった日の「翌日の値動き」を集計。上昇した割合を上昇確率として表示します。</p>` +
+        `<ul class="rules"><li>トレンド区分：移動平均の並び（上昇／下降／もみ合い）</li>` +
+        `<li>RSIゾーン：過熱(≧70)／やや強(≧50)／やや弱(>30)／底値圏(≦30)</li>` +
+        `<li>MACD符号：ヒストグラムの ＋／−</li></ul>` +
+        `<p>同じ状態が <b>${ms}</b> 回に満たないときは、条件をトレンド区分だけに広げて集計します。サンプルが多いほど信頼度は上がります（40回以上で「高」）。</p>` +
+        `<p class="mnote">遡り年数・最小サンプル数は「設定」タブで調整できます。別枠で「オーバーナイト予測」（前夜の米国株×ドル円が同じだった翌営業日の上昇率）も出しています。</p>`;
+      fillSheet({ eyebrow: "仕組み", title: "過去データからの予測はどう出している？", html });
+    }
   }
   function openSheet() { $("backdrop").classList.add("open"); $("sheet").classList.add("open"); sheetOpen = true; }
   function closeSheet() {

@@ -35,6 +35,7 @@ MIN_SAMPLES = 8       # 類似局面がこれ未満なら区分を広げる
 SHIP_YEARS = 8        # サイトのスライダー用に出荷するサンプル履歴の年数
 SCORE_THRESHOLD = 20  # |スコア| がこれ以上で ブル寄り/ベア寄り
 ORDER_CUTOFF = "15:20"  # 楽天ブル4.3倍/ベア3.8倍の購入申込締切（引け15:30の10分前）
+ADX_CUTOFF = 23         # ADXがこれ以上→トレンド相場、未満→もみ合い
 
 
 # ----------------------------------------------------------------------------
@@ -330,6 +331,20 @@ def stochastic(df: pd.DataFrame, n=9, d=3):
     return k, k.rolling(d).mean()
 
 
+def adx(df: pd.DataFrame, n=14) -> pd.Series:
+    """ADX（トレンドの強さ）。高いほどトレンド相場、低いほどもみ合い。"""
+    h, l, c = df["high"], df["low"], df["close"]
+    up, dn = h.diff(), -l.diff()
+    plus_dm = pd.Series(np.where((up > dn) & (up > 0), up, 0.0), index=df.index)
+    minus_dm = pd.Series(np.where((dn > up) & (dn > 0), dn, 0.0), index=df.index)
+    tr = pd.concat([(h - l), (h - c.shift()).abs(), (l - c.shift()).abs()], axis=1).max(axis=1)
+    atr = tr.ewm(alpha=1 / n, adjust=False).mean().replace(0, np.nan)
+    plus_di = 100 * plus_dm.ewm(alpha=1 / n, adjust=False).mean() / atr
+    minus_di = 100 * minus_dm.ewm(alpha=1 / n, adjust=False).mean() / atr
+    dx = 100 * (plus_di - minus_di).abs() / (plus_di + minus_di).replace(0, np.nan)
+    return dx.ewm(alpha=1 / n, adjust=False).mean()
+
+
 def build_features(df: pd.DataFrame) -> pd.DataFrame:
     c = df["close"]
     df = df.copy()
@@ -342,6 +357,7 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     df["bb_mid"], df["bb_up"], df["bb_low"], df["bb_pctb"] = bollinger(c)
     df["stoch_k"], df["stoch_d"] = stochastic(df)
     df["dev25"] = (c - df["sma25"]) / df["sma25"] * 100  # 25日移動平均乖離率(%)
+    df["adx"] = adx(df, 14)
     df["roc10"] = c.pct_change(10) * 100
     df["ret1"] = c.pct_change()
     df["fwd_ret1"] = c.shift(-1) / c - 1  # 翌日リターン（予測の教師）
@@ -581,8 +597,9 @@ def build_pred_samples(d: pd.DataFrame, ship_years: int = SHIP_YEARS) -> list:
     s = s[s["date"] >= cutoff]
     out = []
     for _, row in s.iterrows():
+        areg = "T" if (pd.notna(row.get("adx")) and row["adx"] >= ADX_CUTOFF) else "R"
         out.append([row["date"].strftime("%Y-%m-%d"), row["key"],
-                    round(float(row["fwd_ret1"]) * 100, 3), _sig_string(row)])
+                    round(float(row["fwd_ret1"]) * 100, 3), _sig_string(row), areg])
     return out
 
 
@@ -754,7 +771,8 @@ def build_payload(force_sample: bool, pred_log_path: str = "data/predictions.jso
         "ship_years": SHIP_YEARS,
         "score_threshold": SCORE_THRESHOLD,
         "order_cutoff": ORDER_CUTOFF,
-        "run_times_jst": [f"{h:02d}:00" for h in range(8, 21)],  # 平日 8:00〜20:00 毎時
+        "adx_cutoff": ADX_CUTOFF,
+        "run_times_jst": sorted([f"{h:02d}:10" for h in range(8, 21)] + ["15:03"]),  # 平日 8:10〜20:10 毎時+15:03
         "bt_order": BT_ORDER,  # バックテストの指標順（サイト側の再計算用）
         "weights": {s["id"]: s["weight"] for s in signals_all},
     }
@@ -782,6 +800,13 @@ def build_payload(force_sample: bool, pred_log_path: str = "data/predictions.jso
 
     track_record = resolve_and_log(df, verdict, prediction, overnight, is_sample, pred_log_path)
 
+    adx_now = float(last["adx"]) if pd.notna(last["adx"]) else None
+    regime = {
+        "adx": round(adx_now, 1) if adx_now is not None else None,
+        "state": ("trend" if (adx_now is not None and adx_now >= ADX_CUTOFF) else "range"),
+        "cutoff": ADX_CUTOFF,
+    }
+
     return {
         "generated_at": datetime.now(JST).isoformat(timespec="minutes"),
         "is_sample": is_sample,
@@ -798,6 +823,7 @@ def build_payload(force_sample: bool, pred_log_path: str = "data/predictions.jso
         "verdict": verdict,
         "prediction": prediction,
         "overnight": overnight,
+        "regime": regime,
         "leverage": leverage,
         "config": config,
         "sources": sources,
