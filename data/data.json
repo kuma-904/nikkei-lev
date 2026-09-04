@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T18:31+09:00",
+  "generated_at": "2026-09-04T19:36+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -495,11 +495,11 @@
   "verdict": {
     "side": "bear",
     "label": "ベア寄り",
-    "score": -36,
-    "conviction": 2,
-    "n_bull": 2,
+    "score": -28,
+    "conviction": 1,
+    "n_bull": 3,
     "n_bear": 6,
-    "summary": "10指標中 強気2 / 弱気6。総合スコア -36。"
+    "summary": "10指標中 強気3 / 弱気6。総合スコア -28。"
   },
   "prediction": {
     "side": "bull",
@@ -516,8 +516,8 @@
   "overnight": {
     "available": true,
     "us_ret_pct": 1.06,
-    "jpy_ret_pct": -1.58,
-    "fut_premium_pct": 0.05,
+    "jpy_ret_pct": -1.62,
+    "fut_premium_pct": 0.33,
     "prediction": {
       "available": true,
       "side": "bull",
@@ -8787,8 +8787,8 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -1.58,
-      "display": "-1.58%",
+      "value": -1.62,
+      "display": "-1.62%",
       "signal": "bear",
       "reading": "円高方向",
       "weight": 1.2,
@@ -8798,10 +8798,10 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.05,
-      "display": "+0.05%",
-      "signal": "neutral",
-      "reading": "ほぼ同水準",
+      "value": 0.33,
+      "display": "+0.33%",
+      "signal": "bull",
+      "reading": "現物より高い",
       "weight": 1.0,
       "group": "overnight",
       "detail": "日経先物が現物(現在の日経平均)より高いか安いか。先物が高ければ市場は上を見ている目安。ただしEOD(日足)のため夜間の最新値ではない点に注意。"
