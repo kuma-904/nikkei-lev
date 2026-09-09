@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T19:46+09:00",
+  "generated_at": "2026-09-09T23:26+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -515,9 +515,9 @@
   },
   "overnight": {
     "available": true,
-    "us_ret_pct": -0.58,
-    "jpy_ret_pct": -1.5,
-    "fut_premium_pct": -0.79,
+    "us_ret_pct": -0.35,
+    "jpy_ret_pct": -0.39,
+    "fut_premium_pct": -0.69,
     "prediction": {
       "available": true,
       "side": "bear",
@@ -601,13 +601,13 @@
     },
     {
       "name": "米国株(S&P500)",
-      "as_of": "2026-09-08",
+      "as_of": "2026-09-09",
       "provider": "Yahoo ^GSPC",
       "ok": true
     },
     {
       "name": "ドル円",
-      "as_of": "2026-09-08",
+      "as_of": "2026-09-09",
       "provider": "Yahoo JPY=X",
       "ok": true
     },
@@ -8809,8 +8809,8 @@
     {
       "id": "us",
       "name": "米国株（前日S&P500）",
-      "value": -0.58,
-      "display": "-0.58%",
+      "value": -0.35,
+      "display": "-0.35%",
       "signal": "bear",
       "reading": "前日マイナス",
       "weight": 1.6,
@@ -8820,8 +8820,8 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -1.5,
-      "display": "-1.50%",
+      "value": -0.39,
+      "display": "-0.39%",
       "signal": "bear",
       "reading": "円高方向",
       "weight": 1.2,
@@ -8831,8 +8831,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": -0.79,
-      "display": "-0.79%",
+      "value": -0.69,
+      "display": "-0.69%",
       "signal": "bear",
       "reading": "現物より安い",
       "weight": 1.0,
