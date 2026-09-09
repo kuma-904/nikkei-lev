@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-08T23:24+09:00",
+  "generated_at": "2026-09-09T10:13+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
     "name": "日経平均株価",
-    "last": 65269.33,
+    "last": 65596.97,
     "prev_close": 66399.84,
-    "change": -1130.52,
-    "change_pct": -1.7,
-    "date": "2026-09-08",
+    "change": -802.88,
+    "change_pct": -1.21,
+    "date": "2026-09-09",
     "history": [
       {
         "d": "2026-03-16",
@@ -487,19 +487,19 @@
         "c": 66399.84
       },
       {
-        "d": "2026-09-08",
-        "c": 65269.33
+        "d": "2026-09-09",
+        "c": 65596.97
       }
     ]
   },
   "verdict": {
     "side": "bear",
     "label": "ベア寄り",
-    "score": -81,
+    "score": -71,
     "conviction": 4,
     "n_bull": 0,
-    "n_bear": 8,
-    "summary": "10指標中 強気0 / 弱気8。総合スコア -81。"
+    "n_bear": 7,
+    "summary": "10指標中 強気0 / 弱気7。総合スコア -71。"
   },
   "prediction": {
     "side": "bull",
@@ -515,22 +515,22 @@
   },
   "overnight": {
     "available": true,
-    "us_ret_pct": -0.44,
-    "jpy_ret_pct": -1.35,
-    "fut_premium_pct": -0.03,
+    "us_ret_pct": -0.58,
+    "jpy_ret_pct": -0.1,
+    "fut_premium_pct": 0.03,
     "prediction": {
       "available": true,
       "side": "bear",
       "label": "ベア寄り",
-      "up_probability": 0.35,
-      "sample_size": 163,
-      "avg_next_return_pct": -0.532,
+      "up_probability": 0.349,
+      "sample_size": 86,
+      "avg_next_return_pct": -0.615,
       "confidence": "高",
-      "note": "前日に米国株下落・ドル円円高となった翌営業日、日経が上昇したのは直近5年で163回中35%（米国株×ドル円、信頼度高）。"
+      "note": "前日に米国株下落・ドル円横ばいとなった翌営業日、日経が上昇したのは直近5年で86回中35%（米国株×ドル円、信頼度高）。"
     }
   },
   "regime": {
-    "adx": 15.2,
+    "adx": 15.3,
     "state": "range",
     "cutoff": 23
   },
@@ -538,12 +538,12 @@
     "bull_mult": 4.3,
     "bear_mult": 3.8,
     "hold_days": 1,
-    "daily_move_pct": 1.41,
-    "swing_bull_pct": 6.1,
-    "swing_bear_pct": 5.4,
-    "today_bull_pct": -7.32,
-    "today_bear_pct": 6.47,
-    "realized_vol_annual_pct": 22.3,
+    "daily_move_pct": 1.38,
+    "swing_bull_pct": 6.0,
+    "swing_bear_pct": 5.3,
+    "today_bull_pct": -5.2,
+    "today_bear_pct": 4.59,
+    "realized_vol_annual_pct": 22.0,
     "decay_note": "1日で解約する運用なら、減価（複数日の再計算で効く目減り）はほぼ発生しません。効くのは往復コストと、方向が当たるかどうかです。",
     "cost_note": "勝っても往復コスト（信託報酬の日割り・信託財産留保額・購入時手数料など）が差し引かれます。料率は目論見書で要確認。"
   },
@@ -595,7 +595,7 @@
   "sources": [
     {
       "name": "日経平均",
-      "as_of": "2026-09-08",
+      "as_of": "2026-09-09",
       "provider": "Yahoo Finance (^N225)",
       "ok": true
     },
@@ -607,7 +607,7 @@
     },
     {
       "name": "ドル円",
-      "as_of": "2026-09-08",
+      "as_of": "2026-09-09",
       "provider": "Yahoo JPY=X",
       "ok": true
     },
@@ -627,8 +627,19 @@
     "ov_hit_rate": 33.3,
     "ov_n": 3,
     "since": "2026-09-01",
-    "total_logged": 5,
+    "total_logged": 6,
     "recent": [
+      {
+        "date": "2026-09-09",
+        "close": 65596.97,
+        "verdict_side": "bear",
+        "pred_side": "bull",
+        "ov_side": "bear",
+        "next_ret": null,
+        "verdict_correct": null,
+        "pred_correct": null,
+        "ov_correct": null
+      },
       {
         "date": "2026-09-08",
         "close": 65269.33,
@@ -688,17 +699,10 @@
   },
   "pred_samples": [
     [
-      "2021-12-27",
-      "mid|low|pos",
-      1.369,
-      "nbnbbsb",
-      "R"
-    ],
-    [
       "2021-12-28",
       "mid|high|pos",
       -0.558,
-      "nbnbbsb",
+      "nbbbbsb",
       "R"
     ],
     [
@@ -782,7 +786,7 @@
       "2022-01-18",
       "down|low|neg",
       -2.796,
-      "sssssbs",
+      "ssnssbs",
       "R"
     ],
     [
@@ -936,7 +940,7 @@
       "2022-02-18",
       "down|low|pos",
       -0.779,
-      "sssbsss",
+      "ssnbsss",
       "R"
     ],
     [
@@ -8732,8 +8736,8 @@
     {
       "id": "cross",
       "name": "移動平均クロス",
-      "value": -1.76,
-      "display": "-1.76%",
+      "value": -1.68,
+      "display": "-1.68%",
       "signal": "bear",
       "reading": "短期<中期",
       "weight": 1.0,
@@ -8743,8 +8747,8 @@
     {
       "id": "rsi14",
       "name": "RSI (14)",
-      "value": 46.9,
-      "display": "46.9",
+      "value": 48.3,
+      "display": "48.3",
       "signal": "neutral",
       "reading": "中立",
       "weight": 1.2,
@@ -8754,8 +8758,8 @@
     {
       "id": "macd",
       "name": "MACD",
-      "value": -84.1,
-      "display": "-84.1",
+      "value": -63.2,
+      "display": "-63.2",
       "signal": "bear",
       "reading": "下落の勢い",
       "weight": 0.3,
@@ -8765,8 +8769,8 @@
     {
       "id": "bb",
       "name": "ボリンジャーバンド %b",
-      "value": 0.3,
-      "display": "0.30",
+      "value": 0.35,
+      "display": "0.35",
       "signal": "bear",
       "reading": "中央より下",
       "weight": 1.3,
@@ -8776,8 +8780,8 @@
     {
       "id": "stoch",
       "name": "ストキャスティクス",
-      "value": 47.0,
-      "display": "47.0",
+      "value": 57.3,
+      "display": "57.3",
       "signal": "bear",
       "reading": "下向き",
       "weight": 1.0,
@@ -8787,8 +8791,8 @@
     {
       "id": "dev25",
       "name": "25日移動平均乖離率",
-      "value": -1.42,
-      "display": "-1.42%",
+      "value": -0.95,
+      "display": "-0.95%",
       "signal": "bear",
       "reading": "平均より下",
       "weight": 2.2,
@@ -8798,8 +8802,8 @@
     {
       "id": "us",
       "name": "米国株（前日S&P500）",
-      "value": -0.44,
-      "display": "-0.44%",
+      "value": -0.58,
+      "display": "-0.58%",
       "signal": "bear",
       "reading": "前日マイナス",
       "weight": 1.6,
@@ -8809,10 +8813,10 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -1.35,
-      "display": "-1.35%",
-      "signal": "bear",
-      "reading": "円高方向",
+      "value": -0.1,
+      "display": "-0.10%",
+      "signal": "neutral",
+      "reading": "ほぼ横ばい",
       "weight": 1.2,
       "group": "overnight",
       "detail": "前日のドル円の動き。円安(ドル円上昇)は輸出企業の採算改善期待から日経の追い風、円高は向かい風になりやすい。"
@@ -8820,8 +8824,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": -0.03,
-      "display": "-0.03%",
+      "value": 0.03,
+      "display": "+0.03%",
       "signal": "neutral",
       "reading": "ほぼ同水準",
       "weight": 1.0,
