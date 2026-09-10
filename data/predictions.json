@@ -75,5 +75,18 @@
   "verdict_correct": null,
   "pred_correct": null,
   "ov_correct": null
+ },
+ {
+  "date": "2026-09-10",
+  "close": 64429.67,
+  "verdict_side": "bear",
+  "verdict_score": -100,
+  "pred_side": "bull",
+  "pred_prob": 0.628,
+  "ov_side": "bear",
+  "next_ret": null,
+  "verdict_correct": null,
+  "pred_correct": null,
+  "ov_correct": null
  }
 ]
