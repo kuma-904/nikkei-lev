@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T18:33+09:00",
+  "generated_at": "2026-09-11T19:37+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -495,11 +495,11 @@
   "verdict": {
     "side": "bear",
     "label": "ベア寄り",
-    "score": -62,
-    "conviction": 3,
-    "n_bull": 2,
+    "score": -72,
+    "conviction": 4,
+    "n_bull": 1,
     "n_bear": 8,
-    "summary": "10指標中 強気2 / 弱気8。総合スコア -62。"
+    "summary": "10指標中 強気1 / 弱気8。総合スコア -72。"
   },
   "prediction": {
     "side": "bull",
@@ -516,17 +516,17 @@
   "overnight": {
     "available": true,
     "us_ret_pct": -0.58,
-    "jpy_ret_pct": 0.37,
-    "fut_premium_pct": 0.29,
+    "jpy_ret_pct": 0.06,
+    "fut_premium_pct": 0.33,
     "prediction": {
       "available": true,
       "side": "bear",
       "label": "ベア寄り",
-      "up_probability": 0.308,
-      "sample_size": 240,
-      "avg_next_return_pct": -0.553,
+      "up_probability": 0.337,
+      "sample_size": 86,
+      "avg_next_return_pct": -0.652,
       "confidence": "高",
-      "note": "前日に米国株下落・ドル円円安となった翌営業日、日経が上昇したのは直近5年で240回中31%（米国株×ドル円、信頼度高）。"
+      "note": "前日に米国株下落・ドル円横ばいとなった翌営業日、日経が上昇したのは直近5年で86回中34%（米国株×ドル円、信頼度高）。"
     }
   },
   "regime": {
@@ -607,7 +607,7 @@
     },
     {
       "name": "ドル円",
-      "as_of": "2026-09-11",
+      "as_of": "2026-09-10",
       "provider": "Yahoo JPY=X",
       "ok": true
     },
@@ -8842,10 +8842,10 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": 0.37,
-      "display": "+0.37%",
-      "signal": "bull",
-      "reading": "円安方向",
+      "value": 0.06,
+      "display": "+0.06%",
+      "signal": "neutral",
+      "reading": "ほぼ横ばい",
       "weight": 1.2,
       "group": "overnight",
       "detail": "前日のドル円の動き。円安(ドル円上昇)は輸出企業の採算改善期待から日経の追い風、円高は向かい風になりやすい。"
@@ -8853,8 +8853,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.29,
-      "display": "+0.29%",
+      "value": 0.33,
+      "display": "+0.33%",
       "signal": "bull",
       "reading": "現物より高い",
       "weight": 1.0,
