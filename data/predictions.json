@@ -156,9 +156,9 @@
  },
  {
   "date": "2026-09-18",
-  "close": 65304.6,
+  "close": 65018.95,
   "verdict_side": "neutral",
-  "verdict_score": -2,
+  "verdict_score": -7,
   "pred_side": "bull",
   "pred_prob": 0.614,
   "ov_side": "bull",
