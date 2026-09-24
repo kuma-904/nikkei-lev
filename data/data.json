@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-24T13:34+09:00",
+  "generated_at": "2026-09-24T18:53+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
     "name": "日経平均株価",
-    "last": 65669.6,
+    "last": 65513.99,
     "prev_close": 65018.95,
-    "change": 650.65,
-    "change_pct": 1.0,
+    "change": 495.04,
+    "change_pct": 0.76,
     "date": "2026-09-24",
     "history": [
       {
@@ -488,18 +488,18 @@
       },
       {
         "d": "2026-09-24",
-        "c": 65669.6
+        "c": 65513.99
       }
     ]
   },
   "verdict": {
     "side": "neutral",
     "label": "様子見",
-    "score": -3,
-    "conviction": 0,
-    "n_bull": 4,
-    "n_bear": 5,
-    "summary": "10指標中 強気4 / 弱気5。総合スコア -3。"
+    "score": 14,
+    "conviction": 1,
+    "n_bull": 5,
+    "n_bear": 4,
+    "summary": "10指標中 強気5 / 弱気4。総合スコア +14。"
   },
   "prediction": {
     "side": "bull",
@@ -516,8 +516,8 @@
   "overnight": {
     "available": true,
     "us_ret_pct": -0.76,
-    "jpy_ret_pct": 0.29,
-    "fut_premium_pct": -0.25,
+    "jpy_ret_pct": 0.82,
+    "fut_premium_pct": -0.63,
     "prediction": {
       "available": true,
       "side": "bear",
@@ -538,12 +538,12 @@
     "bull_mult": 4.3,
     "bear_mult": 3.8,
     "hold_days": 1,
-    "daily_move_pct": 1.14,
+    "daily_move_pct": 1.13,
     "swing_bull_pct": 4.9,
     "swing_bear_pct": 4.3,
-    "today_bull_pct": 4.3,
-    "today_bear_pct": -3.8,
-    "realized_vol_annual_pct": 18.1,
+    "today_bull_pct": 3.27,
+    "today_bear_pct": -2.89,
+    "realized_vol_annual_pct": 17.9,
     "decay_note": "1日で解約する運用なら、減価（複数日の再計算で効く目減り）はほぼ発生しません。効くのは往復コストと、方向が当たるかどうかです。",
     "cost_note": "勝っても往復コスト（信託報酬の日割り・信託財産留保額・購入時手数料など）が差し引かれます。料率は目論見書で要確認。"
   },
@@ -631,7 +631,7 @@
     "recent": [
       {
         "date": "2026-09-24",
-        "close": 65669.6,
+        "close": 65513.99,
         "verdict_side": "neutral",
         "pred_side": "bull",
         "ov_side": "bear",
@@ -8802,8 +8802,8 @@
     {
       "id": "cross",
       "name": "移動平均クロス",
-      "value": -1.34,
-      "display": "-1.34%",
+      "value": -1.38,
+      "display": "-1.38%",
       "signal": "bear",
       "reading": "短期<中期",
       "weight": 1.0,
@@ -8813,8 +8813,8 @@
     {
       "id": "rsi14",
       "name": "RSI (14)",
-      "value": 52.6,
-      "display": "52.6",
+      "value": 51.8,
+      "display": "51.8",
       "signal": "neutral",
       "reading": "中立",
       "weight": 1.2,
@@ -8824,8 +8824,8 @@
     {
       "id": "macd",
       "name": "MACD",
-      "value": 45.8,
-      "display": "+45.8",
+      "value": 35.9,
+      "display": "+35.9",
       "signal": "bull",
       "reading": "改善中",
       "weight": 0.3,
@@ -8835,8 +8835,8 @@
     {
       "id": "bb",
       "name": "ボリンジャーバンド %b",
-      "value": 0.64,
-      "display": "0.64",
+      "value": 0.6,
+      "display": "0.60",
       "signal": "bull",
       "reading": "中央より上",
       "weight": 1.3,
@@ -8846,10 +8846,10 @@
     {
       "id": "stoch",
       "name": "ストキャスティクス",
-      "value": 83.6,
-      "display": "83.6",
-      "signal": "bear",
-      "reading": "買われすぎ",
+      "value": 79.1,
+      "display": "79.1",
+      "signal": "bull",
+      "reading": "上向き",
       "weight": 1.0,
       "detail": "一定期間の高値・安値の中で現在値がどの位置かを見る指標。80以上で買われすぎ、20以下で売られすぎ。%K が %D を上抜けると買いサイン。",
       "group": "tech"
@@ -8857,8 +8857,8 @@
     {
       "id": "dev25",
       "name": "25日移動平均乖離率",
-      "value": 0.53,
-      "display": "+0.53%",
+      "value": 0.3,
+      "display": "+0.30%",
       "signal": "bull",
       "reading": "平均より上",
       "weight": 2.2,
@@ -8879,8 +8879,8 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": 0.29,
-      "display": "+0.29%",
+      "value": 0.82,
+      "display": "+0.82%",
       "signal": "bull",
       "reading": "円安方向",
       "weight": 1.2,
@@ -8890,8 +8890,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": -0.25,
-      "display": "-0.25%",
+      "value": -0.63,
+      "display": "-0.63%",
       "signal": "bear",
       "reading": "現物より安い",
       "weight": 1.0,
