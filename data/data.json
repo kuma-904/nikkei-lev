@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T21:08+09:00",
+  "generated_at": "2026-09-29T21:40+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -495,11 +495,11 @@
   "verdict": {
     "side": "bull",
     "label": "ブル寄り",
-    "score": 17,
+    "score": 28,
     "conviction": 1,
     "n_bull": 5,
-    "n_bear": 3,
-    "summary": "10指標中 強気5 / 弱気3。総合スコア +17。"
+    "n_bear": 2,
+    "summary": "10指標中 強気5 / 弱気2。総合スコア +28。"
   },
   "prediction": {
     "side": "neutral",
@@ -516,17 +516,17 @@
   "overnight": {
     "available": true,
     "us_ret_pct": -0.77,
-    "jpy_ret_pct": -0.24,
-    "fut_premium_pct": 0.55,
+    "jpy_ret_pct": -0.09,
+    "fut_premium_pct": 0.56,
     "prediction": {
       "available": true,
       "side": "bear",
       "label": "ベア寄り",
-      "up_probability": 0.339,
-      "sample_size": 165,
-      "avg_next_return_pct": -0.534,
+      "up_probability": 0.349,
+      "sample_size": 86,
+      "avg_next_return_pct": -0.637,
       "confidence": "高",
-      "note": "前日に米国株下落・ドル円円高となった翌営業日、日経が上昇したのは直近5年で165回中34%（米国株×ドル円、信頼度高）。"
+      "note": "前日に米国株下落・ドル円横ばいとなった翌営業日、日経が上昇したのは直近5年で86回中35%（米国株×ドル円、信頼度高）。"
     }
   },
   "regime": {
@@ -8879,10 +8879,10 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -0.24,
-      "display": "-0.24%",
-      "signal": "bear",
-      "reading": "円高方向",
+      "value": -0.09,
+      "display": "-0.09%",
+      "signal": "neutral",
+      "reading": "ほぼ横ばい",
       "weight": 1.2,
       "group": "overnight",
       "detail": "前日のドル円の動き。円安(ドル円上昇)は輸出企業の採算改善期待から日経の追い風、円高は向かい風になりやすい。"
@@ -8890,8 +8890,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.55,
-      "display": "+0.55%",
+      "value": 0.56,
+      "display": "+0.56%",
       "signal": "bull",
       "reading": "現物より高い",
       "weight": 1.0,
