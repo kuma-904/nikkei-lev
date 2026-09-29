@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-29T11:33+09:00",
+  "generated_at": "2026-09-29T14:34+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
     "name": "日経平均株価",
-    "last": 65281.6,
+    "last": 65051.71,
     "prev_close": 65877.62,
-    "change": -596.02,
-    "change_pct": -0.9,
+    "change": -825.91,
+    "change_pct": -1.25,
     "date": "2026-09-29",
     "history": [
       {
@@ -488,18 +488,18 @@
       },
       {
         "d": "2026-09-29",
-        "c": 65281.6
+        "c": 65051.71
       }
     ]
   },
   "verdict": {
-    "side": "bull",
-    "label": "ブル寄り",
-    "score": 28,
-    "conviction": 1,
-    "n_bull": 5,
-    "n_bear": 2,
-    "summary": "10指標中 強気5 / 弱気2。総合スコア +28。"
+    "side": "bear",
+    "label": "ベア寄り",
+    "score": -33,
+    "conviction": 2,
+    "n_bull": 3,
+    "n_bear": 4,
+    "summary": "10指標中 強気3 / 弱気4。総合スコア -33。"
   },
   "prediction": {
     "side": "neutral",
@@ -516,8 +516,8 @@
   "overnight": {
     "available": true,
     "us_ret_pct": -0.77,
-    "jpy_ret_pct": -0.08,
-    "fut_premium_pct": 0.3,
+    "jpy_ret_pct": 0.02,
+    "fut_premium_pct": 0.24,
     "prediction": {
       "available": true,
       "side": "bear",
@@ -530,7 +530,7 @@
     }
   },
   "regime": {
-    "adx": 14.1,
+    "adx": 14.0,
     "state": "range",
     "cutoff": 23
   },
@@ -538,12 +538,12 @@
     "bull_mult": 4.3,
     "bear_mult": 3.8,
     "hold_days": 1,
-    "daily_move_pct": 1.18,
+    "daily_move_pct": 1.19,
     "swing_bull_pct": 5.1,
     "swing_bear_pct": 4.5,
-    "today_bull_pct": -3.89,
-    "today_bear_pct": 3.44,
-    "realized_vol_annual_pct": 18.7,
+    "today_bull_pct": -5.39,
+    "today_bear_pct": 4.76,
+    "realized_vol_annual_pct": 19.0,
     "decay_note": "1日で解約する運用なら、減価（複数日の再計算で効く目減り）はほぼ発生しません。効くのは往復コストと、方向が当たるかどうかです。",
     "cost_note": "勝っても往復コスト（信託報酬の日割り・信託財産留保額・購入時手数料など）が差し引かれます。料率は目論見書で要確認。"
   },
@@ -613,7 +613,7 @@
     },
     {
       "name": "日経先物",
-      "as_of": "2026-09-28",
+      "as_of": "2026-09-29",
       "provider": "Yahoo NIY=F",
       "ok": true
     }
@@ -631,8 +631,8 @@
     "recent": [
       {
         "date": "2026-09-29",
-        "close": 65281.6,
-        "verdict_side": "bull",
+        "close": 65051.71,
+        "verdict_side": "bear",
         "pred_side": "neutral",
         "ov_side": "bear",
         "next_ret": null,
@@ -8802,8 +8802,8 @@
     {
       "id": "cross",
       "name": "移動平均クロス",
-      "value": 0.54,
-      "display": "+0.54%",
+      "value": 0.48,
+      "display": "+0.48%",
       "signal": "bull",
       "reading": "短期>中期",
       "weight": 1.0,
@@ -8813,8 +8813,8 @@
     {
       "id": "rsi14",
       "name": "RSI (14)",
-      "value": 49.7,
-      "display": "49.7",
+      "value": 48.5,
+      "display": "48.5",
       "signal": "neutral",
       "reading": "中立",
       "weight": 1.2,
@@ -8824,8 +8824,8 @@
     {
       "id": "macd",
       "name": "MACD",
-      "value": 173.6,
-      "display": "+173.6",
+      "value": 158.9,
+      "display": "+158.9",
       "signal": "bull",
       "reading": "改善中",
       "weight": 0.3,
@@ -8835,10 +8835,10 @@
     {
       "id": "bb",
       "name": "ボリンジャーバンド %b",
-      "value": 0.55,
-      "display": "0.55",
-      "signal": "bull",
-      "reading": "中央より上",
+      "value": 0.49,
+      "display": "0.49",
+      "signal": "bear",
+      "reading": "中央より下",
       "weight": 1.3,
       "detail": "価格が変動幅（バンド）のどこにいるかを0〜1で表します。1超で上限突破＝過熱、0未満で下限突破＝売られすぎ。0.5が移動平均（真ん中）です。",
       "group": "tech"
@@ -8846,8 +8846,8 @@
     {
       "id": "stoch",
       "name": "ストキャスティクス",
-      "value": 59.3,
-      "display": "59.3",
+      "value": 54.0,
+      "display": "54.0",
       "signal": "bear",
       "reading": "下向き",
       "weight": 1.0,
@@ -8857,10 +8857,10 @@
     {
       "id": "dev25",
       "name": "25日移動平均乖離率",
-      "value": 0.03,
-      "display": "+0.03%",
-      "signal": "bull",
-      "reading": "平均より上",
+      "value": -0.3,
+      "display": "-0.30%",
+      "signal": "bear",
+      "reading": "平均より下",
       "weight": 2.2,
       "detail": "価格が25日移動平均からどれだけ離れているか(%)。プラスに大きすぎると反落、マイナスに大きすぎると反発しやすい（行き過ぎの目安）。",
       "group": "tech"
@@ -8879,8 +8879,8 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -0.08,
-      "display": "-0.08%",
+      "value": 0.02,
+      "display": "+0.02%",
       "signal": "neutral",
       "reading": "ほぼ横ばい",
       "weight": 1.2,
@@ -8890,8 +8890,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.3,
-      "display": "+0.30%",
+      "value": 0.24,
+      "display": "+0.24%",
       "signal": "bull",
       "reading": "現物より高い",
       "weight": 1.0,
