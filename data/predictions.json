@@ -234,9 +234,9 @@
  },
  {
   "date": "2026-10-01",
-  "close": 68822.04,
-  "verdict_side": "neutral",
-  "verdict_score": -12,
+  "close": 68956.72,
+  "verdict_side": "bear",
+  "verdict_score": -29,
   "pred_side": "neutral",
   "pred_prob": 0.538,
   "ov_side": "bear",
