@@ -260,9 +260,9 @@
  },
  {
   "date": "2026-10-05",
-  "close": 70016.33,
+  "close": 69723.89,
   "verdict_side": "neutral",
-  "verdict_score": -5,
+  "verdict_score": 5,
   "pred_side": "neutral",
   "pred_prob": 0.538,
   "ov_side": "bull",
