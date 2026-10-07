@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-07T11:21+09:00",
+  "generated_at": "2026-10-07T14:44+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
     "name": "日経平均株価",
-    "last": 70145.0,
+    "last": 70330.71,
     "prev_close": 70683.98,
-    "change": -538.98,
-    "change_pct": -0.76,
+    "change": -353.27,
+    "change_pct": -0.5,
     "date": "2026-10-07",
     "history": [
       {
@@ -488,7 +488,7 @@
       },
       {
         "d": "2026-10-07",
-        "c": 70145.0
+        "c": 70330.71
       }
     ]
   },
@@ -516,15 +516,15 @@
   "overnight": {
     "available": true,
     "us_ret_pct": 0.58,
-    "jpy_ret_pct": 0.29,
-    "fut_premium_pct": 0.31,
+    "jpy_ret_pct": 0.27,
+    "fut_premium_pct": 0.28,
     "prediction": {
       "available": true,
       "side": "bull",
       "label": "ブル寄り",
       "up_probability": 0.73,
       "sample_size": 270,
-      "avg_next_return_pct": 0.61,
+      "avg_next_return_pct": 0.611,
       "confidence": "高",
       "note": "前日に米国株上昇・ドル円円安となった翌営業日、日経が上昇したのは直近5年で270回中73%（米国株×ドル円、信頼度高）。"
     }
@@ -538,12 +538,12 @@
     "bull_mult": 4.3,
     "bear_mult": 3.8,
     "hold_days": 1,
-    "daily_move_pct": 1.37,
-    "swing_bull_pct": 5.9,
+    "daily_move_pct": 1.36,
+    "swing_bull_pct": 5.8,
     "swing_bear_pct": 5.2,
-    "today_bull_pct": -3.28,
-    "today_bear_pct": 2.9,
-    "realized_vol_annual_pct": 21.7,
+    "today_bull_pct": -2.15,
+    "today_bear_pct": 1.9,
+    "realized_vol_annual_pct": 21.6,
     "decay_note": "1日で解約する運用なら、減価（複数日の再計算で効く目減り）はほぼ発生しません。効くのは往復コストと、方向が当たるかどうかです。",
     "cost_note": "勝っても往復コスト（信託報酬の日割り・信託財産留保額・購入時手数料など）が差し引かれます。料率は目論見書で要確認。"
   },
@@ -613,7 +613,7 @@
     },
     {
       "name": "日経先物",
-      "as_of": "2026-10-06",
+      "as_of": "2026-10-07",
       "provider": "Yahoo NIY=F",
       "ok": true
     }
@@ -631,7 +631,7 @@
     "recent": [
       {
         "date": "2026-10-07",
-        "close": 70145.0,
+        "close": 70330.71,
         "verdict_side": "bull",
         "pred_side": "neutral",
         "ov_side": "bull",
@@ -8802,8 +8802,8 @@
     {
       "id": "cross",
       "name": "移動平均クロス",
-      "value": 5.45,
-      "display": "+5.45%",
+      "value": 5.49,
+      "display": "+5.49%",
       "signal": "bull",
       "reading": "短期>中期",
       "weight": 1.0,
@@ -8813,8 +8813,8 @@
     {
       "id": "rsi14",
       "name": "RSI (14)",
-      "value": 66.1,
-      "display": "66.1",
+      "value": 67.2,
+      "display": "67.2",
       "signal": "bull",
       "reading": "強気",
       "weight": 1.2,
@@ -8824,8 +8824,8 @@
     {
       "id": "macd",
       "name": "MACD",
-      "value": 647.6,
-      "display": "+647.6",
+      "value": 659.4,
+      "display": "+659.4",
       "signal": "bull",
       "reading": "上昇の勢い",
       "weight": 0.3,
@@ -8835,8 +8835,8 @@
     {
       "id": "bb",
       "name": "ボリンジャーバンド %b",
-      "value": 0.95,
-      "display": "0.95",
+      "value": 0.96,
+      "display": "0.96",
       "signal": "bull",
       "reading": "中央より上",
       "weight": 1.3,
@@ -8846,8 +8846,8 @@
     {
       "id": "stoch",
       "name": "ストキャスティクス",
-      "value": 89.3,
-      "display": "89.3",
+      "value": 92.3,
+      "display": "92.3",
       "signal": "bear",
       "reading": "買われすぎ",
       "weight": 1.0,
@@ -8857,8 +8857,8 @@
     {
       "id": "dev25",
       "name": "25日移動平均乖離率",
-      "value": 6.26,
-      "display": "+6.26%",
+      "value": 6.53,
+      "display": "+6.53%",
       "signal": "bear",
       "reading": "上に離れすぎ",
       "weight": 2.2,
@@ -8879,8 +8879,8 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": 0.29,
-      "display": "+0.29%",
+      "value": 0.27,
+      "display": "+0.27%",
       "signal": "bull",
       "reading": "円安方向",
       "weight": 1.2,
@@ -8890,8 +8890,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.31,
-      "display": "+0.31%",
+      "value": 0.28,
+      "display": "+0.28%",
       "signal": "bull",
       "reading": "現物より高い",
       "weight": 1.0,
