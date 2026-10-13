@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T22:38+09:00",
+  "generated_at": "2026-10-13T23:57+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -495,11 +495,11 @@
   "verdict": {
     "side": "bull",
     "label": "ブル寄り",
-    "score": 41,
-    "conviction": 2,
-    "n_bull": 5,
+    "score": 52,
+    "conviction": 3,
+    "n_bull": 6,
     "n_bear": 1,
-    "summary": "10指標中 強気5 / 弱気1。総合スコア +41。"
+    "summary": "10指標中 強気6 / 弱気1。総合スコア +52。"
   },
   "prediction": {
     "side": "neutral",
@@ -515,18 +515,18 @@
   },
   "overnight": {
     "available": true,
-    "us_ret_pct": -0.02,
-    "jpy_ret_pct": 0.0,
-    "fut_premium_pct": 0.14,
+    "us_ret_pct": -0.14,
+    "jpy_ret_pct": 0.19,
+    "fut_premium_pct": 0.36,
     "prediction": {
       "available": true,
-      "side": "bull",
-      "label": "ブル寄り",
-      "up_probability": 0.6,
-      "sample_size": 35,
-      "avg_next_return_pct": 0.554,
-      "confidence": "中",
-      "note": "前日に米国株横ばい・ドル円横ばいとなった翌営業日、日経が上昇したのは直近5年で35回中60%（米国株×ドル円、信頼度中）。"
+      "side": "bear",
+      "label": "ベア寄り",
+      "up_probability": 0.318,
+      "sample_size": 236,
+      "avg_next_return_pct": -0.537,
+      "confidence": "高",
+      "note": "前日に米国株下落・ドル円円安となった翌営業日、日経が上昇したのは直近5年で236回中32%（米国株×ドル円、信頼度高）。"
     }
   },
   "regime": {
@@ -607,7 +607,7 @@
     },
     {
       "name": "ドル円",
-      "as_of": "2026-10-09",
+      "as_of": "2026-10-13",
       "provider": "Yahoo JPY=X",
       "ok": true
     },
@@ -634,7 +634,7 @@
         "close": 67777.52,
         "verdict_side": "bull",
         "pred_side": "neutral",
-        "ov_side": "bull",
+        "ov_side": "bear",
         "next_ret": null,
         "verdict_correct": null,
         "pred_correct": null,
@@ -8861,8 +8861,8 @@
     {
       "id": "us",
       "name": "米国株（前日S&P500）",
-      "value": -0.02,
-      "display": "-0.02%",
+      "value": -0.14,
+      "display": "-0.14%",
       "signal": "neutral",
       "reading": "ほぼ横ばい",
       "weight": 1.6,
@@ -8872,10 +8872,10 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": 0.0,
-      "display": "+0.00%",
-      "signal": "neutral",
-      "reading": "ほぼ横ばい",
+      "value": 0.19,
+      "display": "+0.19%",
+      "signal": "bull",
+      "reading": "円安方向",
       "weight": 1.2,
       "group": "overnight",
       "detail": "前日のドル円の動き。円安(ドル円上昇)は輸出企業の採算改善期待から日経の追い風、円高は向かい風になりやすい。"
@@ -8883,8 +8883,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.14,
-      "display": "+0.14%",
+      "value": 0.36,
+      "display": "+0.36%",
       "signal": "bull",
       "reading": "現物より高い",
       "weight": 1.0,
