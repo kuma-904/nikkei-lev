@@ -327,7 +327,7 @@
   "date": "2026-10-13",
   "close": 67777.52,
   "verdict_side": "bull",
-  "verdict_score": 52,
+  "verdict_score": 21,
   "pred_side": "neutral",
   "pred_prob": 0.534,
   "ov_side": "bear",
