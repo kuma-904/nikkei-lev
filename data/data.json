@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T18:47+09:00",
+  "generated_at": "2026-10-15T19:52+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -517,7 +517,7 @@
     "available": true,
     "us_ret_pct": -1.11,
     "jpy_ret_pct": -0.12,
-    "fut_premium_pct": 0.5,
+    "fut_premium_pct": 0.43,
     "prediction": {
       "available": true,
       "side": "bear",
@@ -8883,8 +8883,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.5,
-      "display": "+0.50%",
+      "value": 0.43,
+      "display": "+0.43%",
       "signal": "bull",
       "reading": "現物より高い",
       "weight": 1.0,
