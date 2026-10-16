@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T18:40+09:00",
+  "generated_at": "2026-10-16T19:43+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -495,11 +495,11 @@
   "verdict": {
     "side": "neutral",
     "label": "様子見",
-    "score": -14,
-    "conviction": 1,
+    "score": -3,
+    "conviction": 0,
     "n_bull": 4,
-    "n_bear": 5,
-    "summary": "10指標中 強気4 / 弱気5。総合スコア -14。"
+    "n_bear": 4,
+    "summary": "10指標中 強気4 / 弱気4。総合スコア -3。"
   },
   "prediction": {
     "side": "bull",
@@ -516,17 +516,17 @@
   "overnight": {
     "available": true,
     "us_ret_pct": 0.33,
-    "jpy_ret_pct": -0.23,
-    "fut_premium_pct": 0.56,
+    "jpy_ret_pct": -0.04,
+    "fut_premium_pct": 0.31,
     "prediction": {
       "available": true,
       "side": "bull",
       "label": "ブル寄り",
-      "up_probability": 0.692,
-      "sample_size": 221,
-      "avg_next_return_pct": 0.515,
+      "up_probability": 0.66,
+      "sample_size": 103,
+      "avg_next_return_pct": 0.559,
       "confidence": "高",
-      "note": "前日に米国株上昇・ドル円円高となった翌営業日、日経が上昇したのは直近5年で221回中69%（米国株×ドル円、信頼度高）。"
+      "note": "前日に米国株上昇・ドル円横ばいとなった翌営業日、日経が上昇したのは直近5年で103回中66%（米国株×ドル円、信頼度高）。"
     }
   },
   "regime": {
@@ -607,7 +607,7 @@
     },
     {
       "name": "ドル円",
-      "as_of": "2026-10-15",
+      "as_of": "2026-10-16",
       "provider": "Yahoo JPY=X",
       "ok": true
     },
@@ -8872,10 +8872,10 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -0.23,
-      "display": "-0.23%",
-      "signal": "bear",
-      "reading": "円高方向",
+      "value": -0.04,
+      "display": "-0.04%",
+      "signal": "neutral",
+      "reading": "ほぼ横ばい",
       "weight": 1.2,
       "group": "overnight",
       "detail": "前日のドル円の動き。円安(ドル円上昇)は輸出企業の採算改善期待から日経の追い風、円高は向かい風になりやすい。"
@@ -8883,8 +8883,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.56,
-      "display": "+0.56%",
+      "value": 0.31,
+      "display": "+0.31%",
       "signal": "bull",
       "reading": "現物より高い",
       "weight": 1.0,
