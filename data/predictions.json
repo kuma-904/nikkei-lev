@@ -377,9 +377,9 @@
  },
  {
   "date": "2026-10-19",
-  "close": 64151.26,
+  "close": 64749.37,
   "verdict_side": "bear",
-  "verdict_score": -74,
+  "verdict_score": -55,
   "pred_side": "bull",
   "pred_prob": 0.576,
   "ov_side": "bear",
