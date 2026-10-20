@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T19:56+09:00",
+  "generated_at": "2026-10-20T23:57+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -493,13 +493,13 @@
     ]
   },
   "verdict": {
-    "side": "bear",
-    "label": "ベア寄り",
-    "score": -19,
-    "conviction": 1,
-    "n_bull": 3,
+    "side": "neutral",
+    "label": "様子見",
+    "score": -10,
+    "conviction": 0,
+    "n_bull": 4,
     "n_bear": 5,
-    "summary": "10指標中 強気3 / 弱気5。総合スコア -19。"
+    "summary": "10指標中 強気4 / 弱気5。総合スコア -10。"
   },
   "prediction": {
     "side": "bull",
@@ -515,9 +515,9 @@
   },
   "overnight": {
     "available": true,
-    "us_ret_pct": 0.41,
-    "jpy_ret_pct": 0.21,
-    "fut_premium_pct": 0.04,
+    "us_ret_pct": 0.73,
+    "jpy_ret_pct": 0.12,
+    "fut_premium_pct": 1.6,
     "prediction": {
       "available": true,
       "side": "bull",
@@ -601,7 +601,7 @@
     },
     {
       "name": "米国株(S&P500)",
-      "as_of": "2026-10-19",
+      "as_of": "2026-10-20",
       "provider": "Yahoo ^GSPC",
       "ok": true
     },
@@ -632,7 +632,7 @@
       {
         "date": "2026-10-20",
         "close": 64075.42,
-        "verdict_side": "bear",
+        "verdict_side": "neutral",
         "pred_side": "bull",
         "ov_side": "bull",
         "next_ret": null,
@@ -8861,8 +8861,8 @@
     {
       "id": "us",
       "name": "米国株（前日S&P500）",
-      "value": 0.41,
-      "display": "+0.41%",
+      "value": 0.73,
+      "display": "+0.73%",
       "signal": "bull",
       "reading": "前日プラス",
       "weight": 1.6,
@@ -8872,8 +8872,8 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": 0.21,
-      "display": "+0.21%",
+      "value": 0.12,
+      "display": "+0.12%",
       "signal": "bull",
       "reading": "円安方向",
       "weight": 1.2,
@@ -8883,10 +8883,10 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.04,
-      "display": "+0.04%",
-      "signal": "neutral",
-      "reading": "ほぼ同水準",
+      "value": 1.6,
+      "display": "+1.60%",
+      "signal": "bull",
+      "reading": "現物より高い",
       "weight": 1.0,
       "group": "overnight",
       "detail": "日経先物が現物(現在の日経平均)より高いか安いか。先物が高ければ市場は上を見ている目安。ただしEOD(日足)のため夜間の最新値ではない点に注意。"
