@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-20T10:45+09:00",
+  "generated_at": "2026-10-20T13:38+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
     "name": "日経平均株価",
-    "last": 64319.21,
+    "last": 64238.27,
     "prev_close": 64916.7,
-    "change": -597.49,
-    "change_pct": -0.92,
+    "change": -678.43,
+    "change_pct": -1.05,
     "date": "2026-10-20",
     "history": [
       {
@@ -488,7 +488,7 @@
       },
       {
         "d": "2026-10-20",
-        "c": 64319.21
+        "c": 64238.27
       }
     ]
   },
@@ -516,8 +516,8 @@
   "overnight": {
     "available": true,
     "us_ret_pct": 0.41,
-    "jpy_ret_pct": 0.47,
-    "fut_premium_pct": 0.17,
+    "jpy_ret_pct": 0.28,
+    "fut_premium_pct": 0.1,
     "prediction": {
       "available": true,
       "side": "bull",
@@ -538,11 +538,11 @@
     "bull_mult": 4.3,
     "bear_mult": 3.8,
     "hold_days": 1,
-    "daily_move_pct": 1.74,
+    "daily_move_pct": 1.75,
     "swing_bull_pct": 7.5,
     "swing_bear_pct": 6.6,
-    "today_bull_pct": -3.96,
-    "today_bear_pct": 3.5,
+    "today_bull_pct": -4.49,
+    "today_bear_pct": 3.97,
     "realized_vol_annual_pct": 27.7,
     "decay_note": "1日で解約する運用なら、減価（複数日の再計算で効く目減り）はほぼ発生しません。効くのは往復コストと、方向が当たるかどうかです。",
     "cost_note": "勝っても往復コスト（信託報酬の日割り・信託財産留保額・購入時手数料など）が差し引かれます。料率は目論見書で要確認。"
@@ -613,7 +613,7 @@
     },
     {
       "name": "日経先物",
-      "as_of": "2026-10-19",
+      "as_of": "2026-10-20",
       "provider": "Yahoo NIY=F",
       "ok": true
     }
@@ -631,7 +631,7 @@
     "recent": [
       {
         "date": "2026-10-20",
-        "close": 64319.21,
+        "close": 64238.27,
         "verdict_side": "neutral",
         "pred_side": "bull",
         "ov_side": "bull",
@@ -8795,8 +8795,8 @@
     {
       "id": "cross",
       "name": "移動平均クロス",
-      "value": -1.58,
-      "display": "-1.58%",
+      "value": -1.6,
+      "display": "-1.60%",
       "signal": "bear",
       "reading": "短期<中期",
       "weight": 1.0,
@@ -8806,8 +8806,8 @@
     {
       "id": "rsi14",
       "name": "RSI (14)",
-      "value": 40.2,
-      "display": "40.2",
+      "value": 40.0,
+      "display": "40.0",
       "signal": "bear",
       "reading": "弱気",
       "weight": 1.2,
@@ -8817,8 +8817,8 @@
     {
       "id": "macd",
       "name": "MACD",
-      "value": -506.7,
-      "display": "-506.7",
+      "value": -511.8,
+      "display": "-511.8",
       "signal": "bear",
       "reading": "下落の勢い",
       "weight": 0.3,
@@ -8828,8 +8828,8 @@
     {
       "id": "bb",
       "name": "ボリンジャーバンド %b",
-      "value": 0.18,
-      "display": "0.18",
+      "value": 0.17,
+      "display": "0.17",
       "signal": "bear",
       "reading": "中央より下",
       "weight": 1.3,
@@ -8839,8 +8839,8 @@
     {
       "id": "stoch",
       "name": "ストキャスティクス",
-      "value": 7.0,
-      "display": "7.0",
+      "value": 5.8,
+      "display": "5.8",
       "signal": "bull",
       "reading": "売られすぎ",
       "weight": 1.0,
@@ -8850,8 +8850,8 @@
     {
       "id": "dev25",
       "name": "25日移動平均乖離率",
-      "value": -3.12,
-      "display": "-3.12%",
+      "value": -3.24,
+      "display": "-3.24%",
       "signal": "bear",
       "reading": "平均より下",
       "weight": 2.2,
@@ -8872,8 +8872,8 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": 0.47,
-      "display": "+0.47%",
+      "value": 0.28,
+      "display": "+0.28%",
       "signal": "bull",
       "reading": "円安方向",
       "weight": 1.2,
@@ -8883,8 +8883,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.17,
-      "display": "+0.17%",
+      "value": 0.1,
+      "display": "+0.10%",
       "signal": "bull",
       "reading": "現物より高い",
       "weight": 1.0,
