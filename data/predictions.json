@@ -405,7 +405,7 @@
   "date": "2026-10-21",
   "close": 64621.24,
   "verdict_side": "bear",
-  "verdict_score": -40,
+  "verdict_score": -31,
   "pred_side": "bull",
   "pred_prob": 0.573,
   "ov_side": "bull",
