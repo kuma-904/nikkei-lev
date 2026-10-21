@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-21T13:31+09:00",
+  "generated_at": "2026-10-21T19:01+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
     "name": "日経平均株価",
-    "last": 64598.1,
+    "last": 64621.24,
     "prev_close": 64075.42,
-    "change": 522.68,
-    "change_pct": 0.82,
+    "change": 545.82,
+    "change_pct": 0.85,
     "date": "2026-10-21",
     "history": [
       {
@@ -488,18 +488,18 @@
       },
       {
         "d": "2026-10-21",
-        "c": 64598.1
+        "c": 64621.24
       }
     ]
   },
   "verdict": {
-    "side": "neutral",
-    "label": "様子見",
-    "score": -10,
-    "conviction": 0,
-    "n_bull": 4,
-    "n_bear": 5,
-    "summary": "10指標中 強気4 / 弱気5。総合スコア -10。"
+    "side": "bear",
+    "label": "ベア寄り",
+    "score": -40,
+    "conviction": 2,
+    "n_bull": 2,
+    "n_bear": 6,
+    "summary": "10指標中 強気2 / 弱気6。総合スコア -40。"
   },
   "prediction": {
     "side": "bull",
@@ -516,17 +516,17 @@
   "overnight": {
     "available": true,
     "us_ret_pct": 0.28,
-    "jpy_ret_pct": 0.45,
-    "fut_premium_pct": 0.24,
+    "jpy_ret_pct": -0.24,
+    "fut_premium_pct": 0.09,
     "prediction": {
       "available": true,
       "side": "bull",
       "label": "ブル寄り",
-      "up_probability": 0.734,
-      "sample_size": 267,
-      "avg_next_return_pct": 0.619,
+      "up_probability": 0.689,
+      "sample_size": 222,
+      "avg_next_return_pct": 0.506,
       "confidence": "高",
-      "note": "前日に米国株上昇・ドル円円安となった翌営業日、日経が上昇したのは直近5年で267回中73%（米国株×ドル円、信頼度高）。"
+      "note": "前日に米国株上昇・ドル円円高となった翌営業日、日経が上昇したのは直近5年で222回中69%（米国株×ドル円、信頼度高）。"
     }
   },
   "regime": {
@@ -541,8 +541,8 @@
     "daily_move_pct": 1.76,
     "swing_bull_pct": 7.6,
     "swing_bear_pct": 6.7,
-    "today_bull_pct": 3.51,
-    "today_bear_pct": -3.1,
+    "today_bull_pct": 3.66,
+    "today_bear_pct": -3.24,
     "realized_vol_annual_pct": 28.0,
     "decay_note": "1日で解約する運用なら、減価（複数日の再計算で効く目減り）はほぼ発生しません。効くのは往復コストと、方向が当たるかどうかです。",
     "cost_note": "勝っても往復コスト（信託報酬の日割り・信託財産留保額・購入時手数料など）が差し引かれます。料率は目論見書で要確認。"
@@ -607,7 +607,7 @@
     },
     {
       "name": "ドル円",
-      "as_of": "2026-10-20",
+      "as_of": "2026-10-21",
       "provider": "Yahoo JPY=X",
       "ok": true
     },
@@ -631,8 +631,8 @@
     "recent": [
       {
         "date": "2026-10-21",
-        "close": 64598.1,
-        "verdict_side": "neutral",
+        "close": 64621.24,
+        "verdict_side": "bear",
         "pred_side": "bull",
         "ov_side": "bull",
         "next_ret": null,
@@ -8795,8 +8795,8 @@
     {
       "id": "cross",
       "name": "移動平均クロス",
-      "value": -2.55,
-      "display": "-2.55%",
+      "value": -2.54,
+      "display": "-2.54%",
       "signal": "bear",
       "reading": "短期<中期",
       "weight": 1.0,
@@ -8806,8 +8806,8 @@
     {
       "id": "rsi14",
       "name": "RSI (14)",
-      "value": 42.0,
-      "display": "42.0",
+      "value": 42.2,
+      "display": "42.2",
       "signal": "bear",
       "reading": "弱気",
       "weight": 1.2,
@@ -8817,8 +8817,8 @@
     {
       "id": "macd",
       "name": "MACD",
-      "value": -525.8,
-      "display": "-525.8",
+      "value": -524.4,
+      "display": "-524.4",
       "signal": "bear",
       "reading": "下落の勢い",
       "weight": 0.3,
@@ -8839,8 +8839,8 @@
     {
       "id": "stoch",
       "name": "ストキャスティクス",
-      "value": 12.9,
-      "display": "12.9",
+      "value": 13.3,
+      "display": "13.3",
       "signal": "bull",
       "reading": "売られすぎ",
       "weight": 1.0,
@@ -8850,8 +8850,8 @@
     {
       "id": "dev25",
       "name": "25日移動平均乖離率",
-      "value": -2.65,
-      "display": "-2.65%",
+      "value": -2.62,
+      "display": "-2.62%",
       "signal": "bear",
       "reading": "平均より下",
       "weight": 2.2,
@@ -8872,10 +8872,10 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": 0.45,
-      "display": "+0.45%",
-      "signal": "bull",
-      "reading": "円安方向",
+      "value": -0.24,
+      "display": "-0.24%",
+      "signal": "bear",
+      "reading": "円高方向",
       "weight": 1.2,
       "group": "overnight",
       "detail": "前日のドル円の動き。円安(ドル円上昇)は輸出企業の採算改善期待から日経の追い風、円高は向かい風になりやすい。"
@@ -8883,10 +8883,10 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 0.24,
-      "display": "+0.24%",
-      "signal": "bull",
-      "reading": "現物より高い",
+      "value": 0.09,
+      "display": "+0.09%",
+      "signal": "neutral",
+      "reading": "ほぼ同水準",
       "weight": 1.0,
       "group": "overnight",
       "detail": "日経先物が現物(現在の日経平均)より高いか安いか。先物が高ければ市場は上を見ている目安。ただしEOD(日足)のため夜間の最新値ではない点に注意。"
