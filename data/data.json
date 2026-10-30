@@ -1,19 +1,15 @@
 {
-  "generated_at": "2026-10-29T21:49+09:00",
+  "generated_at": "2026-10-30T11:33+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
     "name": "日経平均株価",
-    "last": 64659.47,
-    "prev_close": 63954.19,
-    "change": 705.28,
-    "change_pct": 1.1,
-    "date": "2026-10-29",
+    "last": 62896.74,
+    "prev_close": 64659.47,
+    "change": -1762.73,
+    "change_pct": -2.73,
+    "date": "2026-10-30",
     "history": [
-      {
-        "d": "2026-05-07",
-        "c": 62833.84
-      },
       {
         "d": "2026-05-08",
         "c": 62713.65
@@ -489,44 +485,48 @@
       {
         "d": "2026-10-29",
         "c": 64659.47
+      },
+      {
+        "d": "2026-10-30",
+        "c": 62896.74
       }
     ]
   },
   "verdict": {
     "side": "bear",
     "label": "ベア寄り",
-    "score": -36,
-    "conviction": 2,
+    "score": -76,
+    "conviction": 4,
     "n_bull": 1,
-    "n_bear": 5,
-    "summary": "10指標中 強気1 / 弱気5。総合スコア -36。"
+    "n_bear": 8,
+    "summary": "10指標中 強気1 / 弱気8。総合スコア -76。"
   },
   "prediction": {
     "side": "bull",
     "label": "ブル寄り",
-    "up_probability": 0.571,
-    "sample_size": 205,
-    "avg_next_return_pct": 0.07,
+    "up_probability": 0.573,
+    "sample_size": 206,
+    "avg_next_return_pct": 0.075,
     "confidence": "高",
     "basis": "類似局面",
-    "note": "直近5年で、同じ状態（もみ合い・RSIやや弱・MACD−）だった日は205回。そのうち翌日上昇は57%（類似局面ベース、サンプル信頼度：高）。",
+    "note": "直近5年で、同じ状態（もみ合い・RSIやや弱・MACD−）だった日は206回。そのうち翌日上昇は57%（類似局面ベース、サンプル信頼度：高）。",
     "key": "mid|low|neg",
     "lookback_years": 5
   },
   "overnight": {
     "available": true,
-    "us_ret_pct": 0.28,
-    "jpy_ret_pct": -0.0,
-    "fut_premium_pct": -0.02,
+    "us_ret_pct": -0.3,
+    "jpy_ret_pct": -0.21,
+    "fut_premium_pct": 0.27,
     "prediction": {
       "available": true,
-      "side": "bull",
-      "label": "ブル寄り",
-      "up_probability": 0.663,
-      "sample_size": 101,
-      "avg_next_return_pct": 0.569,
+      "side": "bear",
+      "label": "ベア寄り",
+      "up_probability": 0.335,
+      "sample_size": 167,
+      "avg_next_return_pct": -0.56,
       "confidence": "高",
-      "note": "前日に米国株上昇・ドル円横ばいとなった翌営業日、日経が上昇したのは直近5年で101回中66%（米国株×ドル円、信頼度高）。"
+      "note": "前日に米国株下落・ドル円円高となった翌営業日、日経が上昇したのは直近5年で167回中34%（米国株×ドル円、信頼度高）。"
     }
   },
   "regime": {
@@ -538,12 +538,12 @@
     "bull_mult": 4.3,
     "bear_mult": 3.8,
     "hold_days": 1,
-    "daily_move_pct": 1.82,
-    "swing_bull_pct": 7.8,
-    "swing_bear_pct": 6.9,
-    "today_bull_pct": 4.74,
-    "today_bear_pct": -4.19,
-    "realized_vol_annual_pct": 28.9,
+    "daily_move_pct": 1.72,
+    "swing_bull_pct": 7.4,
+    "swing_bear_pct": 6.5,
+    "today_bull_pct": -11.72,
+    "today_bear_pct": 10.36,
+    "realized_vol_annual_pct": 27.3,
     "decay_note": "1日で解約する運用なら、減価（複数日の再計算で効く目減り）はほぼ発生しません。効くのは往復コストと、方向が当たるかどうかです。",
     "cost_note": "勝っても往復コスト（信託報酬の日割り・信託財産留保額・購入時手数料など）が差し引かれます。料率は目論見書で要確認。"
   },
@@ -595,19 +595,19 @@
   "sources": [
     {
       "name": "日経平均",
-      "as_of": "2026-10-29",
+      "as_of": "2026-10-30",
       "provider": "Yahoo Finance (^N225)",
       "ok": true
     },
     {
       "name": "米国株(S&P500)",
-      "as_of": "2026-10-28",
+      "as_of": "2026-10-29",
       "provider": "Yahoo ^GSPC",
       "ok": true
     },
     {
       "name": "ドル円",
-      "as_of": "2026-10-29",
+      "as_of": "2026-10-30",
       "provider": "Yahoo JPY=X",
       "ok": true
     },
@@ -619,26 +619,37 @@
     }
   ],
   "track_record": {
-    "resolved": 37,
-    "verdict_hit_rate": 51.7,
-    "verdict_n": 29,
-    "pred_hit_rate": 60.9,
-    "pred_n": 23,
-    "ov_hit_rate": 52.9,
-    "ov_n": 34,
+    "resolved": 38,
+    "verdict_hit_rate": 53.3,
+    "verdict_n": 30,
+    "pred_hit_rate": 58.3,
+    "pred_n": 24,
+    "ov_hit_rate": 51.4,
+    "ov_n": 35,
     "since": "2026-09-01",
-    "total_logged": 38,
+    "total_logged": 39,
     "recent": [
+      {
+        "date": "2026-10-30",
+        "close": 62896.74,
+        "verdict_side": "bear",
+        "pred_side": "bull",
+        "ov_side": "bear",
+        "next_ret": null,
+        "verdict_correct": null,
+        "pred_correct": null,
+        "ov_correct": null
+      },
       {
         "date": "2026-10-29",
         "close": 64659.47,
         "verdict_side": "bear",
         "pred_side": "bull",
         "ov_side": "bull",
-        "next_ret": null,
-        "verdict_correct": null,
-        "pred_correct": null,
-        "ov_correct": null
+        "next_ret": -2.726,
+        "verdict_correct": true,
+        "pred_correct": false,
+        "ov_correct": false
       },
       {
         "date": "2026-10-28",
@@ -749,34 +760,16 @@
         "verdict_correct": false,
         "pred_correct": null,
         "ov_correct": true
-      },
-      {
-        "date": "2026-10-14",
-        "close": 67744.29,
-        "verdict_side": "bull",
-        "pred_side": "neutral",
-        "ov_side": "bull",
-        "next_ret": -3.837,
-        "verdict_correct": false,
-        "pred_correct": null,
-        "ov_correct": false
       }
     ]
   },
   "pred_samples": [
     [
-      "2022-02-18",
-      "down|low|pos",
-      -0.779,
-      "ssnbsss",
-      "R"
-    ],
-    [
       "2022-02-21",
       "down|low|pos",
       -1.714,
       "sssbsss",
-      "R"
+      "T"
     ],
     [
       "2022-02-22",
@@ -843,9 +836,9 @@
     ],
     [
       "2022-03-08",
-      "down|low|neg",
+      "down|cold|neg",
       -0.296,
-      "ssssbbb",
+      "ssbsbbb",
       "T"
     ],
     [
@@ -8778,6 +8771,13 @@
       1.084,
       "nssssbs",
       "T"
+    ],
+    [
+      "2026-10-28",
+      "mid|low|neg",
+      1.103,
+      "nssssbs",
+      "T"
     ]
   ],
   "indicators": [
@@ -8795,8 +8795,8 @@
     {
       "id": "cross",
       "name": "移動平均クロス",
-      "value": -4.27,
-      "display": "-4.27%",
+      "value": -4.06,
+      "display": "-4.06%",
       "signal": "bear",
       "reading": "短期<中期",
       "weight": 1.0,
@@ -8806,10 +8806,10 @@
     {
       "id": "rsi14",
       "name": "RSI (14)",
-      "value": 47.1,
-      "display": "47.1",
-      "signal": "neutral",
-      "reading": "中立",
+      "value": 40.5,
+      "display": "40.5",
+      "signal": "bear",
+      "reading": "弱気",
       "weight": 1.2,
       "detail": "買われすぎ・売られすぎを0〜100で示す指標。一般に70以上で過熱（反落警戒）、30以下で売られすぎ（反発期待）。50より上なら買い方優勢と見ます。",
       "group": "tech"
@@ -8817,8 +8817,8 @@
     {
       "id": "macd",
       "name": "MACD",
-      "value": -281.9,
-      "display": "-281.9",
+      "value": -276.3,
+      "display": "-276.3",
       "signal": "bear",
       "reading": "下落の勢い",
       "weight": 0.3,
@@ -8828,8 +8828,8 @@
     {
       "id": "bb",
       "name": "ボリンジャーバンド %b",
-      "value": 0.36,
-      "display": "0.36",
+      "value": 0.22,
+      "display": "0.22",
       "signal": "bear",
       "reading": "中央より下",
       "weight": 1.3,
@@ -8839,10 +8839,10 @@
     {
       "id": "stoch",
       "name": "ストキャスティクス",
-      "value": 81.1,
-      "display": "81.1",
+      "value": 36.4,
+      "display": "36.4",
       "signal": "bear",
-      "reading": "買われすぎ",
+      "reading": "下向き",
       "weight": 1.0,
       "detail": "一定期間の高値・安値の中で現在値がどの位置かを見る指標。80以上で買われすぎ、20以下で売られすぎ。%K が %D を上抜けると買いサイン。",
       "group": "tech"
@@ -8850,8 +8850,8 @@
     {
       "id": "dev25",
       "name": "25日移動平均乖離率",
-      "value": -2.3,
-      "display": "-2.30%",
+      "value": -4.81,
+      "display": "-4.81%",
       "signal": "bear",
       "reading": "平均より下",
       "weight": 2.2,
@@ -8861,10 +8861,10 @@
     {
       "id": "us",
       "name": "米国株（前日S&P500）",
-      "value": 0.28,
-      "display": "+0.28%",
-      "signal": "bull",
-      "reading": "前日プラス",
+      "value": -0.3,
+      "display": "-0.30%",
+      "signal": "bear",
+      "reading": "前日マイナス",
       "weight": 1.6,
       "group": "overnight",
       "detail": "前日の米国市場(S&P500)の騰落。日本株は米国株の影響を強く受け、前日の米国上昇は翌日の日経の追い風、下落は向かい風になりやすい。"
@@ -8872,10 +8872,10 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -0.0,
-      "display": "-0.00%",
-      "signal": "neutral",
-      "reading": "ほぼ横ばい",
+      "value": -0.21,
+      "display": "-0.21%",
+      "signal": "bear",
+      "reading": "円高方向",
       "weight": 1.2,
       "group": "overnight",
       "detail": "前日のドル円の動き。円安(ドル円上昇)は輸出企業の採算改善期待から日経の追い風、円高は向かい風になりやすい。"
@@ -8883,10 +8883,10 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": -0.02,
-      "display": "-0.02%",
-      "signal": "neutral",
-      "reading": "ほぼ同水準",
+      "value": 0.27,
+      "display": "+0.27%",
+      "signal": "bull",
+      "reading": "現物より高い",
       "weight": 1.0,
       "group": "overnight",
       "detail": "日経先物が現物(現在の日経平均)より高いか安いか。先物が高ければ市場は上を見ている目安。ただしEOD(日足)のため夜間の最新値ではない点に注意。"
