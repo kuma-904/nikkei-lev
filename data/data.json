@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T21:08+09:00",
+  "generated_at": "2026-10-30T21:41+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -516,8 +516,8 @@
   "overnight": {
     "available": true,
     "us_ret_pct": -0.3,
-    "jpy_ret_pct": -0.46,
-    "fut_premium_pct": -0.95,
+    "jpy_ret_pct": -0.43,
+    "fut_premium_pct": -0.86,
     "prediction": {
       "available": true,
       "side": "bear",
@@ -8872,8 +8872,8 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -0.46,
-      "display": "-0.46%",
+      "value": -0.43,
+      "display": "-0.43%",
       "signal": "bear",
       "reading": "円高方向",
       "weight": 1.2,
@@ -8883,8 +8883,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": -0.95,
-      "display": "-0.95%",
+      "value": -0.86,
+      "display": "-0.86%",
       "signal": "bear",
       "reading": "現物より安い",
       "weight": 1.0,
