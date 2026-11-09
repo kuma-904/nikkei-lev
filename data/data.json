@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T00:12+09:00",
+  "generated_at": "2026-11-10T01:00+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -515,9 +515,9 @@
   },
   "overnight": {
     "available": true,
-    "us_ret_pct": 1.82,
+    "us_ret_pct": 2.21,
     "jpy_ret_pct": 0.4,
-    "fut_premium_pct": 5.02,
+    "fut_premium_pct": 5.47,
     "prediction": {
       "available": true,
       "side": "bull",
@@ -8854,8 +8854,8 @@
     {
       "id": "us",
       "name": "米国株（前日S&P500）",
-      "value": 1.82,
-      "display": "+1.82%",
+      "value": 2.21,
+      "display": "+2.21%",
       "signal": "bull",
       "reading": "前日プラス",
       "weight": 1.6,
@@ -8876,8 +8876,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": 5.02,
-      "display": "+5.02%",
+      "value": 5.47,
+      "display": "+5.47%",
       "signal": "bull",
       "reading": "現物より高い",
       "weight": 1.0,
