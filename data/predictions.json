@@ -573,8 +573,8 @@
  {
   "date": "2026-11-10",
   "close": 60459.58,
-  "verdict_side": "bear",
-  "verdict_score": -17,
+  "verdict_side": "neutral",
+  "verdict_score": 3,
   "pred_side": "bull",
   "pred_prob": 0.643,
   "ov_side": "bull",

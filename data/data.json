@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T16:04+09:00",
+  "generated_at": "2026-11-10T23:20+09:00",
   "is_sample": false,
   "source": "Yahoo Finance (^N225)",
   "index": {
@@ -493,13 +493,13 @@
     ]
   },
   "verdict": {
-    "side": "bear",
-    "label": "ベア寄り",
-    "score": -17,
-    "conviction": 1,
-    "n_bull": 3,
-    "n_bear": 7,
-    "summary": "10指標中 強気3 / 弱気7。総合スコア -17。"
+    "side": "neutral",
+    "label": "様子見",
+    "score": 3,
+    "conviction": 0,
+    "n_bull": 4,
+    "n_bear": 6,
+    "summary": "10指標中 強気4 / 弱気6。総合スコア +3。"
   },
   "prediction": {
     "side": "bull",
@@ -516,17 +516,17 @@
   "overnight": {
     "available": true,
     "us_ret_pct": 2.35,
-    "jpy_ret_pct": -0.2,
-    "fut_premium_pct": -0.11,
+    "jpy_ret_pct": 0.13,
+    "fut_premium_pct": -0.87,
     "prediction": {
       "available": true,
       "side": "bull",
       "label": "ブル寄り",
-      "up_probability": 0.683,
-      "sample_size": 218,
-      "avg_next_return_pct": 0.489,
+      "up_probability": 0.735,
+      "sample_size": 272,
+      "avg_next_return_pct": 0.623,
       "confidence": "高",
-      "note": "前日に米国株上昇・ドル円円高となった翌営業日、日経が上昇したのは直近5年で218回中68%（米国株×ドル円、信頼度高）。"
+      "note": "前日に米国株上昇・ドル円円安となった翌営業日、日経が上昇したのは直近5年で272回中74%（米国株×ドル円、信頼度高）。"
     }
   },
   "regime": {
@@ -632,7 +632,7 @@
       {
         "date": "2026-11-10",
         "close": 60459.58,
-        "verdict_side": "bear",
+        "verdict_side": "neutral",
         "pred_side": "bull",
         "ov_side": "bull",
         "next_ret": null,
@@ -8872,10 +8872,10 @@
     {
       "id": "jpy",
       "name": "ドル円（前日）",
-      "value": -0.2,
-      "display": "-0.20%",
-      "signal": "bear",
-      "reading": "円高方向",
+      "value": 0.13,
+      "display": "+0.13%",
+      "signal": "bull",
+      "reading": "円安方向",
       "weight": 1.2,
       "group": "overnight",
       "detail": "前日のドル円の動き。円安(ドル円上昇)は輸出企業の採算改善期待から日経の追い風、円高は向かい風になりやすい。"
@@ -8883,8 +8883,8 @@
     {
       "id": "fut",
       "name": "日経先物 vs 現物",
-      "value": -0.11,
-      "display": "-0.11%",
+      "value": -0.87,
+      "display": "-0.87%",
       "signal": "bear",
       "reading": "現物より安い",
       "weight": 1.0,
